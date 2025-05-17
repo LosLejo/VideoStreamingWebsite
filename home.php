@@ -43,7 +43,7 @@
             <div class="swiper-wrapper">
 
                 <div class="swiper-slide">
-                    <div class="box" style="background: url('images/1.jpg') no-repeat center/cover;">
+                    <div class="box" style="background: url('kake.jpg') no-repeat center/cover;">
                         <div class="content">
                             <h3>Kakegurui</h3>
                             <p>
@@ -57,7 +57,7 @@
                 </div>
 
                 <div class="swiper-slide">
-                    <div class="box second" style="background: url('images/2.jpg') no-repeat center/cover;">
+                    <div class="box second" style="background: url('death.jpg') no-repeat center/cover;">
                         <div class="content">
                             <h3>Death Note</h3>
                             <p>
@@ -71,7 +71,7 @@
                 </div>
 
                 <div class="swiper-slide">
-                    <div class="box second" style="background: url('images/3.png') no-repeat center/cover;">
+                    <div class="box second" style="background: url('boku') no-repeat center/cover;">
                         <div class="content">
                             <h3>Boku no Hero</h3>
                             <p>
@@ -85,7 +85,7 @@
                 </div>
 
                 <div class="swiper-slide">
-                    <div class="box second" style="background: url('images/4.jpg') no-repeat center/cover;">
+                    <div class="box second" style="background: url('solo') no-repeat center/cover;">
                         <div class="content">
                             <h3>Solo Leveling</h3>
                             <p>
