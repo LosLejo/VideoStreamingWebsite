@@ -71,7 +71,7 @@
                 </div>
 
                 <div class="swiper-slide">
-                    <div class="box second" style="background: url('boku') no-repeat center/cover;">
+                    <div class="box second" style="background: url('boku.jpg') no-repeat center/cover;">
                         <div class="content">
                             <h3>Boku no Hero</h3>
                             <p>
@@ -85,7 +85,7 @@
                 </div>
 
                 <div class="swiper-slide">
-                    <div class="box second" style="background: url('solo') no-repeat center/cover;">
+                    <div class="box second" style="background: url('solo.jpg') no-repeat center/cover;">
                         <div class="content">
                             <h3>Solo Leveling</h3>
                             <p>
@@ -101,6 +101,8 @@
             </div>
         </div>
     </section>
+
+ 
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script src="main.js"></script>        
