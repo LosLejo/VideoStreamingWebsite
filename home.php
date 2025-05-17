@@ -102,7 +102,47 @@
         </div>
     </section>
 
- 
+    <section class = "anime" id = "anime">
+        <h1 class = "heading">Browse</h1>
+          <div class = "swiper anime-slider">
+            <div class = "swiper-wrapper">
+
+                <div class = "swiper-slide">
+                      <div class = "box" style = "background: url('haik.jpg') no-repeat"></div>
+                        <div class = "content">
+                            <h3>Haikyuu</h3>
+                            <p>When a short high schooler with big dreams joins a powerhouse volleyball team<br>
+                                he must rise above the odds—spiking his way from underdog to unstoppable.
+                            </p>
+                            <a href="#" class="btn">Watch</a>
+                        </div>
+                </div>
+
+                <div class = "swiper-slide">
+                      <div class = "box" style = "background: url ('') no-repeat"></div>
+                        <div class = "content">
+                            <h3>Haikyuu</h3>
+                            <p>When a short high schooler with big dreams joins a powerhouse volleyball team<br>
+                                he must rise above the odds—spiking his way from underdog to unstoppable.
+                            </p>
+                            <a href="#" class="btn">Watch</a>
+                        </div>
+                </div>
+
+                <div class = "swiper-slide">
+                      <div class = "box" style = "background: url ('') no-repeat"></div>
+                        <div class = "content">
+                            <h3>Haikyuu</h3>
+                            <p>When a short high schooler with big dreams joins a powerhouse volleyball team<br>
+                                he must rise above the odds—spiking his way from underdog to unstoppable.
+                            </p>
+                            <a href="#" class="btn">Watch</a>
+                        </div>
+                </div>
+            </div>
+          </div>
+    </section>
+     
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script src="main.js"></script>        
