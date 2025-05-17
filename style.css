@@ -17,6 +17,7 @@
     text-transform: capitalize;
     transition: all .2s linear;
 }
+
 html{
 
     font-size: 62.5%;
@@ -127,6 +128,39 @@ header .icons #menu-bars {
     color: #fff;
     font-size: 1.5rem;
     padding: 1rem 0;
+}
+section{
+    padding: 2rem 9%;
+}
+
+section:nth-child(even){
+    background:var(--light-color);
+}
+.anime{
+    background-color: var(--black);
+    padding: 5rem;
+}
+.anime .box{
+    width: 299px;
+    height: 168px;
+}
+.anime h3 ,p{
+    color: #fff;
+}
+
+.btn{
+    margin-top: 1rem;
+    display: inline-block;
+    font-size: 1.7rem;
+    cursor: pointer;
+    padding: .8rem 3rem;
+ 
+}
+.heading{
+    font-size: 3rem;
+    text-align: center;
+    color: var(--yellow);
+    margin-bottom: 3rem;
 }
 
 a.btn{
