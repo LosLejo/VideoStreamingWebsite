@@ -18,3 +18,17 @@ var swiper = new Swiper(".home-slider", {
         prevEl: ".swiper-button-prev",
     },
 });
+
+var swiper = new Swiper(".anime-slider", {
+    spaceBetween: 30,
+    centerSlides: true,
+    autoplay: {
+        delay: 7500,
+        disabledOnInteraction: false,
+    },
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+    },
+    loop: true,
+});
