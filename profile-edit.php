@@ -51,48 +51,54 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <body>
     <?php include 'Assets/HTML/home-header.php' ?>
     <section class="bg">
-    <div class="profile-container">
-        <div class="profile-header">
-            <div class="profile-avatar">
-                <i class="fas fa-user-edit"></i>
+        <div class="profile-container">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <i class="fas fa-user-edit"></i>
+                </div>
+                <h1>Edit Profile</h1>
             </div>
-            <h1>Edit Profile</h1>
+
+            <form method="POST" class="profile-details">
+                <div class="profile-field">
+                    <label>Full Name</label>
+                    <div class="value"><?= htmlspecialchars($user['name']) ?></div>
+                </div>
+
+                <div class="profile-field">
+                    <label>Email Address</label>
+                    <div class="value"><?= htmlspecialchars($user['email']) ?></div>
+                </div>
+
+                <div class="profile-field">
+                    <textarea name="bio" id="bio"
+                        class="profile-bio"><?= htmlspecialchars($user['bio'] ?? '') ?></textarea>
+                </div>
+
+                <div class="profile-field">
+                    <textarea name="birth=" bio"
+                        class="profile-bio"><?= htmlspecialchars($user['bio'] ?? '') ?></textarea>
+                </div>
+
+
+                <div class="profile-actions">
+                    <button type="submit" class="profile-btn">Save Changes</button>
+                    <a href="profile.php" class="profile-btn secondary">Cancel</a>
+                </div>
+            </form>
         </div>
-
-        <form method="POST" class="profile-details">
-            <div class="profile-field">
-                <label>Full Name</label>
-                <div class="value"><?= htmlspecialchars($user['name']) ?></div>
-            </div>
-
-            <div class="profile-field">
-                <label>Email Address</label>
-                <div class="value"><?= htmlspecialchars($user['email']) ?></div>
-            </div>
-
-            <div class="profile-field">
-                <label for="bio">Bio</label>
-                <textarea name="bio" id="bio" rows="4"
-                    style="width:100%; font-size:1.6rem; padding:1rem;"><?= htmlspecialchars($user['bio'] ?? '') ?></textarea>
-            </div>
-
-            <div class="profile-actions">
-                <button type="submit" class="profile-btn">Save Changes</button>
-                <a href="profile.php" class="profile-btn secondary">Cancel</a>
-            </div>
-        </form>
-    </div>
-</section>
+    </section>
     <?php include 'Assets/HTML/footer.html' ?>
     <script src="Assets/js/main.js"></script>
 </body>
 
 <style>
-       .bg {
-  background: url('Assets/images/profile_bg.jpg') no-repeat center center;
-  background-size: cover;
+    .bg {
+        background: url('Assets/images/profile_bg.jpg') no-repeat center center;
+        background-size: cover;
 
-}
+    }
+
     .profile-container {
         max-width: 650px;
         margin: 5rem auto 0;
@@ -102,31 +108,33 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.3);
     }
 
-.profile-header {
-    display: flex;
-    align-items: center;  
-    gap: 3.5rem;          
-    margin-bottom: 2rem;
-    text-align: left;    
-}
+    .profile-header {
+        display: flex;
+        align-items: center;
+        gap: 3.5rem;
+        margin-bottom: 2rem;
+        text-align: left;
+    }
 
-.profile-header h1 {
-    color: var(--yellow);
-    font-size: 3rem;
-    margin-bottom: 0;    
-}
-.profile-avatar {
-    width: 12rem;
-    height: 12rem;
-    border-radius: 50%;
-    background: var(--yellow);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 0 2rem 0; /* Remove auto-centering */
-    font-size: 4rem;
-    color: var(--black);
-}
+    .profile-header h1 {
+        color: var(--yellow);
+        font-size: 3rem;
+        margin-bottom: 0;
+    }
+
+    .profile-avatar {
+        width: 12rem;
+        height: 12rem;
+        border-radius: 50%;
+        background: var(--yellow);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 0 2rem 0;
+        /* Remove auto-centering */
+        font-size: 4rem;
+        color: var(--black);
+    }
 
     .profile-details {
         display: grid;
@@ -225,4 +233,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 </style>
+
 </html>

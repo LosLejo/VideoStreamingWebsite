@@ -379,3 +379,17 @@ header .icons #menu-bars {
         font-size: 50%;
     }
 }
+
+.profile-bio {
+    background: transparent;
+    color: #fff;
+    font-weight: bolder;
+    font-size: 1.6rem;
+    /* match your desired size */
+    border: 1px solid #fff;
+    outline: none;
+    padding: 1rem;
+    width: 100%;
+    min-height: 80px;
+    resize: vertical;
+}

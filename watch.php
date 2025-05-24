@@ -23,8 +23,17 @@
 
                 <div id="videoWrapper">
                     <div class="video-player">
-                        <div class="video-placeholder"></div>
+                        <div class="video-player">
+                            <video controls width="100%" height="auto">
+                                <source
+                                    src="https://macdn.hakunaymatata.com/resource/bcd4255d03682395796faeb9ab9e1efa.mp4?Expires=1749314587&Signature=IdCKAZZQgr3e8HuLzFfZ~7GwBHJhKk1CNAoPWbz0CcH6PXkYqxTH~PnjXDLvK7crYF5xvFC7UGvnM2kcq6IUnSb0k4v7uCfvawzBC2Gb~kLysuZ~H5b20OjTD1h98aD~H0QFj-MZ2Uzs086OnsrnPS1Sye1tR1o2K39TycOsutSyhXNG3JxYQ7By~Rhrx-8QsDQz98dv4WTOb8tmB1rAyPU3aPeCMvshfjiMEzeCRQcgwKDjZpzvTj1XVtjk0j-WXiGDegc7T-sdFDco2RPKrND~vTxmZEMYL5fGni~QUTEMVaZsVo9CdhogKo9qI3PlCnGccGNUEz7dM5YBHeemKA__&Key-Pair-Id=KMHN1LQ1HEUPL"
+                                    type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+
                     </div>
+
                     <div class="video-controls">
                         <button>Next <i class="fa-solid fa-forward"></i></button>
                         <button onclick="toggleExpand()">Expand <i class="fa-solid fa-expand"></i></button>
@@ -122,28 +131,28 @@
     </div>
 
     <script>
-    document.querySelector("main").classList.add("expanded");
+        document.querySelector("main").classList.add("expanded");
 
-    function toggleExpand() {
-        const videoWrapper = document.getElementById("videoWrapper");
-        const episodeSidebar = document.querySelector(".episode-sidebar");
-        const serverWrapper = document.querySelector(".server-episode-wrapper");
+        function toggleExpand() {
+            const videoWrapper = document.getElementById("videoWrapper");
+            const episodeSidebar = document.querySelector(".episode-sidebar");
+            const serverWrapper = document.querySelector(".server-episode-wrapper");
 
-        videoWrapper.classList.toggle("expanded");
+            videoWrapper.classList.toggle("expanded");
 
-        if (videoWrapper.classList.contains("expanded")) {
-            episodeSidebar.style.display = "none";
-
-
-            serverWrapper.style.display = "flex";
-            serverWrapper.style.justifyContent = "center";
-            serverWrapper.style.width = "100%";
-            episodeSidebar.style.display = "block";
+            if (videoWrapper.classList.contains("expanded")) {
+                episodeSidebar.style.display = "none";
 
 
-            serverWrapper.style.justifyContent = "flex-start";
+                serverWrapper.style.display = "flex";
+                serverWrapper.style.justifyContent = "center";
+                serverWrapper.style.width = "100%";
+                episodeSidebar.style.display = "block";
+
+
+                serverWrapper.style.justifyContent = "flex-start";
+            }
         }
-    }
     </script>
     <?php include 'Assets/HTML/footer.html' ?>
 </body>

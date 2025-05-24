@@ -11,7 +11,7 @@
 </head>
 
 <body>
-        <?php include 'Assets/HTML/register-header.html' ?>
+    <?php include 'Assets/HTML/home-header.php' ?>
     <video autoplay loop muted plays-inline class="background-clip">
         <source src="background.mp4" type="video/mp4">
     </video>
