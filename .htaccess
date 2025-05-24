@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# Remove .php extension from URL
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-zA-Z0-9_-]+)$ $1.php [L]
+
+# Set default to home.php when no file is specified
+DirectoryIndex home.php

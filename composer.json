@@ -1,0 +1,7 @@
+{
+    "require": {
+        "google/apiclient": "^2.14",
+        "guzzlehttp/guzzle": "^7.4",
+        "symfony/cache": "^7.2"
+    }
+}

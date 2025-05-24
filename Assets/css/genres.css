@@ -1,0 +1,445 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+:root {
+    --yellow: #fff700;
+    --black: #000000;
+    --light-color: #181818;
+    --box-shadow: 0.5rem 1.5rem rgba(0, 0, 0, .1);
+}
+
+* {
+    font-family: 'Nunito', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    text-transform: capitalize;
+    transition: all .2s linear;
+}
+
+html {
+
+    font-size: 62.5%;
+    overflow-x: hidden;
+    scroll-padding-top: 5.5rem;
+
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--black);
+    padding: 1rem 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 10000;
+    box-shadow: var(--box-shadow);
+
+}
+
+header .logo {
+    color: #fff;
+    font-size: 2.5rem;
+    font-weight: bolder;
+}
+
+header .logo i {
+    color: var(--yellow);
+}
+
+header .navbar a {
+    font-size: 1.7rem;
+    font-weight: bolder;
+    border-radius: .5rem;
+    padding: .5rem 1.5rem;
+    color: #fff;
+}
+
+header .navbar a.active,
+header .navbar a:hover {
+
+    color: var(--black);
+    background: var(--yellow);
+}
+
+.icons {
+    position: relative; 
+    display: flex;
+    align-items: center;
+    z-index: 10;
+}
+header .icons i,
+header .icons a {
+    cursor: pointer;
+    margin-left: .5rem;
+    height: 4.5rem;
+    line-height: 4.5rem;
+    width: 4.5rem;
+    text-align: center;
+    font-size: 1.7rem;
+    color: var(--black);
+    border-radius: 25%;
+    background: var(--yellow);
+}
+
+header .icons i:hover,
+header .icons a:hover {
+    color: var(--yellow);
+    background: var(--black);
+    transform: rotate(360deg);
+}
+
+
+.home {
+    padding: 0;
+
+}
+
+.home .box {
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    justify-content: flex-end;
+    padding: 2rem 9%;
+}
+.content{
+    margin-right: 8rem;
+     margin-left: 5rem;
+}
+
+.home .box {
+    justify-content: flex-start;
+}
+
+.home .box.second {
+    justify-content: flex-end;
+}
+
+.home .box .content {
+    width: 50rem;
+}
+
+.home .box .content h3 {
+    margin-top: 1rem;
+    font-size: 25px;
+    color: #fff;
+    padding-top: .5rem;
+    text-transform: uppercase;
+}
+
+.home .box .content p {
+    line-height: 2;
+    color: #fff;
+    font-size: 1.5rem;
+    padding: 1rem 0;
+}
+
+section {
+    padding: 2rem 9%;
+}
+
+
+
+.anime {
+    background-color: var(--black);
+    padding: 3rem;
+
+}
+
+
+.anime h3 {
+    margin-top: 2rem;
+    color: #fff;
+    font-size: 20px;
+    padding-bottom: 10px;
+}
+
+.anime p {
+    color: #fff;
+}
+
+.anime .box {
+    margin-left: 5rem;
+    width: 235px;
+    height: 350px;
+    background-size: cover;
+    background-position: center;
+
+
+}
+
+.anime .box:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 19px 38px rgba(233, 230, 230, 0.3), 0 15px 12px rgba(233, 230, 230, 0.22);
+}
+
+.anime .heading {
+    position: relative;
+    font-size: 3rem;
+    padding-top: 5rem;
+    color: var(--yellow);
+    margin-bottom: 1rem;
+}
+
+.anime hr {
+    height: 2px;
+    background-color: var(--yellow);
+    border: none;
+}
+
+.anime.swiper-wrapper {
+    margin-top: 2rem;
+}
+
+
+
+.btn {
+    margin-top: 1rem;
+    display: inline-block;
+    font-size: 1.7rem;
+    cursor: pointer;
+    padding: .8rem 3rem;
+
+}
+
+.heading {
+    position: relative;
+    font-size: 3rem;
+    color: var(--yellow);
+    margin-bottom: 1rem;
+}
+
+hr {
+    height: 2px;
+    background-color: var(--yellow);
+    border: none;
+}
+
+.swiper-wrapper {
+    margin-top: 2rem;
+}
+
+
+a.btn {
+    font-size: 1.7rem;
+    font-weight: bolder;
+    border-radius: .5rem;
+    padding: .5rem 1.5rem;
+    color: var(--black);
+    background: var(--yellow);
+}
+
+
+
+.comedy {
+    background-color: var(--black);
+    padding: 3rem;
+
+}
+
+.comedy h3 {
+    margin-top: 2rem;
+    padding-bottom: 10px;
+    color: #fff;
+    font-size: 20px;
+}
+
+.comedy p {
+    color: #fff;
+}
+
+.comedy .box {
+     margin-left: 5rem;
+    width: 235px;
+    height: 350px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.comedy .box:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 19px 38px rgba(233, 230, 230, 0.3), 0 15px 12px rgba(233, 230, 230, 0.22);
+}
+.comedy .heading {
+    position: relative;
+    font-size: 3rem;
+    color: var(--yellow);
+    margin-bottom: 1rem;
+}
+
+.comedy hr {
+    height: 2px;
+    background-color: var(--yellow);
+    border: none;
+}
+
+.comedy .swiper-wrapper {
+    margin-top: 2rem;
+}
+
+
+
+/* drama */
+
+.drama {
+    background-color: var(--black);
+    padding: 3rem;
+
+}
+
+
+.drama h3 {
+    margin-top: 2rem;
+    color: #fff;
+    font-size: 20px;
+    padding-bottom: 10px;
+}
+
+.drama p {
+    color: #fff;
+}
+
+.drama .box {
+    margin-left: 5rem;
+    width: 235px;
+    height: 350px;
+    background-size: cover;
+    background-position: center;
+
+
+}
+
+.drama .box:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 19px 38px rgba(233, 230, 230, 0.3), 0 15px 12px rgba(233, 230, 230, 0.22);
+}
+
+.drama .heading {
+    position: relative;
+    font-size: 3rem;
+    color: var(--yellow);
+    margin-bottom: 1rem;
+}
+
+.drama hr {
+    height: 2px;
+    background-color: var(--yellow);
+    border: none;
+}
+
+.drama.swiper-wrapper {
+    margin-top: 2rem;
+}
+
+.romance {
+    background-color: var(--black);
+    padding: 3rem;
+
+}
+
+header .icons #menu-bars {
+    display: none;
+}
+
+.romance h3 {
+    margin-top: 2rem;
+    color: #fff;
+    font-size: 20px;
+    padding-bottom: 10px;
+}
+
+.romance p {
+    color: #fff;
+}
+
+.romance .box {
+    margin-left: 5rem;
+    width: 235px;
+    height: 350px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.romance .box:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 19px 38px rgba(233, 230, 230, 0.3), 0 15px 12px rgba(233, 230, 230, 0.22);
+}
+
+.romance .heading {
+    position: relative;
+    font-size: 3rem;
+    color: var(--yellow);
+    margin-bottom: 1rem;
+}
+
+.romance hr {
+    height: 2px;
+    background-color: var(--yellow);
+    border: none;
+}
+
+.romance.swiper-wrapper {
+    margin-top: 2rem;
+}
+
+
+
+
+
+@media(max-width: 991px) {
+    html {
+        font-size: 55%;
+    }
+
+    header {
+        padding: 1rem 2rem;
+    }
+}
+
+@media(max-width: 768px) {
+    header .icons #menu-bars {
+        display: inline-block;
+    }
+
+    header .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--black);
+        border-top: .1rem solid rgba(0, 0, 0, .2);
+        border-bottom: .1rem solid rgba(0, 0, 0, .2);
+        padding: 1rem;
+        clip-path: polygon(0 0, 100% 0, 0 0);
+    }
+
+    header .navbar.active {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    header .navbar a {
+        display: block;
+        padding: 1.5rem;
+        margin: 1rem;
+        font-size: 2rem;
+        background: var(--yellow);
+
+    }
+}
+
+@media(max-width: 468px) {
+    html {
+        font-size: 50%;
+    }
+}
