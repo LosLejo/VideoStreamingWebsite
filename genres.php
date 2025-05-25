@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <?php include 'Assets/HTML/browser-header.php' ?>
+    <?php include 'Assets/HTML/home-header.php' ?>
 
     <section class="anime" id="anime">
         <h1 class="heading">Action</h1>
@@ -67,10 +67,10 @@
                     <div class="content">
                         <h3>Naruto</h3>
                         <p>After years of training, Naruto returns stronger than
-                            ever to face the rising threat of Akatsuki, determined to protect his friends and pursue 
+                            ever to face the rising threat of Akatsuki, determined to protect his friends and pursue
                             his dream of becoming Hokage.
                         </p>
-                            <a href="#" class="btn">Watch</a>
+                        <a href="#" class="btn">Watch</a>
                     </div>
                 </div>
 

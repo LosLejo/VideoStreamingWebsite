@@ -38,6 +38,15 @@ $isLoggedIn = isset($_SESSION['user_email']);
     </div>
 
     <style>
+        header {
+            background-color: grey;
+            /* Change this to any color you want */
+            color: white;
+            /* Text color inside the header */
+            padding: 10px 20px;
+            /* Optional: spacing */
+        }
+
         .search-wrapper {
             position: relative;
             display: inline-flex;

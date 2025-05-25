@@ -71,7 +71,7 @@ header .navbar a:hover {
 }
 
 .icons {
-    position: relative; 
+    position: relative;
     display: flex;
     align-items: center;
     z-index: 10;
@@ -329,6 +329,7 @@ main {
 .episode-title {
     padding: 10px;
     font-size: 16px;
+    color: #fff700;
 }
 
 .expanded {
@@ -365,7 +366,7 @@ main {
 }
 
 /* Hide sidebar when expanded */
-#videoWrapper.expanded ~ .top-anime {
+#videoWrapper.expanded~.top-anime {
     display: none;
 }
 
@@ -418,6 +419,7 @@ main {
     html {
         font-size: 55%;
     }
+
     header {
         padding: 1rem 2rem;
     }
