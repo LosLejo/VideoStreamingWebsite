@@ -2,8 +2,26 @@
 session_start();
 include 'db.php';
 
-// Get anime series (not individual episodes)
-$result = $mysqli->query("SELECT * FROM anime ORDER BY id");
+// Get featured anime for home slider
+$homeSliderQuery = "SELECT DISTINCT a.* FROM anime_series a 
+                   JOIN display_sections ds ON a.id = ds.anime_series_id 
+                   WHERE ds.section_type = 'home_slider' AND ds.is_active = 1 
+                   ORDER BY ds.display_order";
+$homeSliderResult = $mysqli->query($homeSliderQuery);
+
+// Get browse section anime
+$browseQuery = "SELECT DISTINCT a.* FROM anime_series a 
+               JOIN display_sections ds ON a.id = ds.anime_series_id 
+               WHERE ds.section_type = 'browse' AND ds.is_active = 1 
+               ORDER BY ds.display_order";
+$browseResult = $mysqli->query($browseQuery);
+
+// Get new releases
+$newReleasesQuery = "SELECT DISTINCT a.* FROM anime_series a 
+                    JOIN display_sections ds ON a.id = ds.anime_series_id 
+                    WHERE ds.section_type = 'new_releases' AND ds.is_active = 1 
+                    ORDER BY ds.display_order";
+$newReleasesResult = $mysqli->query($newReleasesQuery);
 ?>
 
 <!DOCTYPE html>
@@ -22,43 +40,69 @@ $result = $mysqli->query("SELECT * FROM anime ORDER BY id");
 <body>
     <?php include 'Assets/HTML/home-header.php' ?>
 
+    <!-- HOME SLIDER SECTION -->
     <section class="home" id="home">
         <div class="swiper home-slider">
             <div class="swiper-wrapper">
-
-                <?php while ($anime = $result->fetch_assoc()): ?>
-                    <div class="swiper-slide">
-                        <div class="box"
-                            style="background: url('<?php echo htmlspecialchars($anime['thumbnail']); ?>') no-repeat center/cover;">
-                            <div class="content">
-                                <h3><?php echo htmlspecialchars($anime['title']); ?></h3>
-                                <p><?php echo htmlspecialchars($anime['description']); ?></p>
-                                <!-- Updated: Link to anime series, not specific episode -->
-                                <a href="watch.php?anime_id=<?php echo $anime['id']; ?>" class="btn">Watch</a>
-                            </div>
+                <?php while ($anime = $homeSliderResult->fetch_assoc()): ?>
+                <div class="swiper-slide">
+                    <div class="box"
+                        style="background: url('<?php echo htmlspecialchars($anime['thumbnail']); ?>') no-repeat center/cover;">
+                        <div class="content">
+                            <h3><?php echo htmlspecialchars($anime['title']); ?></h3>
+                            <p><?php echo htmlspecialchars($anime['description']); ?></p>
+                            <a href="watch.php?series_id=<?php echo $anime['id']; ?>" class="btn">Watch</a>
                         </div>
                     </div>
+                </div>
                 <?php endwhile; ?>
-
             </div>
         </div>
     </section>
 
-    <!-- Rest of your sections remain the same -->
+    <!-- BROWSE SECTION -->
     <section class="anime" id="browse">
         <h1 class="heading">Browse <?php echo htmlspecialchars($_SESSION['user_name']); ?></h1>
         <div class="swiper anime-slider">
             <div class="swiper-wrapper">
-
+                <?php while ($anime = $browseResult->fetch_assoc()): ?>
+                <div class="swiper-slide">
+                    <div class="anime-card">
+                        <div class="thumbnail"
+                            style="background-image: url('<?php echo htmlspecialchars($anime['thumbnail']); ?>');">
+                        </div>
+                        <div class="card-content">
+                            <h3><?php echo htmlspecialchars($anime['title']); ?></h3>
+                            <p><?php echo htmlspecialchars($anime['description']); ?></p>
+                            <a href="watch.php?series_id=<?php echo $anime['id']; ?>" class="btn">Watch</a>
+                        </div>
+                    </div>
+                </div>
+                <?php endwhile; ?>
             </div>
         </div>
     </section>
 
+    <!-- NEW RELEASES SECTION -->
     <section class="anime" id="new-releases">
-        <h1 class="heading">New Releases <?php echo htmlspecialchars(strtolower($_SESSION['user_email'])); ?></h1>
+        <h1 class="heading">New Releases</h1>
         <div class="swiper new-release-slider">
             <div class="swiper-wrapper">
-                <!-- Your existing new releases section content -->
+                <?php while ($anime = $newReleasesResult->fetch_assoc()): ?>
+                <div class="swiper-slide">
+                    <div class="anime-card">
+                        <div class="thumbnail"
+                            style="background-image: url('<?php echo htmlspecialchars($anime['thumbnail']); ?>');">
+                        </div>
+                        <div class="card-content">
+                            <h3><?php echo htmlspecialchars($anime['title']); ?></h3>
+                            <p><?php echo htmlspecialchars($anime['description']); ?></p>
+                            <span class="new-badge">NEW</span>
+                            <a href="watch.php?series_id=<?php echo $anime['id']; ?>" class="btn">Watch</a>
+                        </div>
+                    </div>
+                </div>
+                <?php endwhile; ?>
             </div>
         </div>
     </section>
