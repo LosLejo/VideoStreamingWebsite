@@ -166,20 +166,6 @@ main {
     justify-content: center;
 }
 
-.bg {
-    background-color: #181818;
-    border-radius: 10px;
-    max-width: 600px;
-}
-
-.bg-header {
-    text-align: center;
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--yellow);
-    margin-bottom: 1rem;
-}
-
 .server-episode-wrapper {
     display: flex;
     justify-content: center;
@@ -208,6 +194,22 @@ main {
     margin-right: 5px;
     cursor: pointer;
 }
+
+.bg {
+    background-color: #181818;
+    border-radius: 10px;
+    max-width: 600px;
+}
+
+.bg-header {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--yellow);
+    margin-bottom: 1rem;
+}
+
+
 
 .bg1-header {
     text-align: center;
