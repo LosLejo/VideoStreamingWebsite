@@ -1,5 +1,8 @@
 <?php
 session_start();
+include 'db.php';
+
+$result = $mysqli->query("SELECT * FROM anime");
 ?>
 
 <!DOCTYPE html>
@@ -22,19 +25,19 @@ session_start();
         <div class="swiper home-slider">
             <div class="swiper-wrapper">
 
-                <div class="swiper-slide">
-                    <div class="box" style="background: url('Assets/images/kake.jpg') no-repeat center/cover;">
+                <?php while ($anime = $result->fetch_assoc()): ?>
+                    <div class="swiper-slide">
+                        <div class="box"
+                            style="background: url('<?php echo $anime['thumbnail']; ?>') no-repeat center/cover;">
+                        </div>
                         <div class="content">
-                            <h3>Kakegurui</h3>
-                            <p>
-                                High roller Yumeko Jabami plans to clean house at Hyakkaou Private<br>
-                                Academy, a school where students are evaluated solely on their<br>
-                                gambling skills.
-                            </p>
-                            <a href="watch" class="btn">Watch</a>
+                            <h3><?php echo htmlspecialchars($anime['title']); ?></h3>
+                            <p><?php echo htmlspecialchars($anime['description']); ?></p>
+                            <a href="watch.php?id=<?php echo $anime['id']; ?>" class="btn">Watch</a>
                         </div>
                     </div>
-                </div>
+                <?php endwhile; ?>
+
 
                 <div class="swiper-slide">
                     <div class="box second" style="background: url('Assets/images/death.jpg') no-repeat center/cover;">
