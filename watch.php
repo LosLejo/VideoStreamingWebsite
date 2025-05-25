@@ -2,22 +2,40 @@
 session_start();
 include 'db.php';
 
-if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+// Get anime_id and episode from URL parameters
+if (!isset($_GET['anime_id']) || !is_numeric($_GET['anime_id'])) {
     die("Invalid anime ID.");
 }
 
-$id = (int)$_GET['id'];
+$anime_id = (int)$_GET['anime_id'];
+$episode_number = isset($_GET['episode']) ? (int)$_GET['episode'] : 1; // Default to episode 1
 
+// Get anime information
 $stmt = $mysqli->prepare("SELECT * FROM anime WHERE id = ?");
-$stmt->bind_param("i", $id);
+$stmt->bind_param("i", $anime_id);
 $stmt->execute();
-$result = $stmt->get_result();
+$anime_result = $stmt->get_result();
 
-if ($result->num_rows === 0) {
+if ($anime_result->num_rows === 0) {
     die("Anime not found.");
 }
 
-$anime = $result->fetch_assoc();
+$anime = $anime_result->fetch_assoc();
+
+// Get current episode information
+$episode_stmt = $mysqli->prepare("SELECT * FROM episodes WHERE anime_id = ? AND episode_number = ?");
+$episode_stmt->bind_param("ii", $anime_id, $episode_number);
+$episode_stmt->execute();
+$episode_result = $episode_stmt->get_result();
+
+if ($episode_result->num_rows === 0) {
+    die("Episode not found.");
+}
+
+$current_episode = $episode_result->fetch_assoc();
+
+// Get all episodes for this anime (for episode list)
+$all_episodes_result = $mysqli->query("SELECT * FROM episodes WHERE anime_id = $anime_id ORDER BY episode_number");
 ?>
 
 <!DOCTYPE html>
@@ -26,10 +44,9 @@ $anime = $result->fetch_assoc();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($anime['title']); ?> - StrikeFlix</title>
+    <title><?php echo htmlspecialchars($anime['title']); ?> Episode <?php echo $episode_number; ?> - StrikeFlix</title>
     <link rel="icon" type="image/svg+xml" href="assets/bolt-solid.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <link rel="stylesheet" href="Assets/css/watch.css">
 </head>
 
@@ -41,45 +58,45 @@ $anime = $result->fetch_assoc();
 
         <main>
             <section class="video-section">
-                <div class="breadcrumbs">Home > Watching <?php echo htmlspecialchars($anime['title']); ?></div>
+                <div class="breadcrumbs">
+                    Home > <?php echo htmlspecialchars($anime['title']); ?> > Episode <?php echo $episode_number; ?>
+                </div>
 
                 <div id="videoWrapper">
-
                     <div class="video-player">
-                        <div class="video-player">
-                            <video controls width="100%" height="auto">
-                                <source src="<?php echo htmlspecialchars($anime['video_url']); ?>" type="video/mp4" />
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
+                        <video controls width="100%" height="auto">
+                            <source src="<?php echo htmlspecialchars($current_episode['video_url']); ?>"
+                                type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
 
                     <div class="video-controls">
-                        <button>Next <i class="fa-solid fa-forward"></i></button>
+                        <?php if ($episode_number < $anime['total_episodes']): ?>
+                            <a
+                                href="watch.php?anime_id=<?php echo $anime_id; ?>&episode=<?php echo $episode_number + 1; ?>">
+                                <button>Next Episode <i class="fa-solid fa-forward"></i></button>
+                            </a>
+                        <?php endif; ?>
                         <button onclick="toggleExpand()">Expand <i class="fa-solid fa-expand"></i></button>
                     </div>
                 </div>
 
                 <div class="server-episode-wrapper">
                     <div class="bg">
-                        <div class="bg-header">Servers</div>
-                        <div class="servers">
-                            <button>DauVideo</button>
-                            <button>Vidstreaming</button>
-                            <button>Vidcloud</button>
-                        </div>
-                    </div>
-
-                    <div class="bg">
                         <div class="bg-header">Episodes</div>
                         <div class="episodes">
-                            <?php
-                            // Generate episode buttons dynamically based on the episode count from database
-                            for ($i = 1; $i <= $anime['episode']; $i++) {
-                                $activeClass = ($i == 1) ? 'class="active"' : '';
-                                echo "<button $activeClass>$i</button>";
-                            }
-                            ?>
+                            <?php while ($episode = $all_episodes_result->fetch_assoc()): ?>
+                                <?php
+                                $activeClass = ($episode['episode_number'] == $episode_number) ? 'class="active"' : '';
+                                ?>
+                                <a
+                                    href="watch.php?anime_id=<?php echo $anime_id; ?>&episode=<?php echo $episode['episode_number']; ?>">
+                                    <button <?php echo $activeClass; ?>>
+                                        <?php echo $episode['episode_number']; ?>
+                                    </button>
+                                </a>
+                            <?php endwhile; ?>
                         </div>
                     </div>
                 </div>
@@ -92,21 +109,27 @@ $anime = $result->fetch_assoc();
 
                 <div class="episode-list">
                     <?php
-                    // Generate episode list dynamically
-                    for ($i = 1; $i <= $anime['episode']; $i++) {
-                        echo '<div class="episode-item">';
-                        echo '<div class="episode-thumb">';
-                        echo '<img src="' . htmlspecialchars($anime['thumbnail']) . '" alt="' . htmlspecialchars($anime['title']) . ' Episode ' . $i . '">';
-                        echo '<div class="episode-overlay">';
-                        echo '<span>Episode ' . $i . '</span>';
-                        echo '</div>';
-                        echo '</div>';
-                        echo '<div class="episode-title">';
-                        echo htmlspecialchars($anime['title']) . ' - Episode ' . $i;
-                        echo '</div>';
-                        echo '</div>';
-                    }
+                    // Reset result pointer for sidebar
+                    $all_episodes_result->data_seek(0);
+                    while ($episode = $all_episodes_result->fetch_assoc()):
                     ?>
+                        <a
+                            href="watch.php?anime_id=<?php echo $anime_id; ?>&episode=<?php echo $episode['episode_number']; ?>">
+                            <div
+                                class="episode-item <?php echo ($episode['episode_number'] == $episode_number) ? 'active' : ''; ?>">
+                                <div class="episode-thumb">
+                                    <img src="<?php echo htmlspecialchars($episode['thumbnail'] ?: $anime['thumbnail']); ?>"
+                                        alt="<?php echo htmlspecialchars($anime['title']); ?> Episode <?php echo $episode['episode_number']; ?>">
+                                    <div class="episode-overlay">
+                                        <span>Episode <?php echo $episode['episode_number']; ?></span>
+                                    </div>
+                                </div>
+                                <div class="episode-title">
+                                    <?php echo htmlspecialchars($episode['episode_title'] ?: $anime['title'] . ' - Episode ' . $episode['episode_number']); ?>
+                                </div>
+                            </div>
+                        </a>
+                    <?php endwhile; ?>
                 </div>
             </aside>
         </main>
