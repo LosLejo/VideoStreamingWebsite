@@ -43,109 +43,108 @@ $anime = $result->fetch_assoc();
             <section class="video-section">
                 <div class="breadcrumbs">Home > Watching Solo Leveling</div>
 
-                <div id="videoWrapper">
-                    <div class="video-player">
-                        <div class="video-player">
-                            <video controls width="100%" height="auto">
-                                <source
-                                    src="https://rr4---sn-n4v7sney.googlevideo.com/videoplayback?expire=1748169768&ei=qIMyaJ_xGbGp2OMPsq7lyA4&ip=196.51.204.206&id=30dbceffcb42e409&itag=18&source=blogger&xpc=Egho7Zf3LnoBAQ%3D%3D&met=1748140968,&mh=k4&mm=31&mn=sn-n4v7sney&ms=au&mv=m&mvi=4&pl=17&rms=au,au&susc=bl&eaua=uN7j3T-ZPmc&mime=video/mp4&vprv=1&rqh=1&dur=1415.906&lmt=1747594127558530&mt=1748140605&txp=1311224&sparams=expire,ei,ip,id,itag,source,xpc,susc,eaua,mime,vprv,rqh,dur,lmt&sig=AJfQdSswRQIgUP_P9XfZaTu-IC52mgVG4z7XvYD3GuNqM1KvG1sOVJgCIQCzaxfTe-nKH6fW5XdE7hR4ZbYE_-P7PgqtbqAgcKC-lA%3D%3D&lsparams=met,mh,mm,mn,ms,mv,mvi,pl,rms&lsig=ACuhMU0wRQIhAI2DqC3g3nYHv3sJLM4i3hQ_LoGQuqwOaa9k-Lv8XRvvAiBS6dedYcoPRlSn9S3Tebs7Rd8adFZIiyNtmy0DGaQyRA%3D%3D"
-                                    type="video/mp4" />
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
-
-                    </div>
-
-                    <div class="video-controls">
-                        <button>Next <i class="fa-solid fa-forward"></i></button>
-                        <button onclick="toggleExpand()">Expand <i class="fa-solid fa-expand"></i></button>
-                    </div>
-                </div>
-
-                <div class="server-episode-wrapper">
-                    <div class="bg">
-                        <div class="bg-header">Servers</div>
-                        <div class="servers">
-                            <button>DauVideo</button>
-                            <button>Vidstreaming</button>
-                            <button>Vidcloud</button>
-                        </div>
-                    </div>
-
-                    <div class="bg">
-                        <div class="bg-header">Episodes</div>
-                        <div class="episodes">
-                            <button class="active">1</button>
-                            <button>2</button>
-                            <button>3</button>
-                            <button>4</button>
-                            <button>5</button>
-                            <button>6</button>
-                            <button>7</button>
-                            <button>8</button>
-                            <button>9</button>
-                            <button>10</button>
-                            <button>11</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <aside class="episode-sidebar block_area">
-                <div class="block_area-header">
-                    <h2 class="cat-heading">Solo Leveling - Seasons</h2>
-                </div>
-
-                <div class="episode-list">
-                    <div class="episode-item">
-                        <div class="episode-thumb">
-                            <img src="Assets/images/solo_ep1.jpe" alt="Solo Leveling Episode 1">
-                            <div class="episode-overlay">
-                                <span>Season 1</span>
-                            </div>
-                        </div>
-                        <div class="episode-title">
-                            Solo Leveling - Season 1
-                        </div>
-                    </div>
-
-                    <div class="episode-item">
-                        <div class="episode-thumb">
-                            <img src="Assets/images/solo_s2.png" alt="Solo Leveling Episode 2">
-                            <div class="episode-overlay">
-                                <span>Season 2</span>
-                            </div>
-                        </div>
-                        <div class="episode-title">
-                            Solo Leveling - Season 2
-                        </div>
-                    </div>
-
-                    <div class="episode-item">
-                        <div class="episode-thumb">
-                            <img src="Assets/images/solo.jpg" alt="Solo Leveling Episode 3">
-                            <div class="episode-overlay">
-                                <span>Season 3</span>
-                            </div>
-                        </div>
-                        <div class="episode-title">
-                            Solo Leveling - Season 3
-                        </div>
-                    </div>
-
-                    <div class="episode-item">
-                        <div class="episode-thumb">
-                            <img src="Assets/images/solo.jpg" alt="Solo Leveling Episode 3">
-                            <div class="episode-overlay">
-                                <span>Season 3</span>
-                            </div>
-                        </div>
-                        <div class="episode-title">
-                            Solo Leveling - Season 3
+                <div class="swiper-slide">
+                    <div class="box second"
+                        style="background: url('<?php echo $anime['thumbnail']; ?>') no-repeat center/cover;">
+                        <div class="content">
+                            <h3><?php echo htmlspecialchars($anime['title']); ?></h3>
+                            <p><?php echo htmlspecialchars($anime['description']); ?></p>
+                            <a href="watch.php?id=<?php echo $anime['id']; ?>" class="btn">Watch</a>
                         </div>
                     </div>
                 </div>
     </div>
+
+    <div class="video-controls">
+        <button>Next <i class="fa-solid fa-forward"></i></button>
+        <button onclick="toggleExpand()">Expand <i class="fa-solid fa-expand"></i></button>
+    </div>
+    </div>
+
+    <div class="server-episode-wrapper">
+        <div class="bg">
+            <div class="bg-header">Servers</div>
+            <div class="servers">
+                <button>DauVideo</button>
+                <button>Vidstreaming</button>
+                <button>Vidcloud</button>
+            </div>
+        </div>
+
+        <div class="bg">
+            <div class="bg-header">Episodes</div>
+            <div class="episodes">
+                <button class="active">1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>4</button>
+                <button>5</button>
+                <button>6</button>
+                <button>7</button>
+                <button>8</button>
+                <button>9</button>
+                <button>10</button>
+                <button>11</button>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <aside class="episode-sidebar block_area">
+        <div class="block_area-header">
+            <h2 class="cat-heading">Solo Leveling - Seasons</h2>
+        </div>
+
+        <div class="episode-list">
+            <div class="episode-item">
+                <div class="episode-thumb">
+                    <img src="Assets/images/solo_ep1.jpe" alt="Solo Leveling Episode 1">
+                    <div class="episode-overlay">
+                        <span>Season 1</span>
+                    </div>
+                </div>
+                <div class="episode-title">
+                    Solo Leveling - Season 1
+                </div>
+            </div>
+
+            <div class="episode-item">
+                <div class="episode-thumb">
+                    <img src="Assets/images/solo_s2.png" alt="Solo Leveling Episode 2">
+                    <div class="episode-overlay">
+                        <span>Season 2</span>
+                    </div>
+                </div>
+                <div class="episode-title">
+                    Solo Leveling - Season 2
+                </div>
+            </div>
+
+            <div class="episode-item">
+                <div class="episode-thumb">
+                    <img src="Assets/images/solo.jpg" alt="Solo Leveling Episode 3">
+                    <div class="episode-overlay">
+                        <span>Season 3</span>
+                    </div>
+                </div>
+                <div class="episode-title">
+                    Solo Leveling - Season 3
+                </div>
+            </div>
+
+            <div class="episode-item">
+                <div class="episode-thumb">
+                    <img src="Assets/images/solo.jpg" alt="Solo Leveling Episode 3">
+                    <div class="episode-overlay">
+                        <span>Season 3</span>
+                    </div>
+                </div>
+                <div class="episode-title">
+                    Solo Leveling - Season 3
+                </div>
+            </div>
+        </div>
+        </div>
     </aside>
     </main>
     </div>

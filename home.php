@@ -26,60 +26,64 @@ $result = $mysqli->query("SELECT * FROM anime");
             <div class="swiper-wrapper">
 
                 <?php while ($anime = $result->fetch_assoc()): ?>
+
                     <div class="swiper-slide">
-                        <div class="box"
+                        <div class="box second"
                             style="background: url('<?php echo $anime['thumbnail']; ?>') no-repeat center/cover;">
-                        </div>
-                        <div class="content">
-                            <h3><?php echo htmlspecialchars($anime['title']); ?></h3>
-                            <p><?php echo htmlspecialchars($anime['description']); ?></p>
-                            <a href="watch.php?id=<?php echo $anime['id']; ?>" class="btn">Watch</a>
+                            <div class="content">
+                                <h3><?php echo htmlspecialchars($anime['title']); ?></h3>
+                                <p><?php echo htmlspecialchars($anime['description']); ?></p>
+                                <a href="watch.php?id=<?php echo $anime['id']; ?>" class="btn">Watch</a>
+                            </div>
                         </div>
                     </div>
+
+                    <div class="swiper-slide">
+                        <div class="box second"
+                            style="background: url('<?php echo $anime['thumbnail']; ?>') no-repeat center/cover;">
+                            <div class="content">
+                                <h3><?php echo htmlspecialchars($anime['title']); ?></h3>
+                                <p><?php echo htmlspecialchars($anime['description']); ?></p>
+                                <a href="watch.php?id=<?php echo $anime['id']; ?>" class="btn">Watch</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="box second"
+                            style="background: url('<?php echo $anime['thumbnail']; ?>') no-repeat center/cover;">
+                            <div class="content">
+                                <h3><?php echo htmlspecialchars($anime['title']); ?></h3>
+                                <p><?php echo htmlspecialchars($anime['description']); ?></p>
+                                <a href="watch.php?id=<?php echo $anime['id']; ?>" class="btn">Watch</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="swiper-slide">
+                        <div class="box second"
+                            style="background: url('<?php echo $anime['thumbnail']; ?>') no-repeat center/cover;">
+                            <div class="content">
+                                <h3><?php echo htmlspecialchars($anime['title']); ?></h3>
+                                <p><?php echo htmlspecialchars($anime['description']); ?></p>
+                                <a href="watch.php?id=<?php echo $anime['id']; ?>" class="btn">Watch</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="box second"
+                            style="background: url('<?php echo $anime['thumbnail']; ?>') no-repeat center/cover;">
+                            <div class="content">
+                                <h3><?php echo htmlspecialchars($anime['title']); ?></h3>
+                                <p><?php echo htmlspecialchars($anime['description']); ?></p>
+                                <a href="watch.php?id=<?php echo $anime['id']; ?>" class="btn">Watch</a>
+                            </div>
+                        </div>
+                    </div>
+
                 <?php endwhile; ?>
-
-
-                <div class="swiper-slide">
-                    <div class="box second" style="background: url('Assets/images/death.jpg') no-repeat center/cover;">
-                        <div class="content">
-                            <h3>Death Note</h3>
-                            <p>
-                                When a Japanese high schooler comes into possession of a mystical<br>
-                                notebook, he finds he has the power to kill anybody whose name he<br>
-                                enters in it.
-                            </p>
-                            <a href="watch" class="btn">Watch</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="box second" style="background: url('Assets/images/boku.jpg') no-repeat center/cover;">
-                        <div class="content">
-                            <h3>Boku no Hero</h3>
-                            <p>
-                                When a powerless teen in a superhuman society inherits the abilities of the world's
-                                greatest hero, he must train to become the symbol of peace and survive a high
-                                school where danger is part of the curriculum
-                            </p>
-                            <a href="watch" class="btn">Watch</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="box second" style="background: url('Assets/images/solo.jpg') no-repeat center/cover;">
-                        <div class="content">
-                            <h3>Solo Leveling</h3>
-                            <p>
-                                When the world is invaded by deadly dungeons, a weak hunter gains the power to
-                                level up without limit turning from the weakest of all into humanity's ultimate
-                                weapon
-                            </p>
-                            <a href="watch" class="btn">Watch</a>
-                        </div>
-                    </div>
-                </div>
 
             </div>
         </div>
