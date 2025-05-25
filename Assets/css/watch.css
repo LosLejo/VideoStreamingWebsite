@@ -1,5 +1,3 @@
-
-
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
 :root {
@@ -21,12 +19,17 @@
 }
 
 html {
-
     font-size: 62.5%;
     overflow-x: hidden;
     scroll-padding-top: 5.5rem;
     scroll-behavior: smooth;
+}
 
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #000000;
+    color: #fff;
 }
 
 header {
@@ -41,7 +44,6 @@ header {
     justify-content: space-between;
     z-index: 10000;
     box-shadow: var(--box-shadow);
-
 }
 
 header .logo {
@@ -64,7 +66,6 @@ header .navbar a {
 
 header .navbar a.active,
 header .navbar a:hover {
-
     color: var(--black);
     background: var(--yellow);
 }
@@ -75,9 +76,6 @@ header .navbar a:hover {
     align-items: center;
     z-index: 10;
 }
-
-
-
 
 header .icons i,
 header .icons a {
@@ -100,15 +98,18 @@ header .icons a:hover {
     transform: rotate(360deg);
 }
 
+header .icons #menu-bars {
+    display: none;
+}
 
-.heading{
+.heading {
     font-size: 3rem;
     text-align: center;
     color: var(--yellow);
     margin-bottom: 3rem;
 }
 
-a.btn{
+a.btn {
     font-size: 1.7rem;
     font-weight: bolder;
     border-radius: .5rem;
@@ -117,188 +118,66 @@ a.btn{
     background: var(--yellow);
 }
 
-
-
-  
-.footer {
-  position: relative;
-  background-color: #111;
-  color: #eee;
-  padding: 10px 5px 5px;
-  font-size: 14px;
-  overflow: visible;
-  margin-bottom: 0;
-}
-
-.footer-logo {
-  position: absolute; 
-  top: -85px;
-  left: 93%;
-  transform: translateX(-50%);
-  max-width: 200px;
-  height: auto;
-}
-i.fa-facebook, i.fa-instagram, i.fa-twitter {
-  background-color: #fff; 
-  border-radius: 5px;                   
-  color: var(--black);               
-  width: 40px;                          
-  height: 40px;                        
-  display: inline-flex;                 
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;                    
-  margin: 5px;
-}
-
-.footer .container {
-
-  margin-left: 5rem;
-  padding: 0;
-}
-
-.footer p {
-  margin: 5px 0;
-  line-height: 1.5;
-  color: var(--gray);
-}
-
-footer .logo{
-    color: #fff;
-    font-size: 2.5rem;
-    font-weight: bolder;
-}
-
-footer .logo i{
-    color: var(--yellow);
-}
-
-header .icons #menu-bars {
-    display: none;
-}
-
-@media(max-width: 991px) {
-    html {
-        font-size: 55%;
-    }
-
-    header {
-        padding: 1rem 2rem;
-    }
-}
-
-@media(max-width: 768px) {
-    header .icons #menu-bars {
-        display: inline-block;
-    }
-
-    header .navbar {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: var(--black);
-        border-top: .1rem solid rgba(0, 0, 0, .2);
-        border-bottom: .1rem solid rgba(0, 0, 0, .2);
-        padding: 1rem;
-        clip-path: polygon(0 0, 100% 0, 0 0);
-    }
-
-    header .navbar.active {
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    }
-
-    header .navbar a {
-        display: block;
-        padding: 1.5rem;
-        margin: 1rem;
-        font-size: 2rem;
-        background: var(--yellow);
-
-    }
-}
-
-@media(max-width: 468px) {
-    html {
-        font-size: 50%;
-    }
-}
-.auth-buttons button {
-  background: #a78bfa;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 4px;
-  color: #fff;
-  cursor: pointer;
-}
-
 main {
-  display: flex;
-  padding: 20px;
-  gap: 10rem; 
+    display: flex;
+    padding: 20px;
+    gap: 10rem;
 }
 
 .video-section {
-  flex: 0 0 70%; 
-  max-width: 70%; 
-  min-width: 0;
+    flex: 0 0 70%;
+    max-width: 70%;
+    min-width: 0;
 }
 
 .breadcrumbs {
-  margin-bottom: 10px;
-  font-size: 0.9em;
-  color: #bbb;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    color: #bbb;
 }
 
 .video-player {
-  background-color: #000;
-  aspect-ratio: 16 / 9;
-  width: 60vw;  
-  max-width: 1400px;
-  height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    background-color: #000;
+    aspect-ratio: 16 / 9;
+    width: 60vw;
+    max-width: 1400px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .video-placeholder {
-  font-size: 48px;
-  color: #ccc;
+    font-size: 48px;
+    color: #ccc;
 }
 
 .video-controls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1rem; /* optional spacing */
-}
-
-.video-controls,
-.servers,
-.episodes {
-  margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
 }
 
 .servers {
-  gap: 2rem;
-  display: flex;
-  flex-wrap: wrap;   
-  justify-content: center;
-
+    gap: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .bg {
-  background-color: #181818;
-  border-radius: 10px;
-  max-width: 600px;
+    background-color: #181818;
+    border-radius: 10px;
+    max-width: 600px;
 }
 
 .bg-header {
-  text-align: center;
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--yellow);
-  margin-bottom: 1rem;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--yellow);
+    margin-bottom: 1rem;
 }
 
 .server-episode-wrapper {
@@ -318,278 +197,180 @@ main {
     min-width: 300px;
 }
 
-.servers button {
-  background: var(--yellow);
-  color: #000;
-  border: none;
-  padding: 6px 10px;
-  cursor: pointer;
-}
-
-.video-controls button,
 .servers button,
-.episodes button {
-  background:var(--yellow);
-  border-radius: 5px;
-  color: #000000;
-  border: none;
-  padding: 6px 10px;
-  margin-right: 5px;
-  cursor: pointer;
-}
-
 .video-controls button,
-.servers button,
 .episodes button {
-
-  background:var(--yellow);
-  border-radius: 5px;
-  color: #000000;
-  border: none;
-  padding: 6px 10px;
-  margin-right: 5px;
-  cursor: pointer;
-}
-
-.video-controls button,
-.servers button,
-.episodes button {
-
-  background:var(--yellow);
-  border-radius: 5px;
-  color: #000000;
-  border: none;
-  padding: 6px 10px;
-  margin-right: 5px;
-  cursor: pointer;
+    background: var(--yellow);
+    border-radius: 5px;
+    color: #000000;
+    border: none;
+    padding: 6px 10px;
+    margin-right: 5px;
+    cursor: pointer;
 }
 
 .bg1-header {
-
-  text-align: center;
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--yellow);
-  margin-bottom: 1rem;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--yellow);
+    margin-bottom: 1rem;
 }
 
 .episodes {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: .5rem;
 }
+
 .episodes .active {
-  background-color:var(--yellow);
-  color: #000;
+    background-color: var(--yellow);
+    color: #000;
 }
 
 .top-anime {
-  flex: 0 0 28%;  /* fixed 28% width */
-  max-width: 28%;
-  min-width: 0;
+    flex: 0 0 28%;
+    max-width: 28%;
+    min-width: 0;
 }
-aside{
-    display: block;
-    unicode-bidi: isolate;
-}
+
 .top-anime h2 {
-  margin-top: 0;
-  font-size: 1.2em;
+    margin-top: 0;
+    font-size: 1.2em;
 }
 
 .top-anime ol {
-  padding-left: 20px;
+    padding-left: 20px;
 }
 
 .top-anime li {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .top-anime span {
-  font-weight: bold;
-  margin-right: 8px;
-}
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #111;
-  color: #fff;
+    font-weight: bold;
+    margin-right: 8px;
 }
 
-.container {
-  display: flex;
-  flex-wrap: nowrap; /* important para hindi bumaba yung sidebar */
-  gap: 40px; 
-  max-width: 1400px;
-  margin: 10rem auto 0;
-  padding: 1rem;
-  justify-content: center;
-  align-items: flex-start;
+.containers {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 40px;
+    max-width: 1400px;
+    margin: 10rem auto 0;
+    padding: 1rem;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #000;
 }
 
 .episode-sidebar {
-  flex: 0 0 320px; /* fixed width */
-  background: #1b1b1b;
-  border-radius: 10px;
-  padding: 15px;
-  color: #fff;
+    flex: 0 0 320px;
+    background: #1b1b1b;
+    border-radius: 10px;
+    padding: 15px;
+    color: #fff;
 }
 
 .block_area-header {
-  margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 .cat-heading {
-  font-size: 20px;
-  margin-bottom: 10px;
+    font-size: 20px;
+    margin-bottom: 10px;
 }
 
 .episode-list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .episode-item {
-  display: flex;
-  flex-direction: column;
-  background: #2a2a2a;
-  border-radius: 10px;
-  overflow: hidden;
-  transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    background: #2a2a2a;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
 }
 
 .episode-item:hover {
-  transform: scale(1.02);
+    transform: scale(1.02);
 }
 
 .episode-thumb {
-  position: relative;
-  width: 100%;
-  height: 160px;
-  overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
 }
 
 .episode-thumb img {
- display: flex;
-    align-items: center;
-    background-size: cover;
-    background-position: center;
-  width: 100%;
-  height: 100%;
-
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .episode-overlay {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  padding: 10px;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
-  color: #fff;
-  font-weight: bold;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
+    color: #fff;
+    font-weight: bold;
 }
 
 .episode-title {
-  padding: 10px;
-  font-size: 16px;
+    padding: 10px;
+    font-size: 16px;
 }
 
-.footer {
-  position: relative;
-  background-color: #000000;
-  color: #eee;
-  padding: 10px 5px 5px;
-  font-size: 14px;
-  overflow: visible;
-  margin-bottom: 0;
+.expanded {
+    background-color: #000;
 }
-
-.footer-logo {
-  position: absolute; 
-  top: -85px;
-  left: 93%;
-  transform: translateX(-50%);
-  max-width: 200px;
-  height: auto;
-}
-i.fa-facebook, i.fa-instagram, i.fa-twitter {
-  background-color: var(--gray); 
-  border-radius: 5px;                   
-  color: var(--black);               
-  width: 40px;                          
-  height: 40px;                        
-  display: inline-flex;                 
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;                    
-  margin: 5px;
-}
-
-.footer .container {
-
-  margin-left: 5rem;
-  padding: 0;
-}
-
-.footer p {
-  margin: 5px 0;
-  line-height: 1.5;
-  color: var(--gray);
-}
-
-footer .logo{
-    color: #fff;
-    font-size: 2.5rem;
-    font-weight: bolder;
-}
-
-footer .logo i{
-    color: var(--yellow);
-}
-
 
 #videoWrapper.expanded {
-  position: relative;
-  width: 68vw;         
-  max-width: 1600px;   
-  height: auto;
-  background: #000;
-  z-index: 9999;
-  padding: 2rem;
-  box-sizing: border-box;
-  margin: 0 auto;      
+    position: relative;
+    width: 68vw;
+    max-width: 1600px;
+    height: auto;
+    background: #000;
+    z-index: 9999;
+    padding: 2rem;
+    box-sizing: border-box;
+    margin: 0 auto;
 }
 
 #videoWrapper.expanded .video-player {
-  background-color: #000;
-  aspect-ratio: 16 / 9;
-  width: 100%;
-  height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    background-color: #000;
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #videoWrapper.expanded .video-controls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
 }
 
-/* optional: hide sidebar during expand */
+/* Hide sidebar when expanded */
 #videoWrapper.expanded ~ .top-anime {
-  display: none;
+    display: none;
 }
-
 
 .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-
+    position: relative;
+    display: inline-block;
+}
 
 .dropdown-content {
     display: none;
@@ -604,7 +385,8 @@ footer .logo i{
     flex-direction: column;
     overflow: hidden;
     gap: 1rem;
-    }
+}
+
 .dropdown-content button {
     all: unset;
     display: block;
@@ -615,38 +397,201 @@ footer .logo i{
     padding: 8px 12px;
     border-radius: 4px;
     transition: background-color 0.3s ease;
-    width: auto;        
-    margin: 0 auto;         
+    width: auto;
+    margin: 0 auto;
 }
 
 .dropdown-content button:hover {
-  background-color: var(--yellow);
-  color: var(--black);
-
+    background-color: var(--yellow);
+    color: var(--black);
 }
-    .dropdown:hover .dropdown-content {
-      display: flex;
-    }
 
-    /* Responsive Layout */
-    @media(max-width: 991px) {
-      html {
+.dropdown:hover .dropdown-content {
+    display: flex;
+}
+
+/* Responsive Layouts */
+
+@media (max-width: 991px) {
+    html {
         font-size: 55%;
-      }
-
-      header {
+    }
+    header {
         padding: 1rem 2rem;
-      }
     }
 
-    @media(max-width: 768px) {
-      main {
-        flex-direction: column;
-      }
+    .container {
+        max-width: 100%;
+        padding: 1rem 2rem;
     }
 
-    @media(max-width: 468px) {
-      html {
+    main {
+        gap: 5rem;
+    }
+
+    .video-section {
+        flex: 1 1 60%;
+        max-width: 60%;
+    }
+
+    .top-anime {
+        flex: 0 0 35%;
+        max-width: 35%;
+    }
+}
+
+@media (max-width: 768px) {
+    html {
         font-size: 50%;
-      }
     }
+
+    main {
+        flex-direction: column;
+        padding: 1rem;
+        gap: 3rem;
+    }
+
+    .video-section {
+        flex: 1 1 100%;
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .top-anime {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+
+    .container {
+        flex-direction: column;
+        margin: 8rem auto 0;
+        gap: 2rem;
+    }
+
+    .episode-sidebar {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+
+    .server-episode-wrapper {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .server-episode-wrapper .bg {
+        flex: 1 1 100%;
+        min-width: auto;
+    }
+
+    header .icons #menu-bars {
+        display: inline-block;
+    }
+
+    header .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--black);
+        border-top: .1rem solid rgba(0, 0, 0, .2);
+        border-bottom: .1rem solid rgba(0, 0, 0, .2);
+        padding: 1rem;
+        clip-path: polygon(0 0, 100% 0, 0 0);
+        transition: clip-path 0.3s ease;
+    }
+
+    header .navbar.active {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    header .navbar a {
+        display: block;
+        padding: 1.5rem;
+        margin: 1rem 0;
+        font-size: 2rem;
+        background: var(--yellow);
+        color: var(--black);
+    }
+}
+
+@media (max-width: 468px) {
+    html {
+        font-size: 45%;
+    }
+
+    .video-player {
+        width: 100vw;
+        max-width: 100%;
+    }
+
+    .servers {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .episodes {
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .heading {
+        font-size: 2.5rem;
+    }
+}
+
+
+.footer {
+    position: relative;
+    background-color: #111;
+    color: #eee;
+    padding: 10px 5px 5px;
+    font-size: 14px;
+    overflow: visible;
+    margin-bottom: 0;
+}
+
+.footer-logo {
+    position: absolute;
+    top: -85px;
+    left: 93%;
+    transform: translateX(-50%);
+    max-width: 200px;
+    height: auto;
+}
+
+i.fa-facebook,
+i.fa-instagram,
+i.fa-twitter {
+    background-color: var(--yellow);
+    border-radius: 5px;
+    color: var(--black);
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin: 5px;
+}
+
+.footer .container {
+
+    margin-left: 5rem;
+    padding: 0;
+}
+
+.footer p {
+    margin: 5px 0;
+    line-height: 1.5;
+    color: var(--gray);
+}
+
+footer .logo {
+    color: #fff;
+    font-size: 2.5rem;
+    font-weight: bolder;
+}
+
+footer .logo i {
+    color: var(--yellow);
+}

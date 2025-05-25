@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="containers">
         <header>
             <?php include 'Assets/HTML/header-watch.php' ?>
         </header>
@@ -124,8 +124,7 @@
                         </div>
                     </div>
                 </div>
-
-    </div>
+</div>
     </aside>
     </main>
     </div>
@@ -134,25 +133,27 @@
         document.querySelector("main").classList.add("expanded");
 
         function toggleExpand() {
-            const videoWrapper = document.getElementById("videoWrapper");
-            const episodeSidebar = document.querySelector(".episode-sidebar");
-            const serverWrapper = document.querySelector(".server-episode-wrapper");
+    const videoWrapper = document.getElementById("videoWrapper");
+    const episodeSidebar = document.querySelector(".episode-sidebar");
+    const serverWrapper = document.querySelector(".server-episode-wrapper");
 
-            videoWrapper.classList.toggle("expanded");
+    videoWrapper.classList.toggle("expanded");
 
-            if (videoWrapper.classList.contains("expanded")) {
-                episodeSidebar.style.display = "none";
+    if (videoWrapper.classList.contains("expanded")) {
 
+        episodeSidebar.style.display = "none";
+        serverWrapper.style.display = "flex";
+        serverWrapper.style.justifyContent = "center";
+        serverWrapper.style.width = "100%";
+    } else {
 
-                serverWrapper.style.display = "flex";
-                serverWrapper.style.justifyContent = "center";
-                serverWrapper.style.width = "100%";
-                episodeSidebar.style.display = "block";
+        episodeSidebar.style.display = "block";
+        serverWrapper.style.display = "flex";
+        serverWrapper.style.justifyContent = "flex-start";
+        serverWrapper.style.width = "";
+    }
+}
 
-
-                serverWrapper.style.justifyContent = "flex-start";
-            }
-        }
     </script>
     <?php include 'Assets/HTML/footer.html' ?>
 </body>
