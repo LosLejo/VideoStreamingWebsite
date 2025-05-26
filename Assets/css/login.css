@@ -52,6 +52,8 @@
     height: 100vh;
     overflow: hidden;
     z-index: -1;
+    object-fit: cover;
+    pointer-events: none;
 }
 
 .background-clip iframe {
@@ -119,7 +121,6 @@ form .logo i {
     position: relative;
 }
 
-
 .form label input {
     width: 100%;
     padding: 10px 10px 20px 10px;
@@ -136,7 +137,6 @@ form .logo i {
     font-size: 1.5em;
     cursor: text;
     transition: 0.3s ease;
-
 }
 
 .form label input:placeholder-shown+span {
@@ -146,19 +146,9 @@ form .logo i {
 
 .form label input:focus+span,
 .form label input:valid+span {
-    top: 30px;
-    font-size: 1em;
-    font-weight: 600;
-}
-
-.form label input:focus+span,
-.form label input:valid+span {
     top: 20px;
     font-size: 1em;
     font-weight: 600;
-}
-
-.form label input:valid+span {
     color: var(--yellow);
 }
 
@@ -173,8 +163,15 @@ form .logo i {
     padding: 1rem 3.5rem 1rem 1rem;
     background: #222;
     color: #fff;
+    border-radius: 5px;
 }
 
+.form-group span {
+    display: block;
+    margin-top: 0.5rem;
+    color: #aaa;
+    font-size: 1.2rem;
+}
 
 .form label .icon {
     position: absolute;
@@ -220,13 +217,6 @@ form .logo i {
     color: #fff;
 }
 
-.form-group span {
-    display: block;
-    margin-top: 0.5rem;
-    color: #aaa;
-    font-size: 1.2rem;
-}
-
 .icon {
     position: absolute;
     right: 10px;
@@ -236,7 +226,9 @@ form .logo i {
     cursor: pointer;
 }
 
-a.submit {
+a.submit,
+button.submit,
+input.submit {
     width: 100%;
     max-width: 200px;
     padding: 0.8rem;
@@ -247,6 +239,20 @@ a.submit {
     border-radius: 5px;
     cursor: pointer;
     text-align: center;
+    text-decoration: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.2s, color 0.2s;
+}
+
+a.submit:hover,
+button.submit:hover,
+input.submit:hover {
+    background: #ffe600;
+    color: #000;
     text-decoration: none;
 }
 
@@ -294,10 +300,9 @@ a.submit.google {
 }
 
 .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-
+    position: relative;
+    display: inline-block;
+}
 
 .dropdown-content {
     display: none;
@@ -312,7 +317,8 @@ a.submit.google {
     flex-direction: column;
     overflow: hidden;
     gap: 1rem;
-    }
+}
+
 .dropdown-content button {
     all: unset;
     display: block;
@@ -323,15 +329,15 @@ a.submit.google {
     padding: 8px 12px;
     border-radius: 4px;
     transition: background-color 0.3s ease;
-    width: auto;        
-    margin: 0 auto;         
+    width: auto;
+    margin: 0 auto;
 }
 
 .dropdown-content button:hover {
-  background-color: var(--yellow);
-  color: var(--black);
-
+    background-color: var(--yellow);
+    color: var(--black);
 }
-    .dropdown:hover .dropdown-content {
-      display: flex;
-    }
+
+.dropdown:hover .dropdown-content {
+    display: flex;
+}
