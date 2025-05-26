@@ -13,10 +13,10 @@ $userDisplay = $_SESSION['username'] ?? 'Guest';
         <a href="genres.php">Genres</a>
         <a href="home.php#popular">Popular Now</a>
     </nav>
+<div class="icons">
     <div class="search-wrapper">
-        <input type="text" placeholder="Search..." id="searchInput" autocomplete="off">
+        <input type="text" placeholder="Search..." id="searchInput">
         <a href="#" class="fas fa-search" id="searchIcon"></a>
-        <div id="searchResultsDropdown" class="search-results-dropdown" style="display:none;"></div>
     </div>
 
     <div class="dropdown" id="userDropdown">
@@ -40,7 +40,7 @@ $userDisplay = $_SESSION['username'] ?? 'Guest';
     </div>
 
     <i class="fas fa-bars" id="menu-bars"></i>
-    </div>
+</div>
 </header>
 
 <style>
@@ -107,82 +107,33 @@ $userDisplay = $_SESSION['username'] ?? 'Guest';
         color: var(--yellow);
     }
 
-    .search-results-dropdown {
-        position: absolute;
-        top: 110%;
-        left: 0;
-        width: 100%;
-        background: #181818;
-        border-radius: 0 0 10px 10px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-        max-height: 320px;
-        overflow-y: auto;
-        z-index: 999;
-        display: none;
-    }
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    color: var(--white);
+    font-size: 1.4rem;
+    text-decoration: none;
+}
 
-    .search-result-item {
-        display: flex;
-        align-items: center;
-        padding: 0.7em 1em;
-        gap: 1em;
-        cursor: pointer;
-        border-bottom: 1px solid #232323;
-        transition: background 0.15s;
-    }
-
-    .search-result-item:last-child {
-        border-bottom: none;
-    }
-
-    .search-result-item:hover,
-    .search-result-item:focus {
-        background: #222;
-    }
-
-    .search-result-thumb {
-        width: 48px;
-        height: 48px;
-        object-fit: cover;
-        border-radius: 6px;
-        background: #333;
-    }
-
-    .search-result-title {
-        font-size: 1.1em;
-        color: #ffe452;
-        font-weight: bold;
-    }
-
-    .user-info {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        cursor: pointer;
-        color: var(--white);
-        font-size: 1.4rem;
-        text-decoration: none;
-    }
-
-    .username {
-        color: var(--yellow);
-        text-transform: capitalize;
-        font-weight: bold;
-    }
+.username {
+    color: var(--yellow);
+    text-transform: capitalize;
+    font-weight: bold;
+}
 </style>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // --- Search Bar Expand/Collapse ---
         const searchInput = document.getElementById('searchInput');
         const searchIcon = document.getElementById('searchIcon');
         const searchWrapper = searchInput.parentElement;
-        const searchResults = document.getElementById('searchResultsDropdown');
-        let animeSearchTimeout = null;
-        let searchTimeout = null;
 
         const userDropdown = document.getElementById('userDropdown');
         const dropdownContent = document.getElementById('dropdownContent');
+        let dropdownTimeout;
+        let searchTimeout;
 
         // Show input on hover
         searchWrapper.addEventListener('mouseenter', function() {
@@ -196,8 +147,6 @@ $userDisplay = $_SESSION['username'] ?? 'Guest';
             if (document.activeElement !== searchInput) {
                 searchTimeout = setTimeout(() => {
                     searchWrapper.classList.remove('active');
-                    // Also hide results on mouse leave
-                    searchResults.style.display = "none";
                 }, 200);
             }
         });
@@ -206,76 +155,25 @@ $userDisplay = $_SESSION['username'] ?? 'Guest';
         searchInput.addEventListener('blur', function() {
             searchTimeout = setTimeout(() => {
                 searchWrapper.classList.remove('active');
-                searchResults.style.display = "none";
             }, 200);
         });
 
-        // Optional: Focus input when clicking the search icon
+        // Trigger search on click or Enter
         searchIcon.addEventListener('click', function(e) {
             e.preventDefault();
-            searchWrapper.classList.add('active');
-            setTimeout(() => searchInput.focus(), 100);
-        });
-
-        // --- Live Dropdown Search ---
-        function hideSearchResults() {
-            searchResults.style.display = "none";
-            searchResults.innerHTML = "";
-        }
-
-        searchInput.addEventListener('input', function() {
-            const q = this.value.trim();
-            if (q.length < 1) {
-                hideSearchResults();
-                return;
-            }
-            clearTimeout(animeSearchTimeout);
-            animeSearchTimeout = setTimeout(() => {
-                fetch(`search_anime.php?q=${encodeURIComponent(q)}`)
-                    .then(res => res.json())
-                    .then(data => {
-                        if (!Array.isArray(data) || data.length === 0) {
-                            hideSearchResults();
-                            return;
-                        }
-                        let html = "";
-                        data.forEach(anime => {
-                            html += `
-                        <div class="search-result-item" tabindex="0" data-id="${anime.id}">
-                            <img class="search-result-thumb" src="${anime.thumbnail ? anime.thumbnail : 'Assets/images/placeholder.png'}" alt="${anime.title}">
-                            <span class="search-result-title">${anime.title}</span>
-                        </div>`;
-                        });
-                        searchResults.innerHTML = html;
-                        searchResults.style.display = "block";
-                    });
-            }, 200); // debounce
-        });
-
-        // Hide dropdown when input loses focus (with tiny delay for click)
-        searchInput.addEventListener('blur', function() {
-            setTimeout(hideSearchResults, 200);
-        });
-
-        // Go to anime on click
-        searchResults.addEventListener('mousedown', function(e) {
-            const item = e.target.closest('.search-result-item');
-            if (item) {
-                const animeId = item.getAttribute('data-id');
-                if (animeId) {
-                    window.location.href = `watch.php?series_id=${animeId}`;
-                }
+            const query = searchInput.value.trim();
+            if (query) {
+                window.location.href = `search.php?q=${encodeURIComponent(query)}`;
+            } else {
+                searchWrapper.classList.add('active');
+                setTimeout(() => searchInput.focus(), 100);
             }
         });
 
-        // Block Enter key from submitting form or causing page navigation
-        searchInput.addEventListener('keydown', function(e) {
-            if (e.key === "Enter") {
-                e.preventDefault();
-                return false;
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && this.value.trim()) {
+                window.location.href = `search.php?q=${encodeURIComponent(this.value.trim())}`;
             }
-            // Optional: Hide dropdown on Escape
-            if (e.key === "Escape") hideSearchResults();
         });
 
         // Dropdown hover with delay
