@@ -43,56 +43,7 @@ header {
 
 }
 
-header .logo {
-    color: #fff;
-    font-size: 2.5rem;
-    font-weight: bolder;
-}
 
-header .logo i {
-    color: var(--yellow);
-}
-
-header .navbar a {
-    font-size: 1.7rem;
-    font-weight: bolder;
-    border-radius: .5rem;
-    padding: .5rem 1.5rem;
-    color: #fff;
-}
-
-header .navbar a.active,
-header .navbar a:hover {
-
-    color: var(--black);
-    background: var(--yellow);
-}
-
-
-header .icons i,
-header .icons a {
-    cursor: pointer;
-    margin-left: .5rem;
-    height: 4.5rem;
-    line-height: 4.5rem;
-    width: 4.5rem;
-    text-align: center;
-    font-size: 1.7rem;
-    color: var(--black);
-    border-radius: 25%;
-    background: var(--yellow);
-}
-
-header .icons i:hover,
-header .icons a:hover {
-    color: var(--yellow);
-    background: var(--black);
-    transform: rotate(360deg);
-}
-
-header .icons #menu-bars {
-    display: none;
-}
 
 .icons {
     position: relative; 
@@ -159,7 +110,7 @@ form .logo i{
     left: 10px;
     top: 10px;
     color: #fff;
-    font-size: 0.9em;
+    font-size: 1.5rem;
     cursor: text;
     transition: 0.3s ease;
 
@@ -348,34 +299,19 @@ form .logo i{
     }
 }
 
+@media(max-width: 991px) {
+    html {
+        font-size: 55%;
+    }
+
+    header {
+        padding: 1rem 2rem;
+    }
+}
+
 @media(max-width: 768px) {
-    header .icons #menu-bars {
-        display: inline-block;
-    }
-
-    header .navbar {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: var(--black);
-        border-top: .1rem solid rgba(0, 0, 0, .2);
-        border-bottom: .1rem solid rgba(0, 0, 0, .2);
-        padding: 1rem;
-        clip-path: polygon(0 0, 100% 0, 0 0);
-    }
-
-    header .navbar.active {
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    }
-
-    header .navbar a {
-        display: block;
-        padding: 1.5rem;
-        margin: 1rem;
-        font-size: 2rem;
-        background: var(--yellow);
-
+    main {
+        flex-direction: column;
     }
 }
 
