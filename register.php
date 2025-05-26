@@ -50,48 +50,77 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Register</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="Assets/css/reg.css">
-    <link rel="stylesheet" href="Assets/css/style.css">
-    <title>Register</title>
+    <link rel="stylesheet" href="Assets/css/reg.css" />
+    <link rel="stylesheet" href="Assets/css/style.css" />
+
+    <style>
+        .error-message {
+            background-color: rgb(91, 0, 0);
+            color: rgb(255, 0, 0);
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.4rem;
+        }
+
+        .success-message {
+            background-color: rgb(0, 91, 0);
+            color: rgb(0, 255, 0);
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.4rem;
+        }
+    </style>
 </head>
 
 <body>
     <?php include 'Assets/HTML/home-header.php' ?>
 
     <video autoplay loop muted playsinline class="background-clip">
-        <source src="Assets/videos/background.mp4" type="video/mp4">
-        <img src="background.jpg" alt="Background">
+        <source src="Assets/videos/background.mp4" type="video/mp4" />
+        <img src="background.jpg" alt="Background" />
     </video>
 
     <form action="register.php" method="POST" class="form">
         <a href="#" class="logo"><i class="fa-solid fa-bolt"></i>StrikeFlix</a>
         <p class="title">Register</p>
+
         <?php if ($error): ?>
-            <div style="color:#f33;background:#fff2;padding:10px 14px;border-radius:7px;margin-bottom:14px"><?= $error ?>
+            <div class="error-message">
+                <?= htmlspecialchars($error) ?>
             </div>
         <?php elseif ($success): ?>
-            <div style="color:#080;background:#efe8;padding:10px 14px;border-radius:7px;margin-bottom:14px"><?= $success ?>
+            <div class="success-message">
+                <?= $success ?>
             </div>
         <?php endif; ?>
+
         <div class="form-group">
             <label>
                 <input type="text" name="user_name" required
-                    value="<?= isset($_POST['user_name']) ? htmlspecialchars($_POST['user_name']) : '' ?>">
+                    value="<?= isset($_POST['user_name']) ? htmlspecialchars($_POST['user_name']) : '' ?>" />
                 <span>Username</span>
             </label>
 
             <label>
                 <input type="text" name="email" required
-                    value="<?= isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '' ?>">
+                    value="<?= isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '' ?>" />
                 <span>Email</span>
             </label>
 
             <label>
-                <input type="password" name="password" id="password" required>
+                <input type="password" name="password" id="password" required />
                 <span>Password</span>
                 <span class="icon" id="togglePassword">
                     <i class="far fa-eye-slash"></i>
@@ -99,19 +128,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </label>
 
             <label>
-                <input type="password" name="passwordConfirm" id="passwordConfirm" required>
+                <input type="password" name="passwordConfirm" id="passwordConfirm" required />
                 <span>Confirm Password</span>
                 <span class="icon" id="togglePasswordConfirm">
                     <i class="far fa-eye-slash"></i>
                 </span>
             </label>
+
             <button class="submit">Register</button>
+
             <p class="login">
                 Already have an account?
                 <a href="login.php">Log in</a>
             </p>
         </div>
     </form>
+
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script src="Assets/js/main.js"></script>
     <script src="Assets/js/reg.js"></script>

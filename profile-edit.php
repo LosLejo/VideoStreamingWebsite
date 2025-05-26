@@ -24,8 +24,11 @@ if (!$user) {
     die("User not found.");
 }
 
+$error = '';
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $bio = trim($_POST["bio"]);
+    $user_name = trim($_POST["user_name"] ?? '');
+    $bio = trim($_POST["bio"] ?? '');
 
     // Compose birthdate from dropdowns
     $birth_year = $_POST['birth_year'] ?? '';
@@ -36,15 +39,35 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $birth = sprintf('%04d-%02d-%02d', $birth_year, $birth_month, $birth_day);
     }
 
-    $stmt = $mysqli->prepare("UPDATE users SET bio = ?, birthdate = ? WHERE id = ?");
-    $stmt->bind_param("ssi", $bio, $birth, $user_id);
-    $stmt->execute();
+    if (empty($user_name)) {
+        $error = "Username cannot be empty.";
+    } elseif (strlen($user_name) > 20) {
+        $error = "Username must not exceed 20 characters.";
+    } else {
+        // Check if username is taken (exclude current user)
+        $stmt = $mysqli->prepare("SELECT id FROM users WHERE user_name = ? AND id != ?");
+        $stmt->bind_param("si", $user_name, $user_id);
+        $stmt->execute();
+        $stmt->store_result();
 
-    header("Location: profile.php");
-    exit();
+        if ($stmt->num_rows > 0) {
+            $error = "Username already taken. Please choose another.";
+        } else {
+            // Update user data
+            $stmt = $mysqli->prepare("UPDATE users SET user_name = ?, bio = ?, birthdate = ? WHERE id = ?");
+            $stmt->bind_param("sssi", $user_name, $bio, $birth, $user_id);
+            $stmt->execute();
+
+            $_SESSION['username'] = $user_name;
+            $_SESSION['user_name'] = $user_name; // <-- ADD THIS LINE
+            header("Location: profile.php");
+            exit();
+        }
+        $stmt->close();
+    }
 }
 
-// Prepare default selected values for the dropdowns
+// Prepare default selected values for dropdowns
 $birth_year = $birth_month = $birth_day = '';
 if (!empty($user['birthdate'])) {
     $date = DateTime::createFromFormat('Y-m-d', $user['birthdate']);
@@ -103,7 +126,7 @@ if (!empty($user['birthdate'])) {
             padding: 0.5rem 1rem;
             border-radius: 0.4rem;
             border: 1px solid #ccc;
-            font-size: 1.1rem;
+            font-size: 1.5rem;
             background: rgba(255, 255, 255, 0.1);
             color: yellow;
             background-color: rgba(22, 22, 22, 0.88);
@@ -118,8 +141,35 @@ if (!empty($user['birthdate'])) {
             margin-bottom: 0.5rem;
             display: block;
         }
-    </style>
 
+        .profile-username-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 1.5rem;
+            border-radius: 0.4rem;
+            border: 1px solid #ccc;
+            background: rgba(30, 30, 30, 0.84);
+            color: #fff;
+            background-color: rgba(22, 22, 22, 0.88);
+            box-sizing: border-box;
+        }
+
+        .profile-username-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--yellow);
+        }
+
+        .error-message {
+            background-color: rgb(91, 0, 0);
+            color: rgb(255, 0, 0);
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.4rem;
+        }
+    </style>
 </head>
 
 <body>
@@ -134,9 +184,16 @@ if (!empty($user['birthdate'])) {
             </div>
 
             <form method="POST" class="profile-details" autocomplete="off">
+                <?php if (!empty($error)): ?>
+                    <div class="error-message"><?= htmlspecialchars($error) ?></div>
+                <?php endif; ?>
+
                 <div class="profile-field">
-                    <label>User Name</label>
-                    <div class="value"><?= htmlspecialchars($user['user_name']) ?></div>
+                    <label for="user_name">User Name</label>
+                    <input type="text" id="user_name" name="user_name" required
+                        value="<?= htmlspecialchars($user['user_name']) ?>" class="profile-username-input"
+                        maxlength="20" />
+                    <div style="font-size: 1.5rem; color: #ccc; margin-top: 5px;">Max 20 characters.</div>
                 </div>
 
                 <div class="profile-field">
