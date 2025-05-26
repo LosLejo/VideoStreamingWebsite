@@ -42,6 +42,68 @@ header {
 
 }
 
+/* Fallback styles in case your CSS file has issues */
+.swiper-slide {
+    width: auto !important;
+    margin-right: 20px;
+}
+
+.box {
+    width: 200px;
+    height: 300px;
+    background-size: cover !important;
+    background-position: center !important;
+    border-radius: 10px;
+    position: relative;
+}
+
+.content {
+    padding: 15px 0;
+    max-width: 200px;
+}
+
+.content h3 {
+    margin: 10px 0 5px 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.content p {
+    font-size: 12px;
+    color: #666;
+    margin: 5px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.rating {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    font-size: 12px;
+}
+
+.btn {
+    background: #e50914;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+.genre-section {
+    margin: 30px 0;
+}
+
+.heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
 header .logo {
     color: #fff;
     font-size: 2.5rem;
@@ -68,11 +130,12 @@ header .navbar a:hover {
 }
 
 .icons {
-    position: relative; 
+    position: relative;
     display: flex;
     align-items: center;
     z-index: 10;
 }
+
 header .icons i,
 header .icons a {
     cursor: pointer;
@@ -111,9 +174,10 @@ header .icons a:hover {
     justify-content: flex-end;
     padding: 2rem 9%;
 }
-.content{
+
+.content {
     margin-right: 8rem;
-     margin-left: 5rem;
+    margin-left: 5rem;
 }
 
 .home .box {
@@ -177,10 +241,10 @@ section {
 
 }
 
-.anime .box:hover, 
-.comedy .box:hover, 
-.drama .box:hover, 
-.romance .box:hover{
+.anime .box:hover,
+.comedy .box:hover,
+.drama .box:hover,
+.romance .box:hover {
     transform: translateY(-10px);
     box-shadow: 0 19px 38px rgba(255, 217, 0, 0.3), 0 15px 12px rgba(255, 217, 0, 0.3);
 }
@@ -261,7 +325,7 @@ a.btn {
 }
 
 .comedy .box {
-     margin-left: 5rem;
+    margin-left: 5rem;
     width: 235px;
     height: 350px;
     background-size: cover;
@@ -394,6 +458,7 @@ header .icons #menu-bars {
 @media(max-width: 991px) {
     html {
         font-size: 55%;
+        background-color: #000;
     }
 
     header {
