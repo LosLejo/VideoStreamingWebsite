@@ -278,11 +278,7 @@ if ($totalAnimeFound === 0) {
 
             .heading {
                 font-size: 24px;
-<<<<<<< HEAD
-                color: yellow !important;
-=======
                 color: yellow;
->>>>>>> e3fcd0f72228f4c2e33c6084addbfecb7bc70070
             }
 
             .box {
@@ -307,11 +303,7 @@ if ($totalAnimeFound === 0) {
 
             .heading {
                 font-size: 20px;
-<<<<<<< HEAD
-                color: yellow !important;
-=======
                 color: yellow;
->>>>>>> e3fcd0f72228f4c2e33c6084addbfecb7bc70070
             }
         }
     </style>
