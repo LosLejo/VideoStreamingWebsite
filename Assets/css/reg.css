@@ -4,7 +4,7 @@
     --yellow: #fff700;
     --black: #000000;
     --light-color: #181818;
-    --box-shadow: 0.5rem 1.5rem rgba(0,0,0,.1);
+    --box-shadow: 0.5rem 1.5rem rgba(0, 0, 0, .1);
 }
 
 * {
@@ -15,7 +15,6 @@
     text-decoration: none;
     outline: none;
     border: none;
-    text-transform: capitalize;
     transition: all .2s linear;
 }
 
@@ -46,13 +45,13 @@ header {
 
 
 .icons {
-    position: relative; 
+    position: relative;
     display: flex;
     align-items: center;
     z-index: 10;
 }
 
-form .logo{
+form .logo {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -61,17 +60,18 @@ form .logo{
     font-weight: bolder;
 }
 
-form .logo i{
+form .logo i {
     color: var(--yellow);
 }
 
-.form p.message{  
+.form p.message {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0;
     font-size: 14px;
 }
+
 .form {
     background: #0000007c;
     padding: 2rem;
@@ -79,7 +79,8 @@ form .logo i{
     max-width: 400px;
     width: 100%;
 }
-.form label .icon{
+
+.form label .icon {
     position: absolute;
     top: 50%;
     right: 10px;
@@ -92,12 +93,13 @@ form .logo i{
     justify-content: center;
     z-index: 9;
 }
-.form label{
+
+.form label {
     position: relative;
 }
 
 
-.form label input{
+.form label input {
     width: 100%;
     padding: 10px 10px 20px 10px;
     outline: none;
@@ -105,7 +107,7 @@ form .logo i{
     border-radius: 5px;
 }
 
-.form label input + span{
+.form label input+span {
     position: absolute;
     left: 10px;
     top: 10px;
@@ -116,29 +118,29 @@ form .logo i{
 
 }
 
-.form label input:placeholder-shown + span {
+.form label input:placeholder-shown+span {
     top: 15px;
     font-size: 0.9em;
 }
 
-.form label input:focus + span,
-.form label input:valid + span
-{
+.form label input:focus+span,
+.form label input:valid+span {
     top: 30px;
     font-size: 0.7em;
     font-weight: 600;
 }
 
-.form label input:focus + span, 
-.form label input:valid + span{
+.form label input:focus+span,
+.form label input:valid+span {
     top: 20px;
     font-size: 0.7em;
     font-weight: 600;
 }
 
-.form label input:valid + span{
+.form label input:valid+span {
     color: var(--yellow);
 }
+
 .form-group label {
     display: block;
     margin-bottom: 1.5rem;
@@ -147,7 +149,7 @@ form .logo i{
 
 .form-group input {
     width: 100%;
-    padding: 1rem 3.5rem 1rem 1rem; 
+    padding: 1rem 3.5rem 1rem 1rem;
     background: #222;
     color: #fff;
 }
@@ -210,7 +212,7 @@ form .logo i{
     top: 50%;
     transform: translateY(-50%);
     color: #ccc;
-    cursor: pointer; 
+    cursor: pointer;
 }
 
 .submit {
@@ -247,9 +249,9 @@ form .logo i{
 }
 
 .dropdown {
-      position: relative;
-      display: inline-block;
-    }
+    position: relative;
+    display: inline-block;
+}
 
 
 .dropdown-content {
@@ -265,7 +267,8 @@ form .logo i{
     flex-direction: column;
     overflow: hidden;
     gap: 1rem;
-    }
+}
+
 .dropdown-content button {
     all: unset;
     display: block;
@@ -276,18 +279,19 @@ form .logo i{
     padding: 8px 12px;
     border-radius: 4px;
     transition: background-color 0.3s ease;
-    width: auto;        
-    margin: 0 auto;         
+    width: auto;
+    margin: 0 auto;
 }
 
 .dropdown-content button:hover {
-  background-color: var(--yellow);
-  color: var(--black);
+    background-color: var(--yellow);
+    color: var(--black);
 
 }
-    .dropdown:hover .dropdown-content {
-      display: flex;
-    }
+
+.dropdown:hover .dropdown-content {
+    display: flex;
+}
 
 @media(max-width: 991px) {
     html {
