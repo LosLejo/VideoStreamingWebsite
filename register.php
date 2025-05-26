@@ -52,7 +52,9 @@
             </p>
         </div>
     </form>
+     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script src="Assets/js/main.js"></script>
+<script src="Assets/js/reg.js"></script>
 </body>
 
 </html>
