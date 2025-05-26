@@ -1,4 +1,28 @@
+<?php
+session_start();
+include 'db.php';
 
+// Get featured anime for home slider
+$homeSliderQuery = "SELECT DISTINCT a.* FROM anime_series a 
+                   JOIN display_sections ds ON a.id = ds.anime_series_id 
+                   WHERE ds.section_type = 'home_slider' AND ds.is_active = 1 
+                   ORDER BY ds.display_order";
+$homeSliderResult = $mysqli->query($homeSliderQuery);
+
+// Get browse section anime
+$browseQuery = "SELECT DISTINCT a.* FROM anime_series a 
+               JOIN display_sections ds ON a.id = ds.anime_series_id 
+               WHERE ds.section_type = 'browse' AND ds.is_active = 1 
+               ORDER BY ds.display_order";
+$browseResult = $mysqli->query($browseQuery);
+
+// Get new releases
+$newReleasesQuery = "SELECT DISTINCT a.* FROM anime_series a 
+                    JOIN display_sections ds ON a.id = ds.anime_series_id 
+                    WHERE ds.section_type = 'new_releases' AND ds.is_active = 1 
+                    ORDER BY ds.display_order";
+$newReleasesResult = $mysqli->query($newReleasesQuery);
+?>
 
 <!DOCTYPE html>
 <html lang="en">
