@@ -94,6 +94,10 @@ header .icons #menu-bars {
     display: none;
 }
 
+header .icons #menu-bars {
+    display: none;
+}
+
 .icons {
     position: relative; 
     display: flex;
