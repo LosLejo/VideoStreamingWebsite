@@ -1,7 +1,9 @@
 <?php
 session_start();
-$isLoggedIn = isset($_SESSION['user_email']);
+$isLoggedIn = isset($_SESSION['user_id']);
+$userDisplay = $_SESSION['username'] ?? 'Guest';
 ?>
+
 <header class="header">
     <a href="home.php" class="logo"><i class="fa-solid fa-bolt"></i>StrikeFlix</a>
     <nav class="navbar">
