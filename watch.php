@@ -2,17 +2,17 @@
 session_start();
 include 'db.php';
 
-// Get anime_id and episode from URL parameters
-if (!isset($_GET['anime_id']) || !is_numeric($_GET['anime_id'])) {
+// Get series_id and episode from URL parameters (changed from anime_id to series_id)
+if (!isset($_GET['series_id']) || !is_numeric($_GET['series_id'])) {
     die("Invalid anime ID.");
 }
 
-$anime_id = (int)$_GET['anime_id'];
+$series_id = (int)$_GET['series_id'];
 $episode_number = isset($_GET['episode']) ? (int)$_GET['episode'] : 1; // Default to episode 1
 
-// Get anime information
-$stmt = $mysqli->prepare("SELECT * FROM anime WHERE id = ?");
-$stmt->bind_param("i", $anime_id);
+// Get anime information (changed table name from anime to anime_series)
+$stmt = $mysqli->prepare("SELECT * FROM anime_series WHERE id = ?");
+$stmt->bind_param("i", $series_id);
 $stmt->execute();
 $anime_result = $stmt->get_result();
 
@@ -22,9 +22,9 @@ if ($anime_result->num_rows === 0) {
 
 $anime = $anime_result->fetch_assoc();
 
-// Get current episode information
-$episode_stmt = $mysqli->prepare("SELECT * FROM episodes WHERE anime_id = ? AND episode_number = ?");
-$episode_stmt->bind_param("ii", $anime_id, $episode_number);
+// Get current episode information (changed anime_id to anime_series_id)
+$episode_stmt = $mysqli->prepare("SELECT * FROM episodes WHERE anime_series_id = ? AND episode_number = ?");
+$episode_stmt->bind_param("ii", $series_id, $episode_number);
 $episode_stmt->execute();
 $episode_result = $episode_stmt->get_result();
 
@@ -34,8 +34,11 @@ if ($episode_result->num_rows === 0) {
 
 $current_episode = $episode_result->fetch_assoc();
 
-// Get all episodes for this anime (for episode list)
-$all_episodes_result = $mysqli->query("SELECT * FROM episodes WHERE anime_id = $anime_id ORDER BY episode_number");
+// Get all episodes for this anime (for episode list) - changed anime_id to anime_series_id
+$all_episodes_stmt = $mysqli->prepare("SELECT * FROM episodes WHERE anime_series_id = ? ORDER BY episode_number");
+$all_episodes_stmt->bind_param("i", $series_id);
+$all_episodes_stmt->execute();
+$all_episodes_result = $all_episodes_stmt->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -73,10 +76,10 @@ $all_episodes_result = $mysqli->query("SELECT * FROM episodes WHERE anime_id = $
 
                     <div class="video-controls">
                         <?php if ($episode_number < $anime['total_episodes']): ?>
-                            <a
-                                href="watch.php?anime_id=<?php echo $anime_id; ?>&episode=<?php echo $episode_number + 1; ?>">
-                                <button>Next Episode <i class="fa-solid fa-forward"></i></button>
-                            </a>
+                        <a
+                            href="watch.php?series_id=<?php echo $series_id; ?>&episode=<?php echo $episode_number + 1; ?>">
+                            <button>Next Episode <i class="fa-solid fa-forward"></i></button>
+                        </a>
                         <?php endif; ?>
                         <button onclick="toggleExpand()">Expand <i class="fa-solid fa-expand"></i></button>
                     </div>
@@ -87,15 +90,15 @@ $all_episodes_result = $mysqli->query("SELECT * FROM episodes WHERE anime_id = $
                         <div class="bg-header">Episodes</div>
                         <div class="episodes">
                             <?php while ($episode = $all_episodes_result->fetch_assoc()): ?>
-                                <?php
+                            <?php
                                 $activeClass = ($episode['episode_number'] == $episode_number) ? 'class="active"' : '';
                                 ?>
-                                <a
-                                    href="watch.php?anime_id=<?php echo $anime_id; ?>&episode=<?php echo $episode['episode_number']; ?>">
-                                    <button <?php echo $activeClass; ?>>
-                                        <?php echo $episode['episode_number']; ?>
-                                    </button>
-                                </a>
+                            <a
+                                href="watch.php?series_id=<?php echo $series_id; ?>&episode=<?php echo $episode['episode_number']; ?>">
+                                <button <?php echo $activeClass; ?>>
+                                    <?php echo $episode['episode_number']; ?>
+                                </button>
+                            </a>
                             <?php endwhile; ?>
                         </div>
                     </div>
@@ -113,22 +116,22 @@ $all_episodes_result = $mysqli->query("SELECT * FROM episodes WHERE anime_id = $
                     $all_episodes_result->data_seek(0);
                     while ($episode = $all_episodes_result->fetch_assoc()):
                     ?>
-                        <a
-                            href="watch.php?anime_id=<?php echo $anime_id; ?>&episode=<?php echo $episode['episode_number']; ?>">
-                            <div
-                                class="episode-item <?php echo ($episode['episode_number'] == $episode_number) ? 'active' : ''; ?>">
-                                <div class="episode-thumb">
-                                    <img src="<?php echo htmlspecialchars($episode['thumbnail'] ?: $anime['thumbnail']); ?>"
-                                        alt="<?php echo htmlspecialchars($anime['title']); ?> Episode <?php echo $episode['episode_number']; ?>">
-                                    <div class="episode-overlay">
-                                        <span>Episode <?php echo $episode['episode_number']; ?></span>
-                                    </div>
-                                </div>
-                                <div class="episode-title">
-                                    <?php echo htmlspecialchars($episode['episode_title'] ?: $anime['title'] . ' - Episode ' . $episode['episode_number']); ?>
+                    <a
+                        href="watch.php?series_id=<?php echo $series_id; ?>&episode=<?php echo $episode['episode_number']; ?>">
+                        <div
+                            class="episode-item <?php echo ($episode['episode_number'] == $episode_number) ? 'active' : ''; ?>">
+                            <div class="episode-thumb">
+                                <img src="<?php echo htmlspecialchars($anime['thumbnail']); ?>"
+                                    alt="<?php echo htmlspecialchars($anime['title']); ?> Episode <?php echo $episode['episode_number']; ?>">
+                                <div class="episode-overlay">
+                                    <span>Episode <?php echo $episode['episode_number']; ?></span>
                                 </div>
                             </div>
-                        </a>
+                            <div class="episode-title">
+                                <?php echo htmlspecialchars($episode['episode_title'] ?: $anime['title'] . ' - Episode ' . $episode['episode_number']); ?>
+                            </div>
+                        </div>
+                    </a>
                     <?php endwhile; ?>
                 </div>
             </aside>
@@ -136,27 +139,27 @@ $all_episodes_result = $mysqli->query("SELECT * FROM episodes WHERE anime_id = $
     </div>
 
     <script>
-        document.querySelector("main").classList.add("expanded");
+    document.querySelector("main").classList.add("expanded");
 
-        function toggleExpand() {
-            const videoWrapper = document.getElementById("videoWrapper");
-            const episodeSidebar = document.querySelector(".episode-sidebar");
-            const serverWrapper = document.querySelector(".server-episode-wrapper");
+    function toggleExpand() {
+        const videoWrapper = document.getElementById("videoWrapper");
+        const episodeSidebar = document.querySelector(".episode-sidebar");
+        const serverWrapper = document.querySelector(".server-episode-wrapper");
 
-            videoWrapper.classList.toggle("expanded");
+        videoWrapper.classList.toggle("expanded");
 
-            if (videoWrapper.classList.contains("expanded")) {
-                episodeSidebar.style.display = "none";
-                serverWrapper.style.display = "flex";
-                serverWrapper.style.justifyContent = "center";
-                serverWrapper.style.width = "100%";
-            } else {
-                episodeSidebar.style.display = "block";
-                serverWrapper.style.display = "flex";
-                serverWrapper.style.justifyContent = "flex-start";
-                serverWrapper.style.width = "";
-            }
+        if (videoWrapper.classList.contains("expanded")) {
+            episodeSidebar.style.display = "none";
+            serverWrapper.style.display = "flex";
+            serverWrapper.style.justifyContent = "center";
+            serverWrapper.style.width = "100%";
+        } else {
+            episodeSidebar.style.display = "block";
+            serverWrapper.style.display = "flex";
+            serverWrapper.style.justifyContent = "flex-start";
+            serverWrapper.style.width = "";
         }
+    }
     </script>
     <?php include 'Assets/HTML/footer.html' ?>
 </body>
