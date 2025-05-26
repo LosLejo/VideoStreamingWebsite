@@ -11,26 +11,34 @@ $isLoggedIn = isset($_SESSION['user_email']);
         <a href="genres.php">Genres</a>
         <a href="home.php#popular">Popular Now</a>
     </nav>
-    <div class="icons">
-        <div class="search-wrapper">
-            <input type="text" placeholder="Search..." id="searchInput">
-            <a href="#" class="fas fa-search" id="searchIcon"></a>
-        </div>
-        <div class="dropdown" id="userDropdown">
-            <a class="fa fa-user" id="userIcon"></a>
-            <div class="dropdown-content" id="dropdownContent">
-                <?php if ($isLoggedIn): ?>
-                    <button class="dropdown-btn" onclick="location.href='profile.php'">Profile</button>
-                    <button class="dropdown-btn" id="favoritesBtn">Favorites</button>
-                    <button class="dropdown-btn" onclick="location.href='logout.php'">Logout</button>
-                <?php else: ?>
-                    <button class="dropdown-btn" onclick="location.href='login.php'">Log in</button>
-                    <button class="dropdown-btn" onclick="location.href='register.php'">Sign up</button>
-                <?php endif; ?>
-            </div>
-        </div>
-        <i class="fas fa-bars" id="menu-bars"></i>
+<div class="icons">
+    <div class="search-wrapper">
+        <input type="text" placeholder="Search..." id="searchInput">
+        <a href="#" class="fas fa-search" id="searchIcon"></a>
     </div>
+
+    <div class="dropdown" id="userDropdown">
+        <div id="userIcon" class="user-info">
+            <i class="fa fa-user"></i>
+            <?php if ($isLoggedIn && isset($_SESSION['user_name'])): ?>
+                <span class="username"><?= htmlspecialchars($_SESSION['user_name']) ?></span>
+            <?php endif; ?>
+        </div>
+
+        <div class="dropdown-content" id="dropdownContent">
+            <?php if ($isLoggedIn): ?>
+                <button class="dropdown-btn" onclick="location.href='profile.php'">Profile</button>
+                <button class="dropdown-btn" id="favoritesBtn">Favorites</button>
+                <button class="dropdown-btn" onclick="location.href='logout.php'">Logout</button>
+            <?php else: ?>
+                <button class="dropdown-btn" onclick="location.href='login.php'">Log in</button>
+                <button class="dropdown-btn" onclick="location.href='register.php'">Sign up</button>
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <i class="fas fa-bars" id="menu-bars"></i>
+</div>
 </header>
 
 <style>
@@ -96,6 +104,22 @@ $isLoggedIn = isset($_SESSION['user_email']);
     .search-wrapper.active .fas.fa-search {
         color: var(--yellow);
     }
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    color: var(--white);
+    font-size: 1.4rem;
+    text-decoration: none;
+}
+
+.username {
+    color: var(--yellow);
+    text-transform: capitalize;
+    font-weight: bold;
+}
 </style>
 
 <script>
@@ -104,6 +128,9 @@ $isLoggedIn = isset($_SESSION['user_email']);
         const searchIcon = document.getElementById('searchIcon');
         const searchWrapper = searchInput.parentElement;
 
+        const userDropdown = document.getElementById('userDropdown');
+        const dropdownContent = document.getElementById('dropdownContent');
+        let dropdownTimeout;
         let searchTimeout;
 
         // Show input on hover
@@ -134,7 +161,7 @@ $isLoggedIn = isset($_SESSION['user_email']);
             e.preventDefault();
             const query = searchInput.value.trim();
             if (query) {
-                window.location.href = `search.php?q=${enc1deURIComponent(query)}`;
+                window.location.href = `search.php?q=${encodeURIComponent(query)}`;
             } else {
                 searchWrapper.classList.add('active');
                 setTimeout(() => searchInput.focus(), 100);
