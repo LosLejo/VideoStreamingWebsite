@@ -76,8 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </div>
 
                 <div class="profile-field">
-                    <textarea name="birth=" bio"
-                        class="profile-bio"><?= htmlspecialchars($user['bio'] ?? '') ?></textarea>
+                    <input type="date" name="birth" class="profile-bio" value="<?= htmlspecialchars($user['birthdate'] ?? '') ?>">
                 </div>
 
 
