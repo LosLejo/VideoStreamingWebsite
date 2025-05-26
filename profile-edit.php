@@ -23,12 +23,12 @@ $user = $result->fetch_assoc();
 if (!$user) {
     die("User not found.");
 }
-
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $bio = trim($_POST["bio"]);
+    $birth = $_POST["birth"];
 
-    $stmt = $mysqli->prepare("UPDATE users SET bio = ? WHERE google_id = ?");
-    $stmt->bind_param("ss", $bio, $google_id);
+    $stmt = $mysqli->prepare("UPDATE users SET bio = ?, birthdate = ? WHERE google_id = ?");
+    $stmt->bind_param("sss", $bio, $birth, $google_id);
     $stmt->execute();
 
     header("Location: profile.php");
