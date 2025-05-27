@@ -338,7 +338,6 @@ main {
 
 #videoWrapper.expanded {
     position: relative;
-    width: 68vw;
     max-width: 1600px;
     height: auto;
     background: #000;
