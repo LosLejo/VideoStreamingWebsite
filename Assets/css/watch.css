@@ -347,7 +347,7 @@ main {
     margin: 0 auto;
 }
 
-#videoWrapper.expanded .video-player {
+.expanded .video-player {
     background-color: #000;
     aspect-ratio: 16 / 9;
     width: 100%;
