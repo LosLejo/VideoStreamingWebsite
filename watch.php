@@ -51,9 +51,139 @@ $all_episodes_result = $all_episodes_stmt->get_result();
     <link rel="icon" type="image/svg+xml" href="assets/bolt-solid.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="Assets/css/watch.css">
+
+    <style>
+    /* Theater Mode Styles */
+    .theater-mode {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.95);
+        z-index: 9999;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .theater-mode.active {
+        display: flex;
+    }
+
+    .theater-video-container {
+        position: relative;
+        width: 85vw;
+        max-width: 120rem;
+        height: auto;
+        cursor: default;
+    }
+
+    .theater-video-container iframe,
+    .theater-video-container video {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
+        border-radius: 1rem;
+        box-shadow: 0 2rem 6rem rgba(255, 247, 0, 0.3);
+    }
+
+    .theater-controls {
+        position: absolute;
+        bottom: -6rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 1rem;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .theater-mode:hover .theater-controls {
+        opacity: 1;
+    }
+
+    .theater-controls button {
+        background: rgba(255, 247, 0, 0.9);
+        color: #000;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 0.5rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .theater-controls button:hover {
+        background: #fff;
+        transform: translateY(-0.2rem);
+    }
+
+    .theater-close-hint {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 1.4rem;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .theater-mode:hover .theater-close-hint {
+        opacity: 1;
+    }
+
+    /* Hide main content when theater mode is active */
+    body.theater-active {
+        overflow: hidden;
+    }
+
+    body.theater-active header,
+    body.theater-active main,
+    body.theater-active footer {
+        opacity: 0.1;
+        pointer-events: none;
+    }
+
+    /* Add theater mode button */
+    .theater-btn {
+        background: #333 !important;
+        color: var(--yellow) !important;
+        border: 0.2rem solid var(--yellow) !important;
+    }
+
+    .theater-btn:hover {
+        background: var(--yellow) !important;
+        color: #000 !important;
+    }
+    </style>
 </head>
 
 <body>
+    <!-- Theater Mode Overlay -->
+    <div class="theater-mode" id="theaterMode">
+        <div class="theater-close-hint">Click anywhere to exit theater mode</div>
+        <div class="theater-video-container" id="theaterVideoContainer">
+            <!-- Video will be cloned here -->
+        </div>
+        <div class="theater-controls">
+            <?php if ($episode_number > 1): ?>
+            <button onclick="navigateEpisode(<?php echo $episode_number - 1; ?>)">
+                <i class="fa-solid fa-backward"></i> Previous
+            </button>
+            <?php endif; ?>
+            <?php if ($episode_number < $anime['total_episodes']): ?>
+            <button onclick="navigateEpisode(<?php echo $episode_number + 1; ?>)">
+                Next <i class="fa-solid fa-forward"></i>
+            </button>
+            <?php endif; ?>
+            <button onclick="exitTheaterMode()">
+                <i class="fa-solid fa-compress"></i> Exit Theater
+            </button>
+        </div>
+    </div>
+
     <!-- Move header OUTSIDE containers -->
     <?php include 'Assets/HTML/home-header.php' ?>
 
@@ -64,16 +194,16 @@ $all_episodes_result = $all_episodes_stmt->get_result();
             </div>
 
             <div id="videoWrapper">
-                <div class="video-player">
+                <div class="video-player" id="mainVideoPlayer">
                     <?php
                     $video_url = $current_episode['video_url'];
                     $is_youtube = (strpos($video_url, 'youtube.com/embed/') !== false);
                     ?>
                     <?php if ($is_youtube): ?>
                     <iframe width="100%" height="500" src="<?php echo htmlspecialchars($video_url); ?>" frameborder="0"
-                        allowfullscreen></iframe>
+                        allowfullscreen id="mainVideo"></iframe>
                     <?php else: ?>
-                    <video controls width="100%" height="auto">
+                    <video controls width="100%" height="auto" id="mainVideo">
                         <source src="<?php echo htmlspecialchars($video_url); ?>" type="video/mp4" />
                         Your browser does not support the video tag.
                     </video>
@@ -87,6 +217,9 @@ $all_episodes_result = $all_episodes_stmt->get_result();
                     </a>
                     <?php endif; ?>
                     <button onclick="toggleExpand()">Expand <i class="fa-solid fa-expand"></i></button>
+                    <button class="theater-btn" onclick="enterTheaterMode()">
+                        <i class="fa-solid fa-tv"></i> Theater Mode
+                    </button>
                 </div>
 
                 <div class="server-episode-wrapper">
@@ -141,8 +274,91 @@ $all_episodes_result = $all_episodes_stmt->get_result();
     </main>
 
     <script>
-    document.querySelector("main").classList.add("expanded");
+    let theaterModeActive = false;
 
+    // Theater Mode Functions
+    function enterTheaterMode() {
+        const theaterMode = document.getElementById('theaterMode');
+        const theaterContainer = document.getElementById('theaterVideoContainer');
+        const mainVideo = document.getElementById('mainVideo');
+
+        // Clone the video element
+        const videoClone = mainVideo.cloneNode(true);
+        videoClone.style.width = '100%';
+        videoClone.style.height = 'auto';
+
+        // Clear theater container and add cloned video
+        theaterContainer.innerHTML = '';
+        theaterContainer.appendChild(videoClone);
+
+        // Add theater controls back
+        const controls = document.querySelector('.theater-controls');
+        theaterContainer.appendChild(controls);
+
+        // Show theater mode
+        theaterMode.classList.add('active');
+        document.body.classList.add('theater-active');
+        theaterModeActive = true;
+
+        // If it's a video element, sync the time
+        if (mainVideo.tagName === 'VIDEO' && videoClone.tagName === 'VIDEO') {
+            videoClone.currentTime = mainVideo.currentTime;
+            if (!mainVideo.paused) {
+                videoClone.play();
+            }
+        }
+    }
+
+    function exitTheaterMode() {
+        const theaterMode = document.getElementById('theaterMode');
+        const mainVideo = document.getElementById('mainVideo');
+        const theaterVideo = document.querySelector('#theaterVideoContainer video, #theaterVideoContainer iframe');
+
+        // Sync time back to main video if applicable
+        if (mainVideo.tagName === 'VIDEO' && theaterVideo && theaterVideo.tagName === 'VIDEO') {
+            mainVideo.currentTime = theaterVideo.currentTime;
+            if (!theaterVideo.paused) {
+                mainVideo.play();
+            }
+        }
+
+        // Hide theater mode
+        theaterMode.classList.remove('active');
+        document.body.classList.remove('theater-active');
+        theaterModeActive = false;
+    }
+
+    function navigateEpisode(episodeNum) {
+        window.location.href = `watch.php?series_id=<?php echo $series_id; ?>&episode=${episodeNum}`;
+    }
+
+    // Click to exit theater mode
+    document.getElementById('theaterMode').addEventListener('click', function(e) {
+        // Only exit if clicking on the overlay, not the video container
+        if (e.target === this) {
+            exitTheaterMode();
+        }
+    });
+
+    // Prevent video container clicks from closing theater mode
+    document.getElementById('theaterVideoContainer').addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+        if (theaterModeActive) {
+            if (e.key === 'Escape') {
+                exitTheaterMode();
+            }
+        } else {
+            if (e.key === 't' || e.key === 'T') {
+                enterTheaterMode();
+            }
+        }
+    });
+
+    // Existing expand function
     function toggleExpand() {
         const videoWrapper = document.getElementById("videoWrapper");
         const episodeSidebar = document.querySelector(".episode-sidebar");
@@ -163,6 +379,7 @@ $all_episodes_result = $all_episodes_stmt->get_result();
         }
     }
     </script>
+
     <?php include 'Assets/HTML/footer.html' ?>
 </body>
 
