@@ -50,10 +50,10 @@ if ($result && $result->num_rows > 0) {
     <link rel="stylesheet" href="Assets/css/profile.css">
 
     <style>
-    .bg {
-        background: url('Assets/images/profile_bg.jpg') no-repeat center center;
-        background-size: cover;
-    }
+        .bg {
+            background: url('Assets/images/profile_bg.jpg') no-repeat center center;
+            background-size: cover;
+        }
     </style>
 
 </head>

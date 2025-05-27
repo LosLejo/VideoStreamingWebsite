@@ -187,6 +187,7 @@ section#browse.anime {
     flex-direction: column;
     flex-grow: 1;
     background: none;
+    margin-top: 1rem;
 }
 
 .anime-card .card-content h3 {
@@ -695,10 +696,10 @@ header .icons #menu-bars {
 /* Update button styling to fit new layout */
 .anime .content .btn,
 .anime-card .card-content .btn {
-    margin-top: 0;
     align-self: flex-start;
     font-size: 1.4rem;
     padding: 0.8rem 2rem;
+    margin-top: 2px;
 }
 
 

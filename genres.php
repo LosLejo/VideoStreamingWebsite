@@ -84,18 +84,21 @@ if ($totalAnimeFound === 0) {
             background: transparent !important;
         }
 
+        /* Genre section heading - make genre name yellow */
         .heading {
             font-size: 28px;
             margin-bottom: 20px;
-            color: #ffffff !important;
             font-weight: bold;
             text-transform: capitalize;
+            color: yellow !important;
+            /* Add this line */
         }
 
         .heading span {
             font-size: 16px !important;
             color: #b3b3b3 !important;
             font-weight: normal;
+            margin-left: 8px;
         }
 
         hr {
@@ -105,24 +108,33 @@ if ($totalAnimeFound === 0) {
             margin-bottom: 20px;
         }
 
-        /* Swiper container */
-        .swiper {
-            width: 100%;
-            padding: 0 !important;
-            overflow: visible;
-        }
-
+        /* Swiper wrapper: center if only 1 card */
         .swiper-wrapper {
             display: flex;
-            align-items: stretch;
+            align-items: flex-start;
+            /* text aligns with image top */
         }
 
-        /* Swiper slide styles */
+        .swiper-wrapper:only-child,
+        .swiper-wrapper>.swiper-slide:only-child {
+            justify-content: center !important;
+        }
+
+        /* New: If there is only one slide, center it horizontally */
+        .swiper-wrapper:has(.swiper-slide:nth-child(1):last-child) {
+            justify-content: center !important;
+        }
+
+        /* Ensure card content is vertically aligned */
         .swiper-slide {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             width: auto !important;
             margin-right: 20px;
             background: transparent !important;
         }
+
 
         /* Anime card styles */
         .box {
@@ -137,6 +149,7 @@ if ($totalAnimeFound === 0) {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
+            margin-bottom: 0px;
         }
 
         .box:hover {
@@ -168,11 +181,14 @@ if ($totalAnimeFound === 0) {
             border-radius: 10px;
         }
 
-        /* Content styles */
         .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             padding: 15px 0;
             max-width: 200px;
             background: transparent !important;
+            width: 100%;
         }
 
         .content h3 {
@@ -344,7 +360,10 @@ if ($totalAnimeFound === 0) {
                                         <span class="stars">★ <?php echo number_format($anime['rating'], 1); ?></span>
                                         <span class="episodes"><?php echo $anime['total_episodes']; ?> Episodes</span>
                                     </div>
-                                    <a href="watch.php?series_id=<?php echo $anime['id']; ?>" class="btn">Watch Now</a>
+                                    <a href="watch.php?series_id=<?php echo $anime['id']; ?>" class="btn">Watch</a>
+                                    <button class="btn add-watchlist-btn" data-anime-id="<?php echo $anime['id']; ?>">
+                                        <i class="fa fa-plus"></i> Add to Watchlist
+                                    </button>
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -408,6 +427,39 @@ if ($totalAnimeFound === 0) {
                     <?php endif; ?>
                 <?php endforeach; ?>
             }, 100);
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.add-watchlist-btn').forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const animeId = this.getAttribute('data-anime-id');
+                    const button = this;
+                    button.disabled = true;
+                    fetch('add_to_watchlist.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded'
+                            },
+                            body: 'anime_id=' + encodeURIComponent(animeId)
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                button.innerHTML = '<i class="fa fa-check"></i> Added!';
+                                button.classList.add('added');
+                            } else {
+                                button.innerHTML = '<i class="fa fa-check"></i> ' + (data
+                                    .message || 'Already in Watchlist');
+                            }
+                        })
+                        .catch(() => {
+                            button.innerHTML = 'Error';
+                        });
+                });
+            });
         });
     </script>
 
