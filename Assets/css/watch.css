@@ -121,15 +121,15 @@ a.btn {
 main {
     display: flex;
     padding: 2rem;
-    gap: 4rem;
-    /* Increased from 3rem for more space */
+    gap: 6rem;
+    /* Increased from 4rem to 6rem for much wider spacing */
     margin-top: 8rem;
 }
 
 .video-section {
-    flex: 0 0 68%;
-    /* Increased from 65% to give more space */
-    max-width: 68%;
+    flex: 0 0 65%;
+    /* Decreased from 68% to 65% */
+    max-width: 65%;
     min-width: 0;
 }
 
@@ -285,9 +285,9 @@ main {
 }
 
 .episode-sidebar {
-    flex: 0 0 28%;
-    /* Decreased from 30% to balance with video */
-    max-width: 28%;
+    flex: 0 0 30%;
+    /* Increased from 28% to 30% */
+    max-width: 30%;
     background: #1b1b1b;
     border-radius: 1rem;
     padding: 1.5rem;
@@ -466,18 +466,18 @@ main {
     }
 
     main {
-        gap: 2rem;
-        /* Changed from 0.5rem - much better spacing */
+        gap: 4rem;
+        /* Increased from 2rem to 4rem for responsive */
     }
 
     .video-section {
-        flex: 1 1 65%;
-        max-width: 65%;
+        flex: 1 1 62%;
+        max-width: 62%;
     }
 
     .episode-sidebar {
-        flex: 0 0 32%;
-        max-width: 32%;
+        flex: 0 0 33%;
+        max-width: 33%;
     }
 }
 
@@ -489,7 +489,8 @@ main {
     main {
         flex-direction: column;
         padding: 1rem;
-        gap: 3rem;
+        gap: 4rem;
+        /* Increased from 3rem to 4rem */
     }
 
     .video-section {
