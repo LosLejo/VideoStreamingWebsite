@@ -230,7 +230,6 @@ section#browse.anime {
 .episode-info .status {
     color: #fff;
     font-weight: 500;
-    text-transform: capitalize;
     background: rgba(255, 255, 255, 0.1);
     padding: 0.3rem 0.8rem;
     border-radius: 15px;
@@ -719,6 +718,17 @@ header .icons #menu-bars {
     main {
         flex-direction: column;
     }
+}
+
+.error-message {
+    background-color: rgb(91, 0, 0);
+    color: rgb(255, 0, 0);
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.4rem;
 }
 
 @media(max-width: 468px) {

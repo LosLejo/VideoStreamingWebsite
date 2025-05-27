@@ -6,16 +6,16 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 // Redirect if not logged in
-if (!isset($_SESSION['google_id'])) {
+if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
 
-$google_id = $_SESSION['google_id'];
+$user_id = $_SESSION['user_id'];
 
 // Get user info
-$stmt = $mysqli->prepare("SELECT name, email, profile_pic, bio FROM users WHERE google_id = ?");
-$stmt->bind_param("s", $google_id);
+$stmt = $mysqli->prepare("SELECT user_name, email, profile_pic, bio, birthdate FROM users WHERE id = ?");
+$stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
@@ -23,16 +23,59 @@ $user = $result->fetch_assoc();
 if (!$user) {
     die("User not found.");
 }
+
+$error = '';
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $bio = trim($_POST["bio"]);
-    $birth = $_POST["birth"];
+    $user_name = trim($_POST["user_name"] ?? '');
+    $bio = trim($_POST["bio"] ?? '');
 
-    $stmt = $mysqli->prepare("UPDATE users SET bio = ?, birthdate = ? WHERE google_id = ?");
-    $stmt->bind_param("sss", $bio, $birth, $google_id);
-    $stmt->execute();
+    // Compose birthdate from dropdowns
+    $birth_year = $_POST['birth_year'] ?? '';
+    $birth_month = $_POST['birth_month'] ?? '';
+    $birth_day = $_POST['birth_day'] ?? '';
+    $birth = null;
+    if (checkdate((int)$birth_month, (int)$birth_day, (int)$birth_year)) {
+        $birth = sprintf('%04d-%02d-%02d', $birth_year, $birth_month, $birth_day);
+    }
 
-    header("Location: profile.php");
-    exit();
+    if (empty($user_name)) {
+        $error = "Username cannot be empty.";
+    } elseif (strlen($user_name) > 20) {
+        $error = "Username must not exceed 20 characters.";
+    } else {
+        // Check if username is taken (exclude current user)
+        $stmt = $mysqli->prepare("SELECT id FROM users WHERE user_name = ? AND id != ?");
+        $stmt->bind_param("si", $user_name, $user_id);
+        $stmt->execute();
+        $stmt->store_result();
+
+        if ($stmt->num_rows > 0) {
+            $error = "Username already taken. Please choose another.";
+        } else {
+            // Update user data
+            $stmt = $mysqli->prepare("UPDATE users SET user_name = ?, bio = ?, birthdate = ? WHERE id = ?");
+            $stmt->bind_param("sssi", $user_name, $bio, $birth, $user_id);
+            $stmt->execute();
+
+            $_SESSION['username'] = $user_name;
+            $_SESSION['user_name'] = $user_name; // <-- ADD THIS LINE
+            header("Location: profile.php");
+            exit();
+        }
+        $stmt->close();
+    }
+}
+
+// Prepare default selected values for dropdowns
+$birth_year = $birth_month = $birth_day = '';
+if (!empty($user['birthdate'])) {
+    $date = DateTime::createFromFormat('Y-m-d', $user['birthdate']);
+    if ($date) {
+        $birth_year = $date->format('Y');
+        $birth_month = $date->format('m');
+        $birth_day = $date->format('d');
+    }
 }
 ?>
 
@@ -46,6 +89,87 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel="icon" type="image/svg+xml" href="assets/bolt-solid.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="Assets/css/style.css">
+    <link rel="stylesheet" href="Assets/css/profile.css">
+
+    <style>
+        .bg {
+            background: url('Assets/images/profile_bg.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
+        .profile-bio-area {
+            width: 100%;
+            min-height: 80px;
+            max-height: 180px;
+            resize: vertical;
+            padding: 1rem;
+            font-size: 1.5rem;
+            border-radius: 0.4rem;
+            border: 1px solid #ccc;
+            background: rgba(30, 30, 30, 0.84);
+            color: #fff;
+            transition: box-shadow 0.2s;
+        }
+
+        .profile-bio-area:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--yellow);
+        }
+
+        .birthdate-selects {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .birthdate-selects select {
+            padding: 0.5rem 1rem;
+            border-radius: 0.4rem;
+            border: 1px solid #ccc;
+            font-size: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: yellow;
+            background-color: rgba(22, 22, 22, 0.88);
+        }
+
+        .birthdate-selects select:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--yellow);
+        }
+
+        .profile-field label {
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .profile-username-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 1.5rem;
+            border-radius: 0.4rem;
+            border: 1px solid #ccc;
+            background: rgba(30, 30, 30, 0.84);
+            color: #fff;
+            background-color: rgba(22, 22, 22, 0.88);
+            box-sizing: border-box;
+        }
+
+        .profile-username-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--yellow);
+        }
+
+        .error-message {
+            background-color: rgb(91, 0, 0);
+            color: rgb(255, 0, 0);
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.4rem;
+        }
+    </style>
 </head>
 
 <body>
@@ -59,26 +183,65 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <h1>Edit Profile</h1>
             </div>
 
-            <form method="POST" class="profile-details">
+            <form method="POST" class="profile-details" autocomplete="off">
+                <?php if (!empty($error)): ?>
+                    <div class="error-message"><?= htmlspecialchars($error) ?></div>
+                <?php endif; ?>
+
                 <div class="profile-field">
-                    <label>Full Name</label>
-                    <div class="value"><?= htmlspecialchars($user['name']) ?></div>
+                    <label for="user_name">User Name</label>
+                    <input type="text" id="user_name" name="user_name" required
+                        value="<?= htmlspecialchars($user['user_name']) ?>" class="profile-username-input"
+                        maxlength="20" />
+                    <div style="font-size: 1.5rem; color: #ccc; margin-top: 5px;">Max 20 characters.</div>
                 </div>
 
                 <div class="profile-field">
-                    <label>Email Address</label>
+                    <label>Email</label>
                     <div class="value"><?= htmlspecialchars($user['email']) ?></div>
                 </div>
 
                 <div class="profile-field">
-                    <textarea name="bio" id="bio"
-                        class="profile-bio"><?= htmlspecialchars($user['bio'] ?? '') ?></textarea>
+                    <label for="bio">Bio</label>
+                    <textarea name="bio" id="bio" class="profile-bio-area" maxlength="255"
+                        placeholder="Write something about yourself..."><?= htmlspecialchars($user['bio'] ?? '') ?></textarea>
+                    <div style="font-size: 1.5rem; color: #ccc; margin-top: 5px;">Max 255 characters.</div>
                 </div>
 
                 <div class="profile-field">
-                    <input type="date" name="birth" class="profile-bio" value="<?= htmlspecialchars($user['birthdate'] ?? '') ?>">
+                    <label>Date of Birth</label>
+                    <div class="birthdate-selects">
+                        <select name="birth_month" required>
+                            <option value="">Month</option>
+                            <?php
+                            for ($m = 1; $m <= 12; $m++) {
+                                $selected = ($birth_month == sprintf('%02d', $m)) ? 'selected' : '';
+                                $monthName = date('F', mktime(0, 0, 0, $m, 1));
+                                echo "<option value='" . sprintf('%02d', $m) . "' $selected>$monthName</option>";
+                            }
+                            ?>
+                        </select>
+                        <select name="birth_day" required>
+                            <option value="">Day</option>
+                            <?php
+                            for ($d = 1; $d <= 31; $d++) {
+                                $selected = ($birth_day == sprintf('%02d', $d)) ? 'selected' : '';
+                                echo "<option value='" . sprintf('%02d', $d) . "' $selected>$d</option>";
+                            }
+                            ?>
+                        </select>
+                        <select name="birth_year" required>
+                            <option value="">Year</option>
+                            <?php
+                            $currentYear = date('Y');
+                            for ($y = $currentYear - 100; $y <= $currentYear; $y++) {
+                                $selected = ($birth_year == $y) ? 'selected' : '';
+                                echo "<option value='$y' $selected>$y</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
                 </div>
-
 
                 <div class="profile-actions">
                     <button type="submit" class="profile-btn">Save Changes</button>
@@ -90,147 +253,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <?php include 'Assets/HTML/footer.html' ?>
     <script src="Assets/js/main.js"></script>
 </body>
-
-<style>
-    .bg {
-        background: url('Assets/images/profile_bg.jpg') no-repeat center center;
-        background-size: cover;
-
-    }
-
-    .profile-container {
-        max-width: 650px;
-        margin: 5rem auto 0;
-        padding: 3rem;
-        background: rgba(0, 0, 0, 0.75);
-        border-radius: 1rem;
-        box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.3);
-    }
-
-    .profile-header {
-        display: flex;
-        align-items: center;
-        gap: 3.5rem;
-        margin-bottom: 2rem;
-        text-align: left;
-    }
-
-    .profile-header h1 {
-        color: var(--yellow);
-        font-size: 3rem;
-        margin-bottom: 0;
-    }
-
-    .profile-avatar {
-        width: 12rem;
-        height: 12rem;
-        border-radius: 50%;
-        background: var(--yellow);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 0 2rem 0;
-        /* Remove auto-centering */
-        font-size: 4rem;
-        color: var(--black);
-    }
-
-    .profile-details {
-        display: grid;
-        gap: 2rem;
-    }
-
-    .profile-field {
-        background: rgba(255, 255, 255, 0.05);
-        padding: 2rem;
-        border-radius: 0.5rem;
-        border-left: 4px solid var(--yellow);
-    }
-
-    .profile-field label {
-        display: block;
-        color: var(--yellow);
-        font-size: 1.4rem;
-        font-weight: bold;
-        margin-bottom: 0.5rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    .profile-field .value {
-        color: #fff;
-        font-size: 1.6rem;
-        word-break: break-word;
-    }
-
-    .profile-actions {
-        margin-top: 3rem;
-        text-align: center;
-        display: flex;
-        gap: 2rem;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-
-    .profile-btn {
-        display: inline-block;
-        padding: 1.2rem 2.5rem;
-        background: var(--yellow);
-        color: var(--black);
-        text-decoration: none;
-        border-radius: 0.5rem;
-        font-weight: bold;
-        font-size: 1.4rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        transition: all 0.3s ease;
-        border: none;
-        cursor: pointer;
-    }
-
-    .profile-btn:hover {
-        background: #fff;
-        transform: translateY(-2px);
-        box-shadow: 0 0.5rem 1.5rem rgba(255, 193, 7, 0.4);
-    }
-
-    .profile-btn.secondary {
-        background: transparent;
-        color: var(--yellow);
-        border: 2px solid var(--yellow);
-    }
-
-    .profile-btn.secondary:hover {
-        background: var(--yellow);
-        color: var(--black);
-    }
-
-    @media (max-width: 768px) {
-        .profile-container {
-            margin: 10rem 2rem 3rem;
-            padding: 2rem;
-        }
-
-        .profile-header h1 {
-            font-size: 2.5rem;
-        }
-
-        .profile-avatar {
-            width: 10rem;
-            height: 10rem;
-            font-size: 3rem;
-        }
-
-        .profile-actions {
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .profile-btn {
-            width: 100%;
-            max-width: 300px;
-        }
-    }
-</style>
 
 </html>

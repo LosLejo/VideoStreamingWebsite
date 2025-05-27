@@ -15,9 +15,9 @@
     text-decoration: none;
     outline: none;
     border: none;
-    text-transform: capitalize;
     transition: all .2s linear;
 }
+
 .heading {
     position: relative;
     font-size: 3rem;
@@ -30,6 +30,7 @@ hr {
     background-color: var(--yellow);
     border: none;
 }
+
 .footer {
     position: relative;
     background-color: #111;
@@ -37,7 +38,7 @@ hr {
     padding: 10px 5px 5px;
     font-size: 14px;
     overflow: visible;
-    
+
 }
 
 .footer-logo {
@@ -86,7 +87,8 @@ footer .logo i {
     color: var(--yellow);
 }
 
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
     padding: 0;
@@ -98,7 +100,7 @@ html, body {
     background-color: var(--black);
     padding: 3rem;
     padding-top: 8rem;
-       
+
 }
 
 .anime .box {
@@ -186,13 +188,15 @@ header .icons #menu-bars {
 
 /* Swiper styles */
 .anime .swiper-wrapper {
-    height: 100%;        /* full height for swiper wrapper */
+    height: 100%;
+    /* full height for swiper wrapper */
 }
 
 .anime .swiper-slide {
     padding-top: 15rem;
     padding-bottom: 15rem;
-    height: 100%;        /* full height for each slide */
+    height: 100%;
+    /* full height for each slide */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -200,35 +204,38 @@ header .icons #menu-bars {
 }
 
 .content {
-  display: flex;
-  align-items: center;
-  gap: 1rem; /* space between Watch button and like-container */
-  margin-top: 1rem;
-  flex-wrap: wrap; 
-  margin-right: 10rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    /* space between Watch button and like-container */
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    margin-right: 10rem;
 }
 
 .btn {
-  /* existing styles, just make sure no margin-bottom */
-  margin-top: 0; /* remove vertical margin if any */
-  font-size: 1.7rem;
-  cursor: pointer;
-  padding: .8rem 3rem;
-  border-radius: 0.5rem;
-  background: var(--yellow);
-  color: var(--black);
-  font-weight: bolder;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+    /* existing styles, just make sure no margin-bottom */
+    margin-top: 0;
+    /* remove vertical margin if any */
+    font-size: 1.7rem;
+    cursor: pointer;
+    padding: .8rem 3rem;
+    border-radius: 0.5rem;
+    background: var(--yellow);
+    color: var(--black);
+    font-weight: bolder;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .like-container {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  justify-content: center;
-  margin-top: 0; /* remove margin to line up with button */
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 0;
+    /* remove margin to line up with button */
 }
 
 .like-btn {
@@ -267,9 +274,11 @@ header .icons #menu-bars {
     html {
         font-size: 55%;
     }
+
     header {
         padding: 1rem 5%;
     }
+
     .anime .content {
         max-width: 90%;
     }
@@ -279,9 +288,11 @@ header .icons #menu-bars {
     html {
         font-size: 50%;
     }
+
     header #menu-bars {
         display: inline-block;
     }
+
     header .navbar {
         position: absolute;
         top: 100%;
@@ -293,12 +304,13 @@ header .icons #menu-bars {
         max-height: 0;
         transition: 0.5s ease-in-out;
     }
+
     header .navbar.active {
         max-height: 40rem;
         box-shadow: var(--box-shadow);
     }
+
     header .navbar a {
         margin: 2rem;
     }
 }
-
