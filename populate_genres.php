@@ -34,6 +34,6 @@ while ($anime = $animeResult->fetch_assoc()) {
 
 echo "<h2>Anime genres repopulated!</h2>";
 echo "<p>Total anime-genre links inserted: $count</p>";
-echo "<a href='genre.php'>Back to genres</a>";
+echo "<a href='insert_anime.php'>Back to Inserting Anime</a>";
 
 $mysqli->close();

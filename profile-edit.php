@@ -84,7 +84,7 @@ if (!empty($user['birthdate'])) {
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Edit Profile - StrikeFlix</title>
     <link rel="icon" type="image/svg+xml" href="assets/bolt-solid.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />

@@ -55,7 +55,7 @@ if ($totalAnimeFound === 0) {
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>StrikeFlix - Genres</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
@@ -354,10 +354,6 @@ if ($totalAnimeFound === 0) {
                                 </div>
                                 <div class="content">
                                     <h3><?php echo htmlspecialchars($anime['title']); ?></h3>
-                                    <p><?php
-                                        $description = $anime['description'] ?? 'No description available';
-                                        echo htmlspecialchars(strlen($description) > 120 ? substr($description, 0, 120) . '...' : $description);
-                                        ?></p>
                                     <div class="rating">
                                         <span class="stars">★ <?php echo number_format($anime['rating'], 1); ?></span>
                                         <span class="episodes"><?php echo $anime['total_episodes']; ?> Episodes</span>

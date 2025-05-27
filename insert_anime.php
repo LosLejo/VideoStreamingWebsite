@@ -6,7 +6,7 @@ ini_set('display_errors', 1);
 require_once 'db.php';
 
 // Handle form submission
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['populate_genres'])) {
     $title = $_POST['title'] ?? '';
     $description = $_POST['description'] ?? '';
     $thumbnail = $_POST['thumbnail'] ?? '';
@@ -206,6 +206,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .summary-table td {
             background: #fbfbfb;
         }
+
+        .populate-btn {
+            background: #ffc107;
+            color: #333;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-bottom: 18px;
+        }
+
+        .populate-btn:hover {
+            background: #ff9800;
+        }
     </style>
     <script>
         function addEpisodeRow(title = '', url = '') {
@@ -241,7 +256,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="container">
         <h2>🎬 Insert New Anime</h2>
         <?php if (!empty($message)) echo $message; ?>
-        <form action="" method="post" autocomplete="off">
+
+        <!-- Populate Genres Button -->
+        <form action="populate_genres.php" method="post" style="display:inline;">
+            <button type="submit" class="populate-btn">🔄 Populate Genres</button>
+        </form>
+
+        <form action="" method="post" autocomplete="off" style="margin-top:16px;">
             <label>Title *</label>
             <input type="text" name="title" required value="<?= htmlspecialchars($_POST['title'] ?? '') ?>">
 

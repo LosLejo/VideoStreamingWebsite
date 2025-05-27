@@ -120,7 +120,7 @@ a.btn {
 
 main {
     display: flex;
-    padding: 20px;
+    padding: 20rem;
     gap: 10rem;
 }
 
@@ -131,7 +131,7 @@ main {
 }
 
 .breadcrumbs {
-    margin-bottom: 10px;
+    margin-bottom: 10rem;
     font-size: 0.9em;
     color: #bbb;
 }
@@ -140,7 +140,7 @@ main {
     background-color: #000;
     aspect-ratio: 16 / 9;
     width: 60vw;
-    max-width: 1400px;
+    max-width: 1400rem;
     height: auto;
     display: flex;
     justify-content: center;
@@ -148,7 +148,7 @@ main {
 }
 
 .video-placeholder {
-    font-size: 48px;
+    font-size: 48rem;
     color: #ccc;
 }
 
@@ -179,31 +179,31 @@ main {
     flex: 1 1 45%;
     background-color: #181818;
     padding: 1rem;
-    border-radius: 10px;
-    min-width: 300px;
+    border-radius: 10rem;
+    min-width: 300rem;
 }
 
 .servers button,
 .video-controls button,
 .episodes button {
     background: var(--yellow);
-    border-radius: 5px;
+    border-radius: 5rem;
     color: #000000;
     border: none;
-    padding: 6px 10px;
-    margin-right: 5px;
+    padding: 6rem 10rem;
+    margin-right: 5rem;
     cursor: pointer;
 }
 
 .bg {
     background-color: #181818;
-    border-radius: 10px;
-    max-width: 600px;
+    border-radius: 10rem;
+    max-width: 600rem;
 }
 
 .bg-header {
     text-align: center;
-    font-size: 20px;
+    font-size: 20rem;
     font-weight: 600;
     color: var(--yellow);
     margin-bottom: 1rem;
@@ -213,7 +213,7 @@ main {
 
 .bg1-header {
     text-align: center;
-    font-size: 20px;
+    font-size: 20rem;
     font-weight: 600;
     color: var(--yellow);
     margin-bottom: 1rem;
@@ -243,23 +243,23 @@ main {
 }
 
 .top-anime ol {
-    padding-left: 20px;
+    padding-left: 20rem;
 }
 
 .top-anime li {
-    margin-bottom: 10px;
+    margin-bottom: 10rem;
 }
 
 .top-anime span {
     font-weight: bold;
-    margin-right: 8px;
+    margin-right: 8rem;
 }
 
 .containers {
     display: flex;
     flex-wrap: nowrap;
-    gap: 40px;
-    max-width: 1400px;
+    gap: 40rem;
+    max-width: 1400rem;
     margin: 10rem auto 0;
     padding: 1rem;
     justify-content: center;
@@ -268,33 +268,33 @@ main {
 }
 
 .episode-sidebar {
-    flex: 0 0 320px;
+    flex: 0 0 320rem;
     background: #1b1b1b;
-    border-radius: 10px;
-    padding: 15px;
+    border-radius: 10rem;
+    padding: 15rem;
     color: #fff;
 }
 
 .block_area-header {
-    margin-bottom: 15px;
+    margin-bottom: 15rem;
 }
 
 .cat-heading {
-    font-size: 20px;
-    margin-bottom: 10px;
+    font-size: 20rem;
+    margin-bottom: 10rem;
 }
 
 .episode-list {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 15rem;
 }
 
 .episode-item {
     display: flex;
     flex-direction: column;
     background: #2a2a2a;
-    border-radius: 10px;
+    border-radius: 10rem;
     overflow: hidden;
     transition: transform 0.3s ease;
 }
@@ -306,7 +306,7 @@ main {
 .episode-thumb {
     position: relative;
     width: 100%;
-    height: 160px;
+    height: 160rem;
     overflow: hidden;
 }
 
@@ -320,15 +320,15 @@ main {
     position: absolute;
     bottom: 0;
     width: 100%;
-    padding: 10px;
+    padding: 10rem;
     background: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
     color: #fff;
     font-weight: bold;
 }
 
 .episode-title {
-    padding: 10px;
-    font-size: 16px;
+    padding: 10rem;
+    font-size: 16rem;
     color: #fff700;
 }
 
@@ -339,7 +339,7 @@ main {
 #videoWrapper.expanded {
     position: relative;
     width: 68vw;
-    max-width: 1600px;
+    max-width: 1600rem;
     height: auto;
     background: #000;
     z-index: 9999;
@@ -378,12 +378,12 @@ main {
     display: none;
     position: absolute;
     right: 0;
-    margin-top: 10px;
+    margin-top: 10rem;
     padding: 2rem 1rem;
     background-color: #1b1b1b;
-    min-width: 150px;
-    border-radius: 10px;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    min-width: 150rem;
+    border-radius: 10rem;
+    box-shadow: 0rem 8rem 16rem rgba(0, 0, 0, 0.2);
     flex-direction: column;
     overflow: hidden;
     gap: 1rem;
@@ -396,8 +396,8 @@ main {
     color: white;
     font-size: 1.6rem;
     cursor: pointer;
-    padding: 8px 12px;
-    border-radius: 4px;
+    padding: 8rem 12rem;
+    border-radius: 4rem;
     transition: background-color 0.3s ease;
     width: auto;
     margin: 0 auto;
@@ -414,7 +414,7 @@ main {
 
 /* Responsive Layouts */
 
-@media (max-width: 991px) {
+@media (max-width: 991rem) {
     html {
         font-size: 55%;
     }
@@ -443,7 +443,7 @@ main {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 768rem) {
     html {
         font-size: 50%;
     }
@@ -517,7 +517,7 @@ main {
     }
 }
 
-@media (max-width: 468px) {
+@media (max-width: 468rem) {
     html {
         font-size: 45%;
     }
@@ -547,18 +547,18 @@ main {
     position: relative;
     background-color: #111;
     color: #eee;
-    padding: 10px 5px 5px;
-    font-size: 14px;
+    padding: 10rem 5rem 5rem;
+    font-size: 14rem;
     overflow: visible;
     margin-bottom: 0;
 }
 
 .footer-logo {
     position: absolute;
-    top: -85px;
+    top: -85rem;
     left: 93%;
     transform: translateX(-50%);
-    max-width: 200px;
+    max-width: 200rem;
     height: auto;
 }
 
@@ -566,15 +566,15 @@ i.fa-facebook,
 i.fa-instagram,
 i.fa-twitter {
     background-color: var(--yellow);
-    border-radius: 5px;
+    border-radius: 5rem;
     color: var(--black);
-    width: 40px;
-    height: 40px;
+    width: 40rem;
+    height: 40rem;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
-    margin: 5px;
+    font-size: 20rem;
+    margin: 5rem;
 }
 
 .footer .container {
@@ -584,7 +584,7 @@ i.fa-twitter {
 }
 
 .footer p {
-    margin: 5px 0;
+    margin: 5rem 0;
     line-height: 1.5;
     color: var(--gray);
 }
