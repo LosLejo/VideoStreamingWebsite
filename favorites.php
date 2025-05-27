@@ -301,108 +301,10 @@ $mysqli->close();
       </div>
     <?php endif; ?>
   </div>
-<<<<<<< Updated upstream
-</header>
+  </section>
 
-<section class="anime" id="anime">
-  <h1 class="heading"><i class="fa-solid fa-heart"></i>Favorites</h1>
-  <hr />
-  <div class="swiper anime-slider">
-    <div class="swiper-wrapper">
-
-      <div class="swiper-slide">
-        <div class="box" style="background-image: url('Assets/images/dbz.jpg');"></div>
-        <div class="content">
-          <h3>Aho-Girl</h3>
-          <p>Yoshiko Hanabatake is an idiot beyond all belief. <br>
-            Somehow managing to consistently score zeroes on <br>
-            all and consumed by an absurd obsession with bananas, <br>
-            her senseless acts have caused even her own mother to lose all hope.</p>
-          <a href="#" class="btn">Watch</a>
-          
-        </div>
-      </div>
-
-      <div class="swiper-slide">
-        <div class="box" style="background-image: url('Assets/images/dbz.jpg');"></div>
-        <div class="content">
-          <h3>Shadows House</h3>
-          <p>Yoshiko Hanabatake is an idiot beyond all belief. <br>
-            Somehow managing to consistently score zeroes on <br>
-            all and consumed by an absurd obsession with bananas, <br>
-            her senseless acts have caused even her own mother to lose all hope.</p>
-          <a href="#" class="btn">Watch</a>
-          
-        </div>
-      </div>
-
-      <div class="swiper-slide">
-        <div class="box" style="background-image: url('Assets/images/dbz.jpg');"></div>
-        <div class="content">
-          <h3>Shadows House</h3>
-          <p>Yoshiko Hanabatake is an idiot beyond all belief. <br>
-            Somehow managing to consistently score zeroes on <br>
-            all and consumed by an absurd obsession with bananas, <br>
-            her senseless acts have caused even her own mother to lose all hope.</p>
-          <a href="#" class="btn">Watch</a>
-          <div class="like-container">
-            <button class="like-btn" aria-label="Like button">
-              <i class="fa-regular fa-heart"></i>
-              <i class="fa-solid fa-heart liked"></i>
-            </button>
-            <span class="like-count">0</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="swiper-slide">
-        <div class="box" style="background-image: url('Assets/images/dbz.jpg');"></div>
-        <div class="content">
-          <h3>Shadows House</h3>
-         <p>Yoshiko Hanabatake is an idiot beyond all belief. <br>
-            Somehow managing to consistently score zeroes on <br>
-            all and consumed by an absurd obsession with bananas, <br>
-            her senseless acts have caused even her own mother to lose all hope.</p>
-          <a href="#" class="btn">Watch</a>
-          <div class="like-container">
-            <button class="like-btn" aria-label="Like button">
-              <i class="fa-regular fa-heart"></i>
-              <i class="fa-solid fa-heart liked"></i>
-            </button>
-            <span class="like-count">0</span>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="swiper-slide">
-        <div class="box" style="background-image: url('Assets/images/dbz.jpg');"></div>
-        <div class="content">
-          <h3>Shadows House</h3>
-         <p>Yoshiko Hanabatake is an idiot beyond all belief. <br>
-            Somehow managing to consistently score zeroes on <br>
-            all and consumed by an absurd obsession with bananas, <br>
-            her senseless acts have caused even her own mother to lose all hope.</p>
-          <a href="#" class="btn">Watch</a>
-          <div class="like-container">
-            <button class="like-btn" aria-label="Like button">
-              <i class="fa-regular fa-heart"></i>
-              <i class="fa-solid fa-heart liked"></i>
-            </button>
-            <span class="like-count">0</span>
-          </div>
-        </div>
-      </div>
-
-
-    </div>
-  </div>
-</section>
-
-    <?php include 'Assets/HTML/footer.html' ?>
-<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-=======
-  <?php include 'Assets/HTML/footer.html'; ?>
+  <?php include 'Assets/HTML/footer.html' ?>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       document.querySelectorAll('.remove-watchlist-btn').forEach(function(btn) {
@@ -437,7 +339,6 @@ $mysqli->close();
       });
     });
   </script>
->>>>>>> Stashed changes
 </body>
 
 </html>

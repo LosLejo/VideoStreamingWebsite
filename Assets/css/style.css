@@ -99,6 +99,31 @@ header .icons #menu-bars {
 
 }
 
+.box {
+    position: relative;
+    overflow: hidden;
+}
+
+.box::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.55);
+    /* 0.55 = 55% black overlay; adjust as needed */
+    z-index: 1;
+    pointer-events: none;
+}
+
+.box .content {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    /* White text */
+}
+
 .home .box {
     min-height: 100vh;
     display: -webkit-box;
