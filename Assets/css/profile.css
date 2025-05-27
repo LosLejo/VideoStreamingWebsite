@@ -4,7 +4,7 @@
     }
 
     .profile-container {
-        max-width: 650px;
+        max-width: 65rem;
         margin: 5rem auto 0;
         padding: 3rem;
         background: rgba(0, 0, 0, 0.75);
@@ -48,7 +48,7 @@
         background: rgba(255, 255, 255, 0.05);
         padding: 2rem;
         border-radius: 0.5rem;
-        border-left: 4px solid var(--yellow);
+        border-left: 0.4rem solid var(--yellow);
     }
 
     .profile-field label {
@@ -58,7 +58,7 @@
         font-weight: bold;
         margin-bottom: 0.5rem;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 0.1rem;
     }
 
     .profile-field .value {
@@ -86,7 +86,7 @@
         font-weight: bold;
         font-size: 1.4rem;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 0.1rem;
         transition: all 0.3s ease;
         border: none;
         cursor: pointer;
@@ -94,14 +94,14 @@
 
     .profile-btn:hover {
         background: #fff;
-        transform: translateY(-2px);
+        transform: translateY(-0.2rem);
         box-shadow: 0 0.5rem 1.5rem rgba(255, 193, 7, 0.4);
     }
 
     .profile-btn.secondary {
         background: transparent;
         color: var(--yellow);
-        border: 2px solid var(--yellow);
+        border: 0.2rem solid var(--yellow);
     }
 
     .profile-btn.secondary:hover {
@@ -109,7 +109,7 @@
         color: var(--black);
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 76.8rem) {
         .profile-container {
             margin: 10rem 2rem 3rem;
             padding: 2rem;
@@ -132,6 +132,6 @@
 
         .profile-btn {
             width: 100%;
-            max-width: 300px;
+            max-width: 30rem;
         }
     }

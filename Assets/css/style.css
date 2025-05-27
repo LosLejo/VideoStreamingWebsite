@@ -164,7 +164,7 @@ header .icons #menu-bars {
 
 section {
     padding: 2rem 9%;
-    scroll-margin-bottom: 50rem;
+    scroll-margin-bottom: 5rem;
 }
 
 section#browse.anime {
@@ -177,25 +177,25 @@ section#browse.anime {
 
 /* Updated anime card structure for database content */
 .anime-card {
-    width: 280px;
+    width: 28rem;
     height: auto;
     display: flex;
     flex-direction: column;
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
+    border-radius: 0.8rem;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
 }
 
 .anime-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(255, 247, 0, 0.2);
+    transform: translateY(-0.5rem);
+    box-shadow: 0 1rem 2.5rem rgba(255, 247, 0, 0.2);
 }
 
 .anime-card .thumbnail {
     width: 100%;
-    height: 200px;
+    height: 20rem;
     background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
@@ -249,8 +249,8 @@ section#browse.anime {
     font-weight: 600;
     background: rgba(255, 247, 0, 0.1);
     padding: 0.3rem 0.8rem;
-    border-radius: 15px;
-    border: 1px solid rgba(255, 247, 0, 0.3);
+    border-radius: 1.5rem;
+    border: 0, 0.1rem solid rgba(255, 247, 0, 0.3);
 }
 
 .episode-info .status {
@@ -258,7 +258,7 @@ section#browse.anime {
     font-weight: 500;
     background: rgba(255, 255, 255, 0.1);
     padding: 0.3rem 0.8rem;
-    border-radius: 15px;
+    border-radius: 1.5rem;
 }
 
 .episode-info .status.completed {
@@ -283,10 +283,10 @@ section#browse.anime {
     font-weight: 500;
     background: rgba(255, 255, 255, 0.15);
     padding: 0.4rem 0.8rem;
-    border-radius: 12px;
+    border-radius: 1.2rem;
     margin-right: 0.5rem;
     margin-bottom: 0.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 0.1rem solid rgba(255, 255, 255, 0.2);
 }
 
 .anime {
@@ -295,21 +295,21 @@ section#browse.anime {
 }
 
 .anime .box {
-    width: 280px;
+    width: 28rem;
     height: auto;
     /* Changed from fixed height */
     display: flex;
     flex-direction: column;
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
+    border-radius: 0.8rem;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
 }
 
 .anime .box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(255, 247, 0, 0.2);
+    transform: translateY(-0.5rem);
+    box-shadow: 0 1rem 2.5rem rgba(255, 247, 0, 0.2);
 }
 
 /* Create thumbnail area */
@@ -317,7 +317,7 @@ section#browse.anime {
     content: '';
     display: block;
     width: 100%;
-    height: 200px;
+    height: 20rem;
     background-image: var(--bg-image);
     background-size: cover !important;
     background-position: center !important;
@@ -367,7 +367,7 @@ section#browse.anime {
     flex-direction: column;
     align-items: stretch;
     /* Changed from center */
-    width: 280px;
+    width: 28rem;
     /* Fixed width for consistency */
     cursor: grab;
 }
@@ -378,13 +378,13 @@ section#browse.anime {
     color: var(--yellow);
     background: rgba(0, 0, 0, 0.7);
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 4rem;
+    height: 4rem;
 }
 
 .swiper-button-next:after,
 .swiper-button-prev:after {
-    font-size: 16px;
+    font-size: 1.6rem;
 }
 
 .swiper-button-next:hover,
@@ -417,20 +417,20 @@ section#new-releases.anime {
 }
 
 .new-release .box {
-    width: 280px;
+    width: 28rem;
     height: auto;
     display: flex;
     flex-direction: column;
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
+    border-radius: 0.8rem;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
 }
 
 .new-release .box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(255, 247, 0, 0.2);
+    transform: translateY(-0.5rem);
+    box-shadow: 0 1rem 2.5rem rgba(255, 247, 0, 0.2);
 }
 
 .new-release .swiper-slide {
@@ -477,46 +477,46 @@ section#new-releases.anime {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    width: 280px;
+    width: 28rem;
     cursor: grab;
 }
 
 /* Responsive adjustments */
-@media(max-width: 991px) {
+@media(max-width: 99.1rem) {
 
     .anime .box,
     .new-release .box,
     .anime-card {
-        width: 250px;
+        width: 25rem;
     }
 
     .anime .swiper-slide,
     .new-release .swiper-slide {
-        width: 250px;
+        width: 25rem;
     }
 
     .anime-card .thumbnail {
-        height: 180px;
+        height: 18rem;
     }
 }
 
-@media(max-width: 768px) {
+@media(max-width: 76.8rem) {
 
     .anime .box,
     .new-release .box,
     .anime-card {
-        width: 220px;
+        width: 22rem;
     }
 
     .anime .swiper-slide,
     .new-release .swiper-slide {
-        width: 220px;
+        width: 22rem;
     }
 
     .anime .box::before,
     .new-release .box::before,
     .anime-card .thumbnail {
-        height: 160px;
+        height: 16rem;
     }
 
     .anime .content,
@@ -550,21 +550,21 @@ section#new-releases.anime {
     }
 }
 
-@media(max-width: 468px) {
+@media(max-width: 46.8rem) {
 
     .anime .box,
     .new-release .box,
     .anime-card {
-        width: 200px;
+        width: 20rem;
     }
 
     .anime .swiper-slide,
     .new-release .swiper-slide {
-        width: 200px;
+        width: 20rem;
     }
 
     .anime-card .thumbnail {
-        height: 140px;
+        height: 14rem;
     }
 
     .episode-info .episodes,
@@ -607,18 +607,18 @@ a.btn {
     position: relative;
     background-color: #111;
     color: #eee;
-    padding: 10px 5px 5px;
-    font-size: 14px;
+    padding: 1rem 0.5rem 0.5rem;
+    font-size: 1.4rem;
     overflow: visible;
     margin-bottom: 0;
 }
 
 .footer-logo {
     position: absolute;
-    top: -85px;
+    top: -8.5rem;
     left: 93%;
     transform: translateX(-50%);
-    max-width: 200px;
+    max-width: 20rem;
     height: auto;
 }
 
@@ -626,25 +626,25 @@ i.fa-facebook,
 i.fa-instagram,
 i.fa-twitter {
     background-color: var(--yellow);
-    border-radius: 5px;
+    border-radius: 0.5rem;
     color: var(--black);
-    width: 40px;
-    height: 40px;
+    width: 4rem;
+    height: 4rem;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
-    margin: 5px;
+    font-size: 2rem;
+    margin: 0.5rem;
 }
 
 .footer .container {
 
-    margin-left: 5rem;
+    margin-left: 0.5rem;
     padding: 0;
 }
 
 .footer p {
-    margin: 5px 0;
+    margin: 0.5rem 0;
     line-height: 1.5;
     color: var(--gray);
 }
@@ -683,12 +683,12 @@ header .icons #menu-bars {
     display: none;
     position: absolute;
     right: 0;
-    margin-top: 10px;
+    margin-top: 1rem;
     padding: 2rem 1rem;
     background-color: #1b1b1b;
-    min-width: 150px;
-    border-radius: 10px;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    min-width: 15rem;
+    border-radius: 1rem;
+    box-shadow: 0rem 0.8rem 1.6rem rgba(0, 0, 0, 0.2);
     flex-direction: column;
     overflow: hidden;
     gap: 1rem;
@@ -701,8 +701,8 @@ header .icons #menu-bars {
     color: white;
     font-size: 1.6rem;
     cursor: pointer;
-    padding: 8px 12px;
-    border-radius: 4px;
+    padding: 0.8rem 1.2rem;
+    border-radius: 0.4rem;
     transition: background-color 0.3s ease;
     width: auto;
     margin: 0 auto;
@@ -724,13 +724,13 @@ header .icons #menu-bars {
     align-self: flex-start;
     font-size: 1.4rem;
     padding: 0.8rem 2rem;
-    margin-top: 2px;
+    margin-top: 2rem;
 }
 
 
 
 /* Responsive Layout */
-@media(max-width: 991px) {
+@media(max-width: 99.1rem) {
     html {
         font-size: 55%;
     }
@@ -740,7 +740,7 @@ header .icons #menu-bars {
     }
 }
 
-@media(max-width: 768px) {
+@media(max-width: 76.8rem) {
     main {
         flex-direction: column;
     }
@@ -757,7 +757,7 @@ header .icons #menu-bars {
     font-size: 1.4rem;
 }
 
-@media(max-width: 468px) {
+@media(max-width: 46.8rem) {
     html {
         font-size: 50%;
     }
@@ -769,10 +769,10 @@ header .icons #menu-bars {
     font-weight: bolder;
     font-size: 1.6rem;
     /* match your desired size */
-    border: 1px solid #fff;
+    border: 0.1rem solid #fff;
     outline: none;
     padding: 1rem;
     width: 100%;
-    min-height: 80px;
+    min-height: 8rem;
     resize: vertical;
 }

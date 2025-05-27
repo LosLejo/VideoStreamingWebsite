@@ -40,7 +40,7 @@ while ($genre = $genresResult->fetch_assoc()) {
 
 // If no anime found at all, show a helpful message
 if ($totalAnimeFound === 0) {
-    echo "<div style='text-align: center; padding: 50px;'>";
+    echo "<div style='text-align: center; padding: 50rem;'>";
     echo "<h2>No anime found!</h2>";
     echo "<p>It looks like your anime aren't properly linked to genres yet.</p>";
     echo "<p><a href='populate_anime_genres.php'>Click here to populate anime-genre relationships</a></p>";
@@ -82,14 +82,14 @@ if ($totalAnimeFound === 0) {
 
         /* Genre section styles */
         .genre-section {
-            margin: 40px 20px;
+            margin: 4rem 2rem;
             background: transparent !important;
         }
 
         /* Genre section heading - make genre name yellow */
         .heading {
-            font-size: 28px;
-            margin-bottom: 20px;
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
             font-weight: bold;
             text-transform: capitalize;
             color: yellow !important;
@@ -97,17 +97,17 @@ if ($totalAnimeFound === 0) {
         }
 
         .heading span {
-            font-size: 16px !important;
+            font-size: 1.6rem !important;
             color: #b3b3b3 !important;
             font-weight: normal;
-            margin-left: 8px;
+            margin-left: 0.8rem;
         }
 
         hr {
             border: none;
-            height: 1px;
+            height: 1rem;
             background-color: #333333;
-            margin-bottom: 20px;
+            margin-bottom: 2rem;
         }
 
         /* Swiper wrapper: center if only 1 card */
@@ -133,30 +133,30 @@ if ($totalAnimeFound === 0) {
             flex-direction: column;
             align-items: center;
             width: auto !important;
-            margin-right: 20px;
+            margin-right: 2rem;
             background: transparent !important;
         }
 
 
         /* Anime card styles */
         .box {
-            width: 200px;
-            height: 300px;
+            width: 20rem;
+            height: 30rem;
             background-size: cover !important;
             background-position: center !important;
             background-repeat: no-repeat !important;
-            border-radius: 10px;
+            border-radius: 1rem;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
-            margin-bottom: 0px;
+            margin-bottom: 0rem;
         }
 
         .box:hover {
             transform: scale(1.05);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.5);
         }
 
         .box::before {
@@ -178,24 +178,24 @@ if ($totalAnimeFound === 0) {
             height: 100%;
             background: linear-gradient(135deg, #333333, #555555);
             color: #cccccc;
-            font-size: 14px;
+            font-size: 1.4rem;
             text-align: center;
-            border-radius: 10px;
+            border-radius: 1rem;
         }
 
         .content {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 15px 0;
-            max-width: 200px;
+            padding: 1.5rem 0;
+            max-width: 20rem;
             background: transparent !important;
             width: 100%;
         }
 
         .content h3 {
-            margin: 10px 0 8px 0;
-            font-size: 16px;
+            margin: 1rem 0 0.8rem 0;
+            font-size: 1.6rem;
             font-weight: bold;
             color: #ffffff !important;
             line-height: 1.3;
@@ -205,23 +205,23 @@ if ($totalAnimeFound === 0) {
         }
 
         .content p {
-            font-size: 13px;
+            font-size: 1.3rem;
             color: #b3b3b3 !important;
-            margin: 8px 0;
+            margin: 0.8rem 0;
             line-height: 1.4;
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            height: 60px;
+            height: 6rem;
         }
 
         .rating {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin: 10px 0;
-            font-size: 12px;
+            margin: 1rem 0;
+            font-size: 1.2rem;
         }
 
         .stars {
@@ -236,10 +236,10 @@ if ($totalAnimeFound === 0) {
         .btn {
             background: yellow !important;
             color: black !important;
-            padding: 10px 20px;
+            padding: 1rem 2rem;
             text-decoration: none;
-            border-radius: 5px;
-            font-size: 13px;
+            border-radius: 0.5rem;
+            font-size: 1.3rem;
             font-weight: bold;
             display: inline-block;
             transition: background-color 0.3s ease;
@@ -257,15 +257,15 @@ if ($totalAnimeFound === 0) {
         .swiper-button-prev {
             color: #ffffff !important;
             background: rgba(0, 0, 0, 0.5);
-            width: 40px;
-            height: 40px;
+            width: 4rem;
+            height: 4rem;
             border-radius: 50%;
-            margin-top: -20px;
+            margin-top: -2rem;
         }
 
         .swiper-button-next::after,
         .swiper-button-prev::after {
-            font-size: 16px;
+            font-size: 1.6rem;
             font-weight: bold;
         }
 
@@ -277,50 +277,50 @@ if ($totalAnimeFound === 0) {
         /* Debug info */
         .debug-info {
             position: fixed;
-            top: 10px;
-            right: 10px;
+            top: 1rem;
+            right: 1rem;
             background: rgba(0, 0, 0, 0.9);
             color: #ffffff;
-            padding: 10px;
-            font-size: 12px;
+            padding: 1rem;
+            font-size: 1.2rem;
             z-index: 9999;
-            border-radius: 5px;
-            border: 1px solid #333;
+            border-radius: 0.5rem;
+            border: 0.1rem solid #333;
         }
 
         /* Responsive design */
-        @media (max-width: 768px) {
+        @media (max-width: 76.8rem) {
             .genre-section {
-                margin: 20px 10px;
+                margin: 2rem 1rem;
             }
 
             .heading {
-                font-size: 24px;
+                font-size: 2.4rem;
                 color: yellow;
             }
 
             .box {
-                width: 160px;
-                height: 240px;
+                width: 16rem;
+                height: 24rem;
             }
 
             .content {
-                max-width: 160px;
+                max-width: 16rem;
             }
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 48.0rem) {
             .box {
-                width: 140px;
-                height: 210px;
+                width: 14rem;
+                height: 21rem;
             }
 
             .content {
-                max-width: 140px;
+                max-width: 14rem;
             }
 
             .heading {
-                font-size: 20px;
+                font-size: 2rem;
                 color: yellow;
             }
         }
@@ -347,7 +347,7 @@ if ($totalAnimeFound === 0) {
                                     <?php endif; ?>>
                                     <?php if (empty($anime['thumbnail'])): ?>
                                         <div class="no-image-placeholder">
-                                            <i class="fas fa-image" style="font-size: 24px; margin-bottom: 8px;"></i><br>
+                                            <i class="fas fa-image" style="font-size: 2.4rem; margin-bottom: 0.8rem;"></i><br>
                                             No Image Available
                                         </div>
                                     <?php endif; ?>

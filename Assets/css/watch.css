@@ -133,7 +133,7 @@ main {
 }
 
 .breadcrumbs {
-    margin-bottom: 10rem;
+    margin-bottom: 1rem;
     font-size: 0.9em;
     color: #bbb;
 }
@@ -151,7 +151,7 @@ main {
 }
 
 .video-placeholder {
-    font-size: 48rem;
+    font-size: 4.8rem;
     color: #ccc;
 }
 
@@ -182,8 +182,8 @@ main {
     flex: 1 1 45%;
     background-color: #181818;
     padding: 1rem;
-    border-radius: 10rem;
-    min-width: 300rem;
+    border-radius: 1rem;
+    min-width: 30rem;
 }
 
 .servers button {
@@ -464,7 +464,7 @@ main {
 
 /* Responsive Layouts */
 
-@media (max-width: 991rem) {
+@media (max-width: 99.1rem) {
     html {
         font-size: 55%;
     }
@@ -479,7 +479,7 @@ main {
     }
 
     main {
-        gap: 5rem;
+        gap: 0.5rem;
     }
 
     .video-section {
@@ -493,7 +493,7 @@ main {
     }
 }
 
-@media (max-width: 768rem) {
+@media (max-width: 76.8rem) {
     html {
         font-size: 50%;
     }
@@ -515,7 +515,7 @@ main {
         max-width: 100%;
     }
 
-    .container {
+    .containers {
         flex-direction: column;
         margin: 8rem auto 0;
         gap: 2rem;
@@ -532,12 +532,12 @@ main {
     }
 
     .server-episode-wrapper .bg {
-        flex: 1 1 45%;
+        flex: 1 1 100%;
         background-color: #181818;
         padding: 1rem;
         border-radius: 1rem;
         /* Changed from 10px */
-        min-width: 30rem;
+        min-width: auto;
         /* Changed from 300px */
     }
 
@@ -572,7 +572,7 @@ main {
     }
 }
 
-@media (max-width: 468rem) {
+@media (max-width: 46.8rem) {
     html {
         font-size: 45%;
     }
@@ -642,7 +642,7 @@ i.fa-twitter {
 }
 
 .footer .container {
-    margin-left: 5rem;
+    margin-left: 0.5rem;
     padding: 0;
 }
 

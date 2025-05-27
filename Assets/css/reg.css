@@ -69,26 +69,26 @@ form .logo i {
     align-items: center;
     justify-content: center;
     padding: 0;
-    font-size: 14px;
+    font-size: 1.4rem;
 }
 
 .form {
     background: #0000007c;
     padding: 2rem;
-    border-radius: 10px;
-    max-width: 400px;
+    border-radius: 1rem;
+    max-width: 40rem;
     width: 100%;
 }
 
 .form label .icon {
     position: absolute;
     top: 50%;
-    right: 10px;
+    right: 1rem;
     transform: translateY(-50%);
     color: var(--black);
     cursor: pointer;
-    width: 20px;
-    height: 20px;
+    width: 2rem;
+    height: 2rem;
     align-items: center;
     justify-content: center;
     z-index: 9;
@@ -101,16 +101,16 @@ form .logo i {
 
 .form label input {
     width: 100%;
-    padding: 10px 10px 20px 10px;
+    padding: 1rem 1rem 2rem 1rem;
     outline: none;
     border: none;
-    border-radius: 5px;
+    border-radius: 5rem;
 }
 
 .form label input+span {
     position: absolute;
-    left: 10px;
-    top: 10px;
+    left: 1rem;
+    top: 1rem;
     color: #fff;
     font-size: 1.5rem;
     cursor: text;
@@ -119,20 +119,20 @@ form .logo i {
 }
 
 .form label input:placeholder-shown+span {
-    top: 15px;
+    top: 1.5rem;
     font-size: 0.9em;
 }
 
 .form label input:focus+span,
 .form label input:valid+span {
-    top: 30px;
+    top: 3rem;
     font-size: 0.7em;
     font-weight: 600;
 }
 
 .form label input:focus+span,
 .form label input:valid+span {
-    top: 20px;
+    top: 2rem;
     font-size: 0.7em;
     font-weight: 600;
 }
@@ -172,7 +172,7 @@ form .logo i {
 
 .title {
     bottom: 25%;
-    font-size: 25px;
+    font-size: 2.5rem;
     color: var(--yellow);
     text-align: center;
     margin-top: 1rem;
@@ -194,7 +194,7 @@ form .logo i {
 .form-group input {
     width: 100%;
     padding: 1rem;
-    border-radius: 5px;
+    border-radius: 0.5rem;
     background: #222;
     color: #fff;
 }
@@ -208,7 +208,7 @@ form .logo i {
 
 .icon {
     position: absolute;
-    right: 10px;
+    right: 1rem;
     top: 50%;
     transform: translateY(-50%);
     color: #ccc;
@@ -222,7 +222,7 @@ form .logo i {
     color: var(--black);
     font-size: 1.6rem;
     font-weight: bolder;
-    border-radius: 5px;
+    border-radius: 0.5rem;
     margin-top: 1rem;
     cursor: pointer;
 }
@@ -258,12 +258,12 @@ form .logo i {
     display: none;
     position: absolute;
     right: 0;
-    margin-top: 10px;
+    margin-top: 1rem;
     padding: 2rem 1rem;
     background-color: #1b1b1b;
-    min-width: 150px;
-    border-radius: 10px;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    min-width: 15rem;
+    border-radius: 1rem;
+    box-shadow: 0rem 0.8rem 1.6rem rgba(0, 0, 0, 0.2);
     flex-direction: column;
     overflow: hidden;
     gap: 1rem;
@@ -276,8 +276,8 @@ form .logo i {
     color: white;
     font-size: 1.6rem;
     cursor: pointer;
-    padding: 8px 12px;
-    border-radius: 4px;
+    padding: 0.8rem 1.2rem;
+    border-radius: 0.4rem;
     transition: background-color 0.3s ease;
     width: auto;
     margin: 0 auto;
@@ -293,7 +293,7 @@ form .logo i {
     display: flex;
 }
 
-@media(max-width: 991px) {
+@media(max-width: 99.1rem) {
     html {
         font-size: 55%;
     }
@@ -303,7 +303,7 @@ form .logo i {
     }
 }
 
-@media(max-width: 991px) {
+@media(max-width: 99.1rem) {
     html {
         font-size: 55%;
     }
@@ -313,13 +313,13 @@ form .logo i {
     }
 }
 
-@media(max-width: 768px) {
+@media(max-width: 76.8rem) {
     main {
         flex-direction: column;
     }
 }
 
-@media(max-width: 468px) {
+@media(max-width: 46.8rem) {
     html {
         font-size: 50%;
     }

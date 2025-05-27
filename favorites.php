@@ -62,7 +62,7 @@ $mysqli->close();
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 12rem;
       margin: 4rem auto 2rem auto;
       padding: 0 2rem;
     }
@@ -73,12 +73,12 @@ $mysqli->close();
       font-weight: bold;
       margin-bottom: 1.5rem;
       text-align: left;
-      letter-spacing: 1px;
+      letter-spacing: 0.1rem;
     }
 
     .watchlist-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(23.5rem, 1fr));
       gap: 2rem;
       margin-top: 2rem;
     }
@@ -87,7 +87,7 @@ $mysqli->close();
       background: #181818;
       border-radius: 1.2rem;
       overflow: hidden;
-      box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.25);
+      box-shadow: 0 4rem 20rem 0 rgba(0, 0, 0, 0.25);
       display: flex;
       flex-direction: column;
       transition: transform 0.22s, box-shadow 0.22s;
@@ -95,14 +95,14 @@ $mysqli->close();
     }
 
     .watchlist-card:hover {
-      transform: translateY(-8px) scale(1.03);
-      box-shadow: 0 8px 34px 0 rgba(255, 255, 0, 0.12), 0 8px 30px rgba(0, 0, 0, 0.4);
+      transform: translateY(-0.8rem) scale(1.03);
+      box-shadow: 0 0.8rem 3.4rem 0 rgba(255, 255, 0, 0.12), 0 8rem 30rem rgba(0, 0, 0, 0.4);
       z-index: 2;
     }
 
     .watchlist-thumb {
       width: 100%;
-      height: 320px;
+      height: 32rem;
       object-fit: cover;
       background: linear-gradient(135deg, #333, #444 80%);
       border-top-left-radius: 1.2rem;
@@ -136,7 +136,7 @@ $mysqli->close();
     .watchlist-status {
       color: yellow;
       font-weight: bold;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.5rem;
       font-size: 1.06rem;
     }
 
@@ -182,7 +182,7 @@ $mysqli->close();
       transition: background 0.22s;
       cursor: pointer;
       text-decoration: none;
-      letter-spacing: 0.8px;
+      letter-spacing: 0.8rem;
     }
 
     .watchlist-card .btn:hover {
@@ -202,8 +202,8 @@ $mysqli->close();
       text-align: center;
       background: rgba(24, 24, 24, 0.98);
       border-radius: 1rem;
-      max-width: 420px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.22);
+      max-width: 42rem;
+      box-shadow: 0 2rem 10rem rgba(0, 0, 0, 0.22);
     }
 
     .empty-watchlist i {
@@ -223,7 +223,7 @@ $mysqli->close();
     }
 
     /* Responsive */
-    @media (max-width: 800px) {
+    @media (max-width: 80rem) {
       .container {
         padding: 0 0.7rem;
       }
@@ -233,13 +233,13 @@ $mysqli->close();
       }
 
       .watchlist-thumb {
-        height: 220px;
+        height: 22rem;
       }
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 48rem) {
       .watchlist-thumb {
-        height: 165px;
+        height: 165rem;
       }
 
       .container {

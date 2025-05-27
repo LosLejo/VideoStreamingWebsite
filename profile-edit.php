@@ -99,13 +99,13 @@ if (!empty($user['birthdate'])) {
 
         .profile-bio-area {
             width: 100%;
-            min-height: 80px;
-            max-height: 180px;
+            min-height: 8rem;
+            max-height: 18rem;
             resize: vertical;
             padding: 1rem;
             font-size: 1.5rem;
             border-radius: 0.4rem;
-            border: 1px solid #ccc;
+            border: 0.1rem solid #ccc;
             background: rgba(30, 30, 30, 0.84);
             color: #fff;
             transition: box-shadow 0.2s;
@@ -113,7 +113,7 @@ if (!empty($user['birthdate'])) {
 
         .profile-bio-area:focus {
             outline: none;
-            box-shadow: 0 0 0 2px var(--yellow);
+            box-shadow: 0 0 0 2rem var(--yellow);
         }
 
         .birthdate-selects {
@@ -125,7 +125,7 @@ if (!empty($user['birthdate'])) {
         .birthdate-selects select {
             padding: 0.5rem 1rem;
             border-radius: 0.4rem;
-            border: 1px solid #ccc;
+            border: 0.1rem solid #ccc;
             font-size: 1.5rem;
             background: rgba(255, 255, 255, 0.1);
             color: yellow;
@@ -134,7 +134,7 @@ if (!empty($user['birthdate'])) {
 
         .birthdate-selects select:focus {
             outline: none;
-            box-shadow: 0 0 0 2px var(--yellow);
+            box-shadow: 0 0 0 2rem var(--yellow);
         }
 
         .profile-field label {
@@ -147,7 +147,7 @@ if (!empty($user['birthdate'])) {
             padding: 0.75rem 1rem;
             font-size: 1.5rem;
             border-radius: 0.4rem;
-            border: 1px solid #ccc;
+            border: 0.1rem solid #ccc;
             background: rgba(30, 30, 30, 0.84);
             color: #fff;
             background-color: rgba(22, 22, 22, 0.88);
@@ -156,7 +156,7 @@ if (!empty($user['birthdate'])) {
 
         .profile-username-input:focus {
             outline: none;
-            box-shadow: 0 0 0 2px var(--yellow);
+            box-shadow: 0 0 0 2rem var(--yellow);
         }
 
         .error-message {
@@ -193,7 +193,7 @@ if (!empty($user['birthdate'])) {
                     <input type="text" id="user_name" name="user_name" required
                         value="<?= htmlspecialchars($user['user_name']) ?>" class="profile-username-input"
                         maxlength="20" />
-                    <div style="font-size: 1.5rem; color: #ccc; margin-top: 5px;">Max 20 characters.</div>
+                    <div style="font-size: 1.5rem; color: #ccc; margin-top: 05rem;">Max 20 characters.</div>
                 </div>
 
                 <div class="profile-field">
@@ -205,7 +205,7 @@ if (!empty($user['birthdate'])) {
                     <label for="bio">Bio</label>
                     <textarea name="bio" id="bio" class="profile-bio-area" maxlength="255"
                         placeholder="Write something about yourself..."><?= htmlspecialchars($user['bio'] ?? '') ?></textarea>
-                    <div style="font-size: 1.5rem; color: #ccc; margin-top: 5px;">Max 255 characters.</div>
+                    <div style="font-size: 1.5rem; color: #ccc; margin-top: 5rem;">Max 255 characters.</div>
                 </div>
 
                 <div class="profile-field">

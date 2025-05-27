@@ -26,7 +26,7 @@
 }
 
 hr {
-    height: 2px;
+    height: 0.2rem;
     background-color: var(--yellow);
     border: none;
 }
@@ -35,18 +35,18 @@ hr {
     position: relative;
     background-color: #111;
     color: #eee;
-    padding: 10px 5px 5px;
-    font-size: 14px;
+    padding: 1rem 0.5rem 0.5rem;
+    font-size: 1.4rem;
     overflow: visible;
 
 }
 
 .footer-logo {
     position: absolute;
-    top: -85px;
+    top: -8.5rem;
     left: 93%;
     transform: translateX(-50%);
-    max-width: 200px;
+    max-width: 20rem;
     height: auto;
 }
 
@@ -54,25 +54,25 @@ i.fa-facebook,
 i.fa-instagram,
 i.fa-twitter {
     background-color: var(--yellow);
-    border-radius: 5px;
+    border-radius: 0.5rem;
     color: var(--black);
-    width: 40px;
-    height: 40px;
+    width: 4rem;
+    height: 4rem;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
-    margin: 5px;
+    font-size: 20rem;
+    margin: 0.5rem;
 }
 
 .footer .container {
 
-    margin-left: 5rem;
+    margin-left: 0.5rem;
     padding: 0;
 }
 
 .footer p {
-    margin: 5px 0;
+    margin: 0.5rem 0;
     line-height: 1.5;
     color: var(--gray);
 }
@@ -106,16 +106,16 @@ body {
 .anime .box {
     position: relative;
     justify-content: flex-start;
-    width: 235px;
-    height: 350px;
-    margin-right: 20rem;
+    width: 23.5rem;
+    height: 35rem;
+    margin-right: 2rem;
 
 }
 
 .anime h3 {
     margin-top: 1rem;
     color: #fff;
-    font-size: 25px;
+    font-size: 2.5rem;
 }
 
 .anime p {
@@ -193,8 +193,8 @@ header .icons #menu-bars {
 }
 
 .anime .swiper-slide {
-    padding-top: 15rem;
-    padding-bottom: 15rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
     height: 100%;
     /* full height for each slide */
     display: flex;
@@ -210,7 +210,7 @@ header .icons #menu-bars {
     /* space between Watch button and like-container */
     margin-top: 1rem;
     flex-wrap: wrap;
-    margin-right: 10rem;
+    margin-right: 1rem;
 }
 
 .btn {
@@ -270,7 +270,7 @@ header .icons #menu-bars {
 }
 
 /* Responsive tweaks */
-@media(max-width: 991px) {
+@media(max-width: 99.1rem) {
     html {
         font-size: 55%;
     }
@@ -284,7 +284,7 @@ header .icons #menu-bars {
     }
 }
 
-@media(max-width: 768px) {
+@media(max-width: 76.8rem) {
     html {
         font-size: 50%;
     }
