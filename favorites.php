@@ -54,13 +54,7 @@
             all and consumed by an absurd obsession with bananas, <br>
             her senseless acts have caused even her own mother to lose all hope.</p>
           <a href="#" class="btn">Watch</a>
-          <div class="like-container">
-            <button class="like-btn" aria-label="Like button">
-              <i class="fa-regular fa-heart"></i>
-              <i class="fa-solid fa-heart liked"></i>
-            </button>
-            <span class="like-count">0</span>
-          </div>
+          
         </div>
       </div>
 
