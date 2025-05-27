@@ -67,6 +67,7 @@ $newReleasesResult = $mysqli->query($newReleasesQuery);
         <div class="swiper home-slider">
             <div class="swiper-wrapper">
                 <?php while ($anime = $homeSliderResult->fetch_assoc()): ?>
+
                     <div class="swiper-slide">
                         <div class="box"
                             style="background: url('<?php echo htmlspecialchars($anime['thumbnail']); ?>') no-repeat center/cover;">
@@ -77,6 +78,8 @@ $newReleasesResult = $mysqli->query($newReleasesQuery);
                             </div>
                         </div>
                     </div>
+
+
                 <?php endwhile; ?>
             </div>
         </div>
