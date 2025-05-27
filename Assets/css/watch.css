@@ -139,7 +139,7 @@ main {
 .video-player {
     background-color: #000;
     aspect-ratio: 16 / 9;
-    width: 60vw;
+    width: 100%;
     max-width: 1400px;
     height: auto;
     display: flex;
