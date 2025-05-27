@@ -66,58 +66,49 @@ $all_episodes_result = $all_episodes_stmt->get_result();
                 </div>
 
                 <div id="videoWrapper">
-
                     <div class="video-player">
+                        <?php
+                        $video_url = $current_episode['video_url'];
+                        $is_youtube = (strpos($video_url, 'youtube.com/embed/') !== false);
+                        ?>
+                        <?php if ($is_youtube): ?>
+                            <iframe width="100%" height="500" src="<?php echo htmlspecialchars($video_url); ?>"
+                                frameborder="0" allowfullscreen></iframe>
+                        <?php else: ?>
+                            <video controls width="100%" height="auto">
+                                <source src="<?php echo htmlspecialchars($video_url); ?>" type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </video>
+                        <?php endif; ?>
+                    </div>
 
-                        <div id="videoWrapper">
-                            <div class="video-player">
-                                <?php
-                                $video_url = $current_episode['video_url'];
-                                $is_youtube = (strpos($video_url, 'youtube.com/embed/') !== false);
-                                ?>
-                                <?php if ($is_youtube): ?>
-                                    <iframe width="100%" height="500" src="<?php echo htmlspecialchars($video_url); ?>"
-                                        frameborder="0" allowfullscreen></iframe>
-                                <?php else: ?>
-                                    <video controls width="100%" height="auto">
-                                        <source src="<?php echo htmlspecialchars($video_url); ?>" type="video/mp4" />
-                                        Your browser does not support the video tag.
-                                    </video>
-                                <?php endif; ?>
-                            </div>
+                    <div class="video-controls">
+                        <?php if ($episode_number < $anime['total_episodes']): ?>
+                            <a
+                                href="watch.php?series_id=<?php echo $series_id; ?>&episode=<?php echo $episode_number + 1; ?>">
+                                <button>Next Episode <i class="fa-solid fa-forward"></i></button>
+                            </a>
+                        <?php endif; ?>
+                        <button onclick="toggleExpand()">Expand <i class="fa-solid fa-expand"></i></button>
+                    </div>
 
-                            <div class="video-controls">
-                                <?php if ($episode_number < $anime['total_episodes']): ?>
+                    <div class="server-episode-wrapper">
+                        <div class="bg">
+                            <div class="bg-header">Episodes</div>
+                            <div class="episodes">
+                                <?php while ($episode = $all_episodes_result->fetch_assoc()): ?>
+                                    <?php $activeClass = ($episode['episode_number'] == $episode_number) ? 'class="active"' : ''; ?>
                                     <a
-                                        href="watch.php?series_id=<?php echo $series_id; ?>&episode=<?php echo $episode_number + 1; ?>">
-                                        <button>Next Episode <i class="fa-solid fa-forward"></i></button>
+                                        href="watch.php?series_id=<?php echo $series_id; ?>&episode=<?php echo $episode['episode_number']; ?>">
+                                        <button <?php echo $activeClass; ?>>
+                                            <?php echo $episode['episode_number']; ?>
+                                        </button>
                                     </a>
-                                <?php endif; ?>
-                                <button onclick="toggleExpand()">Expand <i class="fa-solid fa-expand"></i></button>
+                                <?php endwhile; ?>
                             </div>
-
-                            <div class="server-episode-wrapper">
-                                <div class="bg">
-                                    <div class="bg-header">Episodes</div>
-                                    <div class="episodes">
-                                        <?php while ($episode = $all_episodes_result->fetch_assoc()): ?>
-                                            <?php
-                                            $activeClass = ($episode['episode_number'] == $episode_number) ? 'class="active"' : '';
-                                            ?>
-                                            <a
-                                                href="watch.php?series_id=<?php echo $series_id; ?>&episode=<?php echo $episode['episode_number']; ?>">
-                                                <button <?php echo $activeClass; ?>>
-                                                    <?php echo $episode['episode_number']; ?>
-                                                </button>
-                                            </a>
-                                        <?php endwhile; ?>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
-
-
+                    </div>
+                </div>
             </section>
 
             <aside class="episode-sidebar block_area">

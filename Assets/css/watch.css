@@ -121,14 +121,13 @@ a.btn {
 main {
     display: flex;
     padding: 2rem;
-    /* Changed from 20px */
-    gap: 2rem;
-    /* Changed from 10rem to 2rem (20px equivalent) */
+    gap: 3rem;
+    margin-top: 8rem;
 }
 
 .video-section {
-    flex: 0 0 70%;
-    max-width: 70%;
+    flex: 0 0 65%;
+    max-width: 65%;
     min-width: 0;
 }
 
@@ -285,11 +284,11 @@ main {
 .containers {
     display: flex;
     flex-wrap: nowrap;
-    gap: 4rem;
-    /* Changed from 40px */
+    gap: 2rem;
+    /* Changed from 4rem - reduces space between sections */
     max-width: 140rem;
-    /* Changed from 1400px */
-    margin: 10rem auto 0;
+    margin: 8rem auto 0;
+    /* Changed from 10rem */
     padding: 1rem;
     justify-content: center;
     align-items: flex-start;
@@ -297,13 +296,12 @@ main {
 }
 
 .episode-sidebar {
-    flex: 0 0 32rem;
-    /* Changed from 320px */
+    flex: 0 0 30%;
+    /* Changed from 32rem to percentage */
+    max-width: 30%;
     background: #1b1b1b;
     border-radius: 1rem;
-    /* Changed from 10px */
     padding: 1.5rem;
-    /* Changed from 15px */
     color: #fff;
 }
 
