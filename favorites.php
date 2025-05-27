@@ -303,8 +303,9 @@ $mysqli->close();
   </div>
   </section>
 
-  <?php include 'Assets/HTML/footer.html' ?>
+
   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       document.querySelectorAll('.remove-watchlist-btn').forEach(function(btn) {
@@ -340,5 +341,6 @@ $mysqli->close();
     });
   </script>
 </body>
+<?php include 'Assets/HTML/footer.html' ?>
 
 </html>

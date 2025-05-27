@@ -48,6 +48,8 @@ if ($totalAnimeFound === 0) {
     exit;
 }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
