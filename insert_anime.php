@@ -72,9 +72,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['populate_genres'])) 
             }
             $episodeStmt->close();
         }
-        $message = "<div style='background:#e8f5e8;padding:10px;border-radius:5px;'>✅ Anime and episodes inserted successfully!</div>";
+        $message = "<div style='background:#e8f5e8;padding:10rem;border-radius:5rem;'>✅ Anime and episodes inserted successfully!</div>";
     } else {
-        $message = "<div style='background:#ffdddd;padding:10px;border-radius:5px;'>❌ Insert failed or anime already exists.</div>";
+        $message = "<div style='background:#ffdddd;padding:10rem;border-radius:5rem;'>❌ Insert failed or anime already exists.</div>";
     }
 }
 ?>
@@ -85,170 +85,170 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['populate_genres'])) 
     <meta charset="UTF-8">
     <title>Insert Anime - Admin</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: #f8f9fa;
-            padding: 0 0 40px 0;
-        }
+    body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: #f8f9fa;
+        padding: 0 0 40rem 0;
+    }
 
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 12px #0002;
-        }
+    .container {
+        max-width: 800rem;
+        margin: 40rem auto;
+        background: #fff;
+        padding: 30rem;
+        border-radius: 10rem;
+        box-shadow: 0 2rem 12rem #0002;
+    }
 
-        h2 {
-            margin-top: 0;
-            color: #007cba;
-        }
+    h2 {
+        margin-top: 0;
+        color: #007cba;
+    }
 
-        label {
-            font-weight: 500;
-            display: block;
-            margin: 12px 0 4px;
-        }
+    label {
+        font-weight: 500;
+        display: block;
+        margin: 12rem 0 4rem;
+    }
 
-        input[type="text"],
-        input[type="number"],
-        input[type="date"],
-        textarea {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    textarea {
+        width: 100%;
+        padding: 8rem;
+        border: 1rem solid #ccc;
+        border-radius: 4rem;
+    }
 
-        textarea {
-            min-height: 60px;
-        }
+    textarea {
+        min-height: 60rem;
+    }
 
-        .row {
-            display: flex;
-            gap: 16px;
-        }
+    .row {
+        display: flex;
+        gap: 16rem;
+    }
 
-        .row>div {
-            flex: 1;
-        }
+    .row>div {
+        flex: 1;
+    }
 
-        .episodes {
-            margin: 18px 0;
-        }
+    .episodes {
+        margin: 18rem 0;
+    }
 
-        .ep-row {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 7px;
-        }
+    .ep-row {
+        display: flex;
+        gap: 10rem;
+        margin-bottom: 7rem;
+    }
 
-        .ep-row input {
-            flex: 2;
-        }
+    .ep-row input {
+        flex: 2;
+    }
 
-        .ep-row input[type="text"]:last-child {
-            flex: 3;
-        }
+    .ep-row input[type="text"]:last-child {
+        flex: 3;
+    }
 
-        .ep-row button {
-            background: #e33;
-            color: #fff;
-            border: none;
-            border-radius: 3px;
-            padding: 0 8px;
-            cursor: pointer;
-        }
+    .ep-row button {
+        background: #e33;
+        color: #fff;
+        border: none;
+        border-radius: 3rem;
+        padding: 0 8rem;
+        cursor: pointer;
+    }
 
-        .ep-row button:hover {
-            background: #c00;
-        }
+    .ep-row button:hover {
+        background: #c00;
+    }
 
-        #add-ep-btn {
-            margin: 10px 0;
-            background: #007cba;
-            color: #fff;
-            border: none;
-            padding: 6px 20px;
-            border-radius: 5px;
-            font-size: 1em;
-            cursor: pointer;
-        }
+    #add-ep-btn {
+        margin: 10rem 0;
+        background: #007cba;
+        color: #fff;
+        border: none;
+        padding: 6rem 20rem;
+        border-radius: 5rem;
+        font-size: 1em;
+        cursor: pointer;
+    }
 
-        #add-ep-btn:hover {
-            background: #005a87;
-        }
+    #add-ep-btn:hover {
+        background: #005a87;
+    }
 
-        .checkbox-label {
-            font-weight: 400;
-        }
+    .checkbox-label {
+        font-weight: 400;
+    }
 
-        .checkbox-group {
-            display: flex;
-            gap: 18px;
-            margin: 10px 0;
-        }
+    .checkbox-group {
+        display: flex;
+        gap: 18rem;
+        margin: 10rem 0;
+    }
 
-        .summary-table {
-            margin-top: 40px;
-        }
+    .summary-table {
+        margin-top: 40rem;
+    }
 
-        .summary-table th,
-        .summary-table td {
-            padding: 6px 10px;
-        }
+    .summary-table th,
+    .summary-table td {
+        padding: 6rem 10rem;
+    }
 
-        .summary-table th {
-            background: #f0f0f0;
-        }
+    .summary-table th {
+        background: #f0f0f0;
+    }
 
-        .summary-table td {
-            background: #fbfbfb;
-        }
+    .summary-table td {
+        background: #fbfbfb;
+    }
 
-        .populate-btn {
-            background: #ffc107;
-            color: #333;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 1em;
-            cursor: pointer;
-            margin-bottom: 18px;
-        }
+    .populate-btn {
+        background: #ffc107;
+        color: #333;
+        border: none;
+        padding: 10rem 20rem;
+        border-radius: 5rem;
+        font-size: 1em;
+        cursor: pointer;
+        margin-bottom: 18rem;
+    }
 
-        .populate-btn:hover {
-            background: #ff9800;
-        }
+    .populate-btn:hover {
+        background: #ff9800;
+    }
     </style>
     <script>
-        function addEpisodeRow(title = '', url = '') {
-            const container = document.getElementById('episodes-container');
-            const div = document.createElement('div');
-            div.className = 'ep-row';
-            div.innerHTML = `
+    function addEpisodeRow(title = '', url = '') {
+        const container = document.getElementById('episodes-container');
+        const div = document.createElement('div');
+        div.className = 'ep-row';
+        div.innerHTML = `
             <input type="text" name="ep_title[]" placeholder="Episode Title" value="${title.replace(/"/g, '&quot;')}" required>
             <input type="text" name="ep_url[]" placeholder="Episode Video URL (optional)" value="${url.replace(/"/g, '&quot;')}">
             <button type="button" onclick="this.parentElement.remove()">✖</button>
         `;
-            container.appendChild(div);
-        }
-        window.onload = function() {
-            document.getElementById('add-ep-btn').onclick = function() {
-                addEpisodeRow();
-            };
-            // If page is loaded after error, preserve episode fields
-            <?php if (!empty($_POST['ep_title'])):
+        container.appendChild(div);
+    }
+    window.onload = function() {
+        document.getElementById('add-ep-btn').onclick = function() {
+            addEpisodeRow();
+        };
+        // If page is loaded after error, preserve episode fields
+        <?php if (!empty($_POST['ep_title'])):
                 foreach ($_POST['ep_title'] as $i => $title):
                     $url = $_POST['ep_url'][$i];
             ?>
-                    addEpisodeRow("<?= htmlspecialchars($title) ?>", "<?= htmlspecialchars($url) ?>");
-                <?php endforeach;
+        addEpisodeRow("<?= htmlspecialchars($title) ?>", "<?= htmlspecialchars($url) ?>");
+        <?php endforeach;
             else: ?>
-                addEpisodeRow();
-            <?php endif; ?>
-        }
+        addEpisodeRow();
+        <?php endif; ?>
+    }
     </script>
 </head>
 
@@ -262,7 +262,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['populate_genres'])) 
             <button type="submit" class="populate-btn">🔄 Populate Genres</button>
         </form>
 
-        <form action="" method="post" autocomplete="off" style="margin-top:16px;">
+        <form action="" method="post" autocomplete="off" style="margin-top:16rem;">
             <label>Title *</label>
             <input type="text" name="title" required value="<?= htmlspecialchars($_POST['title'] ?? '') ?>">
 
@@ -315,7 +315,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['populate_genres'])) 
                 <button type="button" id="add-ep-btn">+ Add Episode</button>
             </div>
             <button type="submit"
-                style="margin-top:18px;background:#007cba;color:#fff;border:none;padding:10px 30px;font-size:1.1em;border-radius:5px;cursor:pointer;">Insert
+                style="margin-top:18rem;background:#007cba;color:#fff;border:none;padding:10rem 30rem;font-size:1.1em;border-radius:5rem;cursor:pointer;">Insert
                 Anime</button>
         </form>
 

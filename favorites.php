@@ -239,7 +239,7 @@ $mysqli->close();
 
     @media (max-width: 48rem) {
       .watchlist-thumb {
-        height: 165rem;
+        height: 16.5rem;
       }
 
       .container {

@@ -193,7 +193,7 @@ if (!empty($user['birthdate'])) {
                     <input type="text" id="user_name" name="user_name" required
                         value="<?= htmlspecialchars($user['user_name']) ?>" class="profile-username-input"
                         maxlength="20" />
-                    <div style="font-size: 1.5rem; color: #ccc; margin-top: 05rem;">Max 20 characters.</div>
+                    <div style="font-size: 1.5rem; color: #ccc; margin-top: 0.5rem;">Max 20 characters.</div>
                 </div>
 
                 <div class="profile-field">

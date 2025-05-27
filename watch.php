@@ -51,113 +51,6 @@ $all_episodes_result = $all_episodes_stmt->get_result();
     <link rel="icon" type="image/svg+xml" href="assets/bolt-solid.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="Assets/css/watch.css">
-
-    <style>
-    /* Theater Mode Styles */
-    .theater-mode {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.95);
-        z-index: 9999;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-    }
-
-    .theater-mode.active {
-        display: flex;
-    }
-
-    .theater-video-container {
-        position: relative;
-        width: 85vw;
-        max-width: 120rem;
-        height: auto;
-        cursor: default;
-    }
-
-    .theater-video-container iframe,
-    .theater-video-container video {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 16 / 9;
-        border-radius: 1rem;
-        box-shadow: 0 2rem 6rem rgba(255, 247, 0, 0.3);
-    }
-
-    .theater-controls {
-        position: absolute;
-        bottom: -6rem;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        gap: 1rem;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-
-    .theater-mode:hover .theater-controls {
-        opacity: 1;
-    }
-
-    .theater-controls button {
-        background: rgba(255, 247, 0, 0.9);
-        color: #000;
-        border: none;
-        padding: 1rem 2rem;
-        border-radius: 0.5rem;
-        font-weight: bold;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .theater-controls button:hover {
-        background: #fff;
-        transform: translateY(-0.2rem);
-    }
-
-    .theater-close-hint {
-        position: absolute;
-        top: 2rem;
-        right: 2rem;
-        color: rgba(255, 255, 255, 0.7);
-        font-size: 1.4rem;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-
-    .theater-mode:hover .theater-close-hint {
-        opacity: 1;
-    }
-
-    /* Hide main content when theater mode is active */
-    body.theater-active {
-        overflow: hidden;
-    }
-
-    body.theater-active header,
-    body.theater-active main,
-    body.theater-active footer {
-        opacity: 0.1;
-        pointer-events: none;
-    }
-
-    /* Add theater mode button */
-    .theater-btn {
-        background: #333 !important;
-        color: var(--yellow) !important;
-        border: 0.2rem solid var(--yellow) !important;
-    }
-
-    .theater-btn:hover {
-        background: var(--yellow) !important;
-        color: #000 !important;
-    }
-    </style>
 </head>
 
 <body>
@@ -167,7 +60,8 @@ $all_episodes_result = $all_episodes_stmt->get_result();
         <div class="theater-video-container" id="theaterVideoContainer">
             <!-- Video will be cloned here -->
         </div>
-        <div class="theater-controls">
+        <!-- Theater controls -->
+        <div class="theater-controls" id="theaterControls">
             <?php if ($episode_number > 1): ?>
             <button onclick="navigateEpisode(<?php echo $episode_number - 1; ?>)">
                 <i class="fa-solid fa-backward"></i> Previous
@@ -276,7 +170,7 @@ $all_episodes_result = $all_episodes_stmt->get_result();
     <script>
     let theaterModeActive = false;
 
-    // Theater Mode Functions
+    // Theater Mode Functions - FIXED VERSION
     function enterTheaterMode() {
         const theaterMode = document.getElementById('theaterMode');
         const theaterContainer = document.getElementById('theaterVideoContainer');
@@ -291,10 +185,6 @@ $all_episodes_result = $all_episodes_stmt->get_result();
         theaterContainer.innerHTML = '';
         theaterContainer.appendChild(videoClone);
 
-        // Add theater controls back
-        const controls = document.querySelector('.theater-controls');
-        theaterContainer.appendChild(controls);
-
         // Show theater mode
         theaterMode.classList.add('active');
         document.body.classList.add('theater-active');
@@ -307,10 +197,13 @@ $all_episodes_result = $all_episodes_stmt->get_result();
                 videoClone.play();
             }
         }
+
+        console.log('Theater mode entered successfully');
     }
 
     function exitTheaterMode() {
         const theaterMode = document.getElementById('theaterMode');
+        const theaterContainer = document.getElementById('theaterVideoContainer');
         const mainVideo = document.getElementById('mainVideo');
         const theaterVideo = document.querySelector('#theaterVideoContainer video, #theaterVideoContainer iframe');
 
@@ -322,19 +215,24 @@ $all_episodes_result = $all_episodes_stmt->get_result();
             }
         }
 
+        // Clear theater container
+        theaterContainer.innerHTML = '';
+
         // Hide theater mode
         theaterMode.classList.remove('active');
         document.body.classList.remove('theater-active');
         theaterModeActive = false;
+
+        console.log('Theater mode exited successfully');
     }
 
     function navigateEpisode(episodeNum) {
         window.location.href = `watch.php?series_id=<?php echo $series_id; ?>&episode=${episodeNum}`;
     }
 
-    // Click to exit theater mode
+    // Click to exit theater mode - IMPROVED VERSION
     document.getElementById('theaterMode').addEventListener('click', function(e) {
-        // Only exit if clicking on the overlay, not the video container
+        // Only exit if clicking on the theater mode overlay itself
         if (e.target === this) {
             exitTheaterMode();
         }
@@ -345,7 +243,12 @@ $all_episodes_result = $all_episodes_stmt->get_result();
         e.stopPropagation();
     });
 
-    // Keyboard shortcuts
+    // Prevent theater controls clicks from closing theater mode
+    document.getElementById('theaterControls').addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+
+    // Keyboard shortcuts - IMPROVED VERSION
     document.addEventListener('keydown', function(e) {
         if (theaterModeActive) {
             if (e.key === 'Escape') {
@@ -353,12 +256,27 @@ $all_episodes_result = $all_episodes_stmt->get_result();
             }
         } else {
             if (e.key === 't' || e.key === 'T') {
+                e.preventDefault(); // Prevent any default behavior
                 enterTheaterMode();
             }
         }
     });
 
-    // Existing expand function
+    // Add click event listener to theater button - ENSURE IT WORKS
+    document.addEventListener('DOMContentLoaded', function() {
+        const theaterBtn = document.querySelector('.theater-btn');
+        if (theaterBtn) {
+            theaterBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (!theaterModeActive) {
+                    enterTheaterMode();
+                }
+            });
+        }
+    });
+
+    // Existing expand function (unchanged)
     function toggleExpand() {
         const videoWrapper = document.getElementById("videoWrapper");
         const episodeSidebar = document.querySelector(".episode-sidebar");

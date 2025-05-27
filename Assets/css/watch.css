@@ -651,3 +651,166 @@ footer .logo {
 footer .logo i {
     color: var(--yellow);
 }
+
+/* Add these theater mode styles at the end of your watch.css file */
+
+/* ===== THEATER MODE STYLES ===== */
+
+/* Theater Mode Overlay */
+.theater-mode {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.theater-mode.active {
+    display: flex;
+}
+
+/* Theater Video Container */
+.theater-video-container {
+    position: relative;
+    width: 85vw;
+    max-width: 120rem;
+    height: auto;
+    cursor: default;
+    z-index: 10001;
+}
+
+.theater-video-container iframe,
+.theater-video-container video {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border-radius: 1rem;
+    box-shadow: 0 2rem 6rem rgba(255, 247, 0, 0.3);
+}
+
+/* Theater Controls */
+.theater-controls {
+    position: absolute;
+    bottom: -6rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 10001;
+}
+
+.theater-mode:hover .theater-controls {
+    opacity: 1;
+}
+
+.theater-controls button {
+    background: rgba(255, 247, 0, 0.9);
+    color: #000;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.theater-controls button:hover {
+    background: #fff;
+    transform: translateY(-0.2rem);
+}
+
+/* Theater Close Hint */
+.theater-close-hint {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.4rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 10001;
+}
+
+.theater-mode:hover .theater-close-hint {
+    opacity: 1;
+}
+
+/* Body modifications when theater mode is active */
+body.theater-active {
+    overflow: hidden;
+}
+
+body.theater-active header,
+body.theater-active main,
+body.theater-active footer {
+    opacity: 0.1;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+/* Theater mode button styling */
+.theater-btn {
+    background: #333 !important;
+    color: var(--yellow) !important;
+    border: 0.2rem solid var(--yellow) !important;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.theater-btn:hover {
+    background: var(--yellow) !important;
+    color: #000 !important;
+    transform: translateY(-0.2rem);
+}
+
+/* Theater mode responsive design */
+@media (max-width: 76.8rem) {
+    .theater-video-container {
+        width: 90vw;
+        max-width: 90vw;
+    }
+
+    .theater-controls {
+        bottom: -5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .theater-controls button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1.4rem;
+    }
+
+    .theater-close-hint {
+        top: 1rem;
+        right: 1rem;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 46.8rem) {
+    .theater-video-container {
+        width: 95vw;
+        max-width: 95vw;
+    }
+
+    .theater-controls {
+        bottom: -4rem;
+        gap: 0.5rem;
+    }
+
+    .theater-controls button {
+        padding: 0.6rem 1rem;
+        font-size: 1.2rem;
+    }
+}
+
+/* ===== END THEATER MODE STYLES ===== */

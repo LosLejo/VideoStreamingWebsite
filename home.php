@@ -40,7 +40,7 @@ $newReleasesResult = $mysqli->query($newReleasesQuery);
         .add-watchlist-btn {
             background: #222 !important;
             color: yellow !important;
-            border: 2px solid yellow;
+            border: 0.2rem solid yellow;
             font-weight: bold;
             transition: background 0.18s, color 0.18s;
         }
