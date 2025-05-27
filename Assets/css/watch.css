@@ -139,7 +139,7 @@ main {
 .video-player {
     background-color: #000;
     aspect-ratio: 16 / 9;
-    width: 100%;
+    width: 60vw;
     max-width: 1400px;
     height: auto;
     display: flex;
@@ -338,6 +338,7 @@ main {
 
 #videoWrapper.expanded {
     position: relative;
+    width: 68vw;
     max-width: 1600px;
     height: auto;
     background: #000;
@@ -347,12 +348,11 @@ main {
     margin: 0 auto;
 }
 
-.expanded .video-player {
+#videoWrapper.expanded .video-player {
     background-color: #000;
     aspect-ratio: 16 / 9;
     width: 100%;
-    max-width: 1400px;
-        height: auto;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
