@@ -86,24 +86,17 @@ var newReleaseSlider = new Swiper('.new-release-slider', {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
+    // Search functionality
     const searchInput = document.getElementById('searchInput');
     const searchIcon = document.getElementById('searchIcon');
-    const userDropdown = document.getElementById('userDropdown');
-    const dropdownContent = document.getElementById('dropdownContent');
-
     let searchTimeout;
-    let dropdownTimeout;
-
-    // Search functionality
     if (searchInput && searchIcon) {
         const searchWrapper = searchInput.parentElement;
-
         searchWrapper.addEventListener('mouseenter', function () {
             clearTimeout(searchTimeout);
             searchWrapper.classList.add('active');
             setTimeout(() => searchInput.focus(), 100);
         });
-
         searchWrapper.addEventListener('mouseleave', function () {
             if (document.activeElement !== searchInput) {
                 searchTimeout = setTimeout(() => {
@@ -111,13 +104,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 }, 200);
             }
         });
-
         searchInput.addEventListener('blur', function () {
             searchTimeout = setTimeout(() => {
                 searchWrapper.classList.remove('active');
             }, 200);
         });
-
         searchIcon.addEventListener('click', function (e) {
             e.preventDefault();
             const query = searchInput.value.trim();
@@ -128,7 +119,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 setTimeout(() => searchInput.focus(), 100);
             }
         });
-
         searchInput.addEventListener('keypress', function (e) {
             if (e.key === 'Enter' && this.value.trim()) {
                 window.location.href = `search.php?q=${encodeURIComponent(this.value.trim())}`;
@@ -136,33 +126,47 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Dropdown functionality
-    if (userDropdown && dropdownContent) {
+    // Dropdown functionality (unified desktop & mobile)
+    const userDropdown = document.getElementById('userDropdown');
+    const userIcon = document.getElementById('userIcon');
+    const dropdownContent = document.getElementById('dropdownContent');
+    let dropdownTimeout;
+
+    if (userDropdown && dropdownContent && userIcon) {
+        // Desktop: hover
         userDropdown.addEventListener('mouseenter', function () {
-            clearTimeout(dropdownTimeout);
-            dropdownContent.style.opacity = '1';
-            dropdownContent.style.visibility = 'visible';
-            dropdownContent.style.transform = 'translateY(0)';
+            if (window.innerWidth > 992) {
+                clearTimeout(dropdownTimeout);
+                dropdownContent.style.display = 'block';
+            }
         });
-
         userDropdown.addEventListener('mouseleave', function () {
-            dropdownTimeout = setTimeout(() => {
-                dropdownContent.style.opacity = '0';
-                dropdownContent.style.visibility = 'hidden';
-                dropdownContent.style.transform = 'translateY(-10px)';
-            }, 300);
+            if (window.innerWidth > 992) {
+                dropdownTimeout = setTimeout(() => {
+                    dropdownContent.style.display = 'none';
+                }, 100);
+            }
         });
 
-        dropdownContent.addEventListener('mouseenter', function () {
-            clearTimeout(dropdownTimeout);
+        // Mobile: click
+        userIcon.addEventListener('click', function (e) {
+            if (window.innerWidth <= 992) {
+                e.preventDefault();
+                e.stopPropagation();
+                dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+            }
         });
 
-        dropdownContent.addEventListener('mouseleave', function () {
-            dropdownTimeout = setTimeout(() => {
-                dropdownContent.style.opacity = '0';
-                dropdownContent.style.visibility = 'hidden';
-                dropdownContent.style.transform = 'translateY(-10px)';
-            }, 300);
+        // Click outside to close on mobile
+        document.addEventListener('click', function (e) {
+            if (window.innerWidth <= 992 && !userDropdown.contains(e.target)) {
+                dropdownContent.style.display = 'none';
+            }
+        });
+
+        // Hide dropdown on resize (prevents stuck open on mode switch)
+        window.addEventListener('resize', function () {
+            dropdownContent.style.display = 'none';
         });
     }
 

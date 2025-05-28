@@ -123,103 +123,163 @@ $userDisplay = $_SESSION['username'] ?? 'Guest';
         font-weight: bold;
     }
 
-    /* ADD MOBILE RESPONSIVE STYLES */
+    /* ADD MISSING DROPDOWN CSS */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 100%;
+        margin-top: 0.5rem;
+        padding: 1rem;
+        background-color: #1b1b1b;
+        min-width: 15rem;
+        border-radius: 1rem;
+        box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        border: 0.1rem solid #333;
+    }
+
+    .dropdown-content button {
+        display: block;
+        width: 100%;
+        text-align: left;
+        color: white;
+        font-size: 1.4rem;
+        cursor: pointer;
+        padding: 0.8rem 1rem;
+        border-radius: 0.5rem;
+        transition: background-color 0.3s ease;
+        background: transparent;
+        margin-bottom: 0.5rem;
+        border: none;
+    }
+
+    .dropdown-content button:hover {
+        background-color: var(--yellow);
+        color: var(--black);
+    }
+
+    .dropdown-content button:last-child {
+        margin-bottom: 0;
+    }
+
+    /* Mobile hamburger menu */
+    #menu-bars {
+        display: none;
+    }
+
+    /* MOBILE RESPONSIVE STYLES - FIXED VERSION */
     @media (max-width: 76.8rem) {
 
-        /* Hide menu bars by default */
+        /* Show hamburger menu on mobile */
         header .icons #menu-bars {
-            display: inline-block;
+            display: inline-block !important;
+            cursor: pointer;
+            font-size: 2.5rem;
+            margin-left: 1rem;
+            background: var(--yellow) !important;
+            color: var(--black) !important;
+            border-radius: 25% !important;
+            height: 4.5rem !important;
+            width: 4.5rem !important;
+            line-height: 4.5rem !important;
+            text-align: center !important;
+            transition: background 0.3s, color 0.3s !important;
         }
 
-        /* Mobile navbar styles */
+        header .icons #menu-bars:hover {
+            background: var(--black) !important;
+            color: var(--yellow) !important;
+        }
+
+        /* Mobile navbar styles - CORRECTED */
         header .navbar {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: var(--black);
-            border-top: .1rem solid rgba(255, 255, 255, .1);
-            border-bottom: .1rem solid rgba(255, 255, 255, .1);
-            padding: 1rem;
-            clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-            transition: clip-path 0.3s ease;
-            z-index: 1000;
+            position: absolute !important;
+            top: 100% !important;
+            left: 0 !important;
+            right: 0 !important;
+            background: var(--black) !important;
+            border-top: .1rem solid rgba(255, 255, 255, .1) !important;
+            border-bottom: .1rem solid rgba(255, 255, 255, .1) !important;
+            padding: 1rem !important;
+            clip-path: polygon(0 0, 100% 0, 100% 0, 0 0) !important;
+            transition: clip-path 0.3s ease !important;
+            z-index: 1000 !important;
+            display: block !important;
+            /* Override any display: none */
         }
 
         header .navbar.active {
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%) !important;
         }
 
         header .navbar a {
-            display: block;
-            padding: 1.5rem;
-            margin: 1rem 0;
-            font-size: 2rem;
-            background: var(--yellow);
-            color: var(--black);
-            border-radius: 0.5rem;
-            text-align: center;
+            display: block !important;
+            padding: 1.5rem !important;
+            margin: 1rem 0 !important;
+            font-size: 2rem !important;
+            background: var(--yellow) !important;
+            color: var(--black) !important;
+            border-radius: 0.5rem !important;
+            text-align: center !important;
         }
 
-        /* Adjust search for mobile */
+        header .navbar a:hover {
+            background: #fff !important;
+            color: var(--black) !important;
+        }
+
+        /* Rest of mobile styles... */
+        .dropdown-content {
+            position: fixed !important;
+            right: 1rem !important;
+            top: 7rem !important;
+            z-index: 2000 !important;
+            min-width: 18rem;
+            max-width: 85vw;
+        }
+
+        .user-info {
+            padding: 0.8rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .user-info:hover,
+        .user-info:active {
+            background-color: rgba(255, 247, 0, 0.1);
+        }
+
         .search-wrapper input {
             width: 15rem;
-            /* Smaller on mobile */
         }
 
-        /* Hide username text on very small screens */
         .username {
             display: none;
         }
     }
 
-    @media (max-width: 76.8rem) {
-        .dropdown-content {
-            left: 0 !important;
-            right: 0 !important;
-            transform: none !important;
-            min-width: 100vw !important;
-            max-width: 100vw !important;
-            border-radius: 0 0 1rem 1rem;
-            margin-top: 1.5rem;
-            z-index: 2000;
-        }
-    }
-
     @media (max-width: 46.8rem) {
-
-        /* Even smaller search on very small screens */
         .search-wrapper input {
             width: 12rem;
         }
 
-        /* Adjust header padding */
         header {
-            padding: 1rem 5%;
-            overflow: visible;
-            /* ensure dropdown can overflow */
+            padding: 1rem 5% !important;
         }
 
-        /* Stack icons better */
         .icons {
-            display: flex;
-            align-items: center;
             gap: 0.5rem;
-            flex-shrink: 0;
-        }
-    }
-
-    @media (max-width: 50rem) {
-        header {
-            padding: 1rem 2vw;
         }
 
-        .icons {
-            gap: 0.2rem;
-        }
-
-        .search-wrapper input {
-            width: 8rem;
+        .dropdown-content {
+            min-width: 20rem !important;
+            right: 0.5rem !important;
         }
     }
 </style>
@@ -228,99 +288,158 @@ $userDisplay = $_SESSION['username'] ?? 'Guest';
     document.addEventListener('DOMContentLoaded', function() {
         const searchInput = document.getElementById('searchInput');
         const searchIcon = document.getElementById('searchIcon');
-        const searchWrapper = searchInput.parentElement;
-
-
+        const searchWrapper = searchInput ? searchInput.parentElement : null;
         const userDropdown = document.getElementById('userDropdown');
-        const userIcon = document.getElementById('userIcon');
         const dropdownContent = document.getElementById('dropdownContent');
+        const menuBars = document.getElementById('menu-bars');
+        const navbar = document.querySelector('.navbar');
+
         let dropdownTimeout;
         let searchTimeout;
 
-
-        // Show input on hover
-        searchWrapper.addEventListener('mouseenter', function() {
-            clearTimeout(searchTimeout);
-            searchWrapper.classList.add('active');
-            setTimeout(() => searchInput.focus(), 100);
+        console.log('Elements found:', {
+            menuBars: !!menuBars,
+            navbar: !!navbar,
+            userDropdown: !!userDropdown,
+            dropdownContent: !!dropdownContent
         });
 
-        // Hide input on mouse leave
-        searchWrapper.addEventListener('mouseleave', function() {
-            if (document.activeElement !== searchInput) {
+        // Function to check if we're on mobile
+        function isMobile() {
+            return window.innerWidth <= 768;
+        }
+
+        // Mobile menu toggle functionality - ENHANCED
+        if (menuBars && navbar) {
+            console.log('Setting up hamburger menu...');
+
+            menuBars.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                console.log('Hamburger clicked!', 'Currently active:', navbar.classList.contains('active'));
+
+                navbar.classList.toggle('active');
+
+                // Close dropdown when mobile menu opens
+                if (navbar.classList.contains('active')) {
+                    if (dropdownContent) {
+                        dropdownContent.style.display = 'none';
+                    }
+                }
+
+                console.log('After toggle:', navbar.classList.contains('active'));
+            });
+
+            // Close mobile menu when clicking on a link
+            const navLinks = navbar.querySelectorAll('a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    console.log('Nav link clicked, closing menu');
+                    navbar.classList.remove('active');
+                });
+            });
+        } else {
+            console.error('Menu bars or navbar not found!', {
+                menuBars,
+                navbar
+            });
+        }
+
+        // Search functionality
+        if (searchWrapper && searchInput) {
+            searchWrapper.addEventListener('mouseenter', function() {
+                if (!isMobile()) {
+                    clearTimeout(searchTimeout);
+                    searchWrapper.classList.add('active');
+                    setTimeout(() => searchInput.focus(), 100);
+                }
+            });
+
+            searchWrapper.addEventListener('mouseleave', function() {
+                if (!isMobile() && document.activeElement !== searchInput) {
+                    searchTimeout = setTimeout(() => {
+                        searchWrapper.classList.remove('active');
+                    }, 200);
+                }
+            });
+
+            searchInput.addEventListener('blur', function() {
                 searchTimeout = setTimeout(() => {
                     searchWrapper.classList.remove('active');
                 }, 200);
+            });
+
+            if (searchIcon) {
+                searchIcon.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const query = searchInput.value.trim();
+                    if (query) {
+                        window.location.href = `search.php?q=${encodeURIComponent(query)}`;
+                    } else {
+                        searchWrapper.classList.add('active');
+                        setTimeout(() => searchInput.focus(), 100);
+                    }
+                });
             }
-        });
 
-        // Handle blur (when input loses focus)
-        searchInput.addEventListener('blur', function() {
-            searchTimeout = setTimeout(() => {
-                searchWrapper.classList.remove('active');
-            }, 200);
-        });
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && this.value.trim()) {
+                    window.location.href = `search.php?q=${encodeURIComponent(this.value.trim())}`;
+                }
+            });
+        }
 
-        // Trigger search on click or Enter
-        searchIcon.addEventListener('click', function(e) {
-            e.preventDefault();
-            const query = searchInput.value.trim();
-            if (query) {
-                window.location.href = `search.php?q=${encodeURIComponent(query)}`;
-            } else {
-                searchWrapper.classList.add('active');
-                setTimeout(() => searchInput.focus(), 100);
-            }
-        });
+        // Dropdown functionality
+        if (userDropdown && dropdownContent) {
+            userDropdown.addEventListener('mouseenter', function() {
+                if (!isMobile()) {
+                    clearTimeout(dropdownTimeout);
+                    dropdownContent.style.display = 'block';
+                }
+            });
 
-        searchInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter' && this.value.trim()) {
-                window.location.href = `search.php?q=${encodeURIComponent(this.value.trim())}`;
-            }
-        });
+            userDropdown.addEventListener('mouseleave', function() {
+                if (!isMobile()) {
+                    dropdownTimeout = setTimeout(() => {
+                        dropdownContent.style.display = 'none';
+                    }, 100);
+                }
+            });
 
-        // Dropdown hover with delay
-        userDropdown.addEventListener('mouseenter', function() {
-            clearTimeout(dropdownTimeout);
-            dropdownContent.style.display = 'block';
-        });
-
-        userDropdown.addEventListener('mouseleave', function() {
-            dropdownTimeout = setTimeout(() => {
-                dropdownContent.style.display = 'none';
-            }, 100); // 0.5 second delay
-        });
-
-        // Dropdown logic for mobile (click/tap)
-        userDropdown.addEventListener('click', function(e) {
-            if (window.innerWidth <= 992) {
+            userDropdown.addEventListener('click', function(e) {
+                e.preventDefault();
                 e.stopPropagation();
-                dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' :
-                    'block';
-            }
-        });
-        // Close dropdown if clicking elsewhere on mobile
+
+                if (navbar && navbar.classList.contains('active')) {
+                    navbar.classList.remove('active');
+                }
+
+                const isVisible = dropdownContent.style.display === 'block';
+                dropdownContent.style.display = isVisible ? 'none' : 'block';
+
+                console.log('Dropdown clicked. Mobile:', isMobile(), 'Visible:', !isVisible);
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!userDropdown.contains(e.target)) {
+                    dropdownContent.style.display = 'none';
+                }
+            });
+        }
+
+        // Close mobile menu when clicking outside
         document.addEventListener('click', function(e) {
-            if (window.innerWidth <= 992 && !userDropdown.contains(e.target)) {
-                dropdownContent.style.display = 'none';
+            if (navbar && menuBars && !navbar.contains(e.target) && !menuBars.contains(e.target)) {
+                navbar.classList.remove('active');
             }
         });
 
-        // Mobile: click (icon)
-        userIcon.addEventListener('click', function(e) {
-            if (window.innerWidth <= 992) {
-                e.stopPropagation();
-                dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' :
-                    'block';
-            }
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (dropdownContent) dropdownContent.style.display = 'none';
+            if (navbar) navbar.classList.remove('active');
+            if (searchWrapper) searchWrapper.classList.remove('active');
         });
-
-        // Close dropdown if clicking elsewhere
-        document.addEventListener('click', function(e) {
-            if (window.innerWidth <= 992 && !userDropdown.contains(e.target)) {
-                dropdownContent.style.display = 'none';
-            }
-        });
-
     });
 </script>
