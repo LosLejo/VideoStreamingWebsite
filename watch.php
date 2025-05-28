@@ -63,14 +63,14 @@ $all_episodes_result = $all_episodes_stmt->get_result();
         <!-- Theater controls -->
         <div class="theater-controls" id="theaterControls">
             <?php if ($episode_number > 1): ?>
-            <button onclick="navigateEpisode(<?php echo $episode_number - 1; ?>)">
-                <i class="fa-solid fa-backward"></i> Previous
-            </button>
+                <button onclick="navigateEpisode(<?php echo $episode_number - 1; ?>)">
+                    <i class="fa-solid fa-backward"></i> Previous
+                </button>
             <?php endif; ?>
             <?php if ($episode_number < $anime['total_episodes']): ?>
-            <button onclick="navigateEpisode(<?php echo $episode_number + 1; ?>)">
-                Next <i class="fa-solid fa-forward"></i>
-            </button>
+                <button onclick="navigateEpisode(<?php echo $episode_number + 1; ?>)">
+                    Next <i class="fa-solid fa-forward"></i>
+                </button>
             <?php endif; ?>
             <button onclick="exitTheaterMode()">
                 <i class="fa-solid fa-compress"></i> Exit Theater
@@ -94,21 +94,21 @@ $all_episodes_result = $all_episodes_stmt->get_result();
                     $is_youtube = (strpos($video_url, 'youtube.com/embed/') !== false);
                     ?>
                     <?php if ($is_youtube): ?>
-                    <iframe width="100%" height="500" src="<?php echo htmlspecialchars($video_url); ?>" frameborder="0"
-                        allowfullscreen id="mainVideo"></iframe>
+                        <iframe width="100%" height="500" src="<?php echo htmlspecialchars($video_url); ?>" frameborder="0"
+                            allowfullscreen id="mainVideo"></iframe>
                     <?php else: ?>
-                    <video controls width="100%" height="auto" id="mainVideo">
-                        <source src="<?php echo htmlspecialchars($video_url); ?>" type="video/mp4" />
-                        Your browser does not support the video tag.
-                    </video>
+                        <video controls width="100%" height="auto" id="mainVideo">
+                            <source src="<?php echo htmlspecialchars($video_url); ?>" type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
                     <?php endif; ?>
                 </div>
 
                 <div class="video-controls">
                     <?php if ($episode_number < $anime['total_episodes']): ?>
-                    <a href="watch.php?series_id=<?php echo $series_id; ?>&episode=<?php echo $episode_number + 1; ?>">
-                        <button>Next Episode <i class="fa-solid fa-forward"></i></button>
-                    </a>
+                        <a href="watch.php?series_id=<?php echo $series_id; ?>&episode=<?php echo $episode_number + 1; ?>">
+                            <button>Next Episode <i class="fa-solid fa-forward"></i></button>
+                        </a>
                     <?php endif; ?>
                     <button onclick="toggleExpand()">Expand <i class="fa-solid fa-expand"></i></button>
                     <button class="theater-btn" onclick="enterTheaterMode()">
@@ -121,13 +121,13 @@ $all_episodes_result = $all_episodes_stmt->get_result();
                         <div class="bg-header">Episodes</div>
                         <div class="episodes">
                             <?php while ($episode = $all_episodes_result->fetch_assoc()): ?>
-                            <?php $activeClass = ($episode['episode_number'] == $episode_number) ? 'class="active"' : ''; ?>
-                            <a
-                                href="watch.php?series_id=<?php echo $series_id; ?>&episode=<?php echo $episode['episode_number']; ?>">
-                                <button <?php echo $activeClass; ?>>
-                                    <?php echo $episode['episode_number']; ?>
-                                </button>
-                            </a>
+                                <?php $activeClass = ($episode['episode_number'] == $episode_number) ? 'class="active"' : ''; ?>
+                                <a
+                                    href="watch.php?series_id=<?php echo $series_id; ?>&episode=<?php echo $episode['episode_number']; ?>">
+                                    <button <?php echo $activeClass; ?>>
+                                        <?php echo $episode['episode_number']; ?>
+                                    </button>
+                                </a>
                             <?php endwhile; ?>
                         </div>
                     </div>
@@ -146,175 +146,156 @@ $all_episodes_result = $all_episodes_stmt->get_result();
                 $all_episodes_result->data_seek(0);
                 while ($episode = $all_episodes_result->fetch_assoc()):
                 ?>
-                <a
-                    href="watch.php?series_id=<?php echo $series_id; ?>&episode=<?php echo $episode['episode_number']; ?>">
-                    <div
-                        class="episode-item <?php echo ($episode['episode_number'] == $episode_number) ? 'active' : ''; ?>">
-                        <div class="episode-thumb">
-                            <img src="<?php echo htmlspecialchars($anime['thumbnail']); ?>"
-                                alt="<?php echo htmlspecialchars($anime['title']); ?> Episode <?php echo $episode['episode_number']; ?>">
-                            <div class="episode-overlay">
-                                <span>Episode <?php echo $episode['episode_number']; ?></span>
+                    <a
+                        href="watch.php?series_id=<?php echo $series_id; ?>&episode=<?php echo $episode['episode_number']; ?>">
+                        <div
+                            class="episode-item <?php echo ($episode['episode_number'] == $episode_number) ? 'active' : ''; ?>">
+                            <div class="episode-thumb">
+                                <img src="<?php echo htmlspecialchars($anime['thumbnail']); ?>"
+                                    alt="<?php echo htmlspecialchars($anime['title']); ?> Episode <?php echo $episode['episode_number']; ?>">
+                                <div class="episode-overlay">
+                                    <span>Episode <?php echo $episode['episode_number']; ?></span>
+                                </div>
+                            </div>
+                            <div class="episode-title">
+                                <?php echo htmlspecialchars($episode['episode_title'] ?: $anime['title'] . ' - Episode ' . $episode['episode_number']); ?>
                             </div>
                         </div>
-                        <div class="episode-title">
-                            <?php echo htmlspecialchars($episode['episode_title'] ?: $anime['title'] . ' - Episode ' . $episode['episode_number']); ?>
-                        </div>
-                    </div>
-                </a>
+                    </a>
                 <?php endwhile; ?>
             </div>
         </aside>
     </main>
 
     <script>
-    let theaterModeActive = false;
+        let theaterModeActive = false;
 
-    // Theater Mode Functions - FIXED VERSION
-    function enterTheaterMode() {
-        const theaterMode = document.getElementById('theaterMode');
-        const theaterContainer = document.getElementById('theaterVideoContainer');
-        const mainVideo = document.getElementById('mainVideo');
+        // Theater Mode Functions - FIXED VERSION
+        function enterTheaterMode() {
+            const theaterMode = document.getElementById('theaterMode');
+            const theaterContainer = document.getElementById('theaterVideoContainer');
+            const mainVideo = document.getElementById('mainVideo');
 
-        if (!theaterMode || !theaterContainer || !mainVideo) {
-            console.error('Theater mode elements not found');
-            return;
-        }
+            // Clone the video element
+            const videoClone = mainVideo.cloneNode(true);
+            videoClone.style.width = '100%';
+            videoClone.style.height = 'auto';
 
-        // Clone the video element
-        const videoClone = mainVideo.cloneNode(true);
-        videoClone.style.width = '100%';
-        videoClone.style.height = 'auto';
-        videoClone.style.position = 'relative';
-        videoClone.style.zIndex = '100001';
+            // Clear theater container and add cloned video
+            theaterContainer.innerHTML = '';
+            theaterContainer.appendChild(videoClone);
 
-        // Clear theater container and add cloned video
-        theaterContainer.innerHTML = '';
-        theaterContainer.appendChild(videoClone);
-
-        // Show theater mode with proper timing
-        theaterMode.style.display = 'flex';
-        setTimeout(() => {
+            // Show theater mode
             theaterMode.classList.add('active');
             document.body.classList.add('theater-active');
-        }, 10);
-        
-        theaterModeActive = true;
+            theaterModeActive = true;
 
-        // If it's a video element, sync the time
-        if (mainVideo.tagName === 'VIDEO' && videoClone.tagName === 'VIDEO') {
-            videoClone.currentTime = mainVideo.currentTime;
-            if (!mainVideo.paused) {
-                videoClone.play();
+            // If it's a video element, sync the time
+            if (mainVideo.tagName === 'VIDEO' && videoClone.tagName === 'VIDEO') {
+                videoClone.currentTime = mainVideo.currentTime;
+                if (!mainVideo.paused) {
+                    videoClone.play();
+                }
             }
+
+            console.log('Theater mode entered successfully');
         }
 
-        console.log('Theater mode entered successfully');
-    }
+        function exitTheaterMode() {
+            const theaterMode = document.getElementById('theaterMode');
+            const theaterContainer = document.getElementById('theaterVideoContainer');
+            const mainVideo = document.getElementById('mainVideo');
+            const theaterVideo = document.querySelector('#theaterVideoContainer video, #theaterVideoContainer iframe');
 
-    function exitTheaterMode() {
-        const theaterMode = document.getElementById('theaterMode');
-        const theaterContainer = document.getElementById('theaterVideoContainer');
-        const mainVideo = document.getElementById('mainVideo');
-        const theaterVideo = document.querySelector('#theaterVideoContainer video, #theaterVideoContainer iframe');
-
-        // Sync time back to main video if applicable
-        if (mainVideo && mainVideo.tagName === 'VIDEO' && theaterVideo && theaterVideo.tagName === 'VIDEO') {
-            mainVideo.currentTime = theaterVideo.currentTime;
-            if (!theaterVideo.paused) {
-                mainVideo.play();
+            // Sync time back to main video if applicable
+            if (mainVideo.tagName === 'VIDEO' && theaterVideo && theaterVideo.tagName === 'VIDEO') {
+                mainVideo.currentTime = theaterVideo.currentTime;
+                if (!theaterVideo.paused) {
+                    mainVideo.play();
+                }
             }
-        }
 
-        // Clear theater container
-        if (theaterContainer) {
+            // Clear theater container
             theaterContainer.innerHTML = '';
-        }
 
-        // Hide theater mode
-        if (theaterMode) {
+            // Hide theater mode
             theaterMode.classList.remove('active');
-            setTimeout(() => {
-                theaterMode.style.display = 'none';
-            }, 300);
+            document.body.classList.remove('theater-active');
+            theaterModeActive = false;
+
+            console.log('Theater mode exited successfully');
         }
-        
-        document.body.classList.remove('theater-active');
-        theaterModeActive = false;
 
-        console.log('Theater mode exited successfully');
-    }
-
-    function navigateEpisode(episodeNum) {
-        window.location.href = `watch.php?series_id=<?php echo $series_id; ?>&episode=${episodeNum}`;
-    }
-
-    // Click to exit theater mode - IMPROVED VERSION
-    document.getElementById('theaterMode').addEventListener('click', function(e) {
-        // Only exit if clicking on the theater mode overlay itself
-        if (e.target === this) {
-            exitTheaterMode();
+        function navigateEpisode(episodeNum) {
+            window.location.href = `watch.php?series_id=<?php echo $series_id; ?>&episode=${episodeNum}`;
         }
-    });
 
-    // Prevent video container clicks from closing theater mode
-    document.getElementById('theaterVideoContainer').addEventListener('click', function(e) {
-        e.stopPropagation();
-    });
-
-    // Prevent theater controls clicks from closing theater mode
-    document.getElementById('theaterControls').addEventListener('click', function(e) {
-        e.stopPropagation();
-    });
-
-    // Keyboard shortcuts - IMPROVED VERSION
-    document.addEventListener('keydown', function(e) {
-        if (theaterModeActive) {
-            if (e.key === 'Escape') {
+        // Click to exit theater mode - IMPROVED VERSION
+        document.getElementById('theaterMode').addEventListener('click', function(e) {
+            // Only exit if clicking on the theater mode overlay itself
+            if (e.target === this) {
                 exitTheaterMode();
             }
-        } else {
-            if (e.key === 't' || e.key === 'T') {
-                e.preventDefault(); // Prevent any default behavior
-                enterTheaterMode();
-            }
-        }
-    });
+        });
 
-    // Add click event listener to theater button - ENSURE IT WORKS
-    document.addEventListener('DOMContentLoaded', function() {
-        const theaterBtn = document.querySelector('.theater-btn');
-        if (theaterBtn) {
-            theaterBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                if (!theaterModeActive) {
+        // Prevent video container clicks from closing theater mode
+        document.getElementById('theaterVideoContainer').addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+
+        // Prevent theater controls clicks from closing theater mode
+        document.getElementById('theaterControls').addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+
+        // Keyboard shortcuts - IMPROVED VERSION
+        document.addEventListener('keydown', function(e) {
+            if (theaterModeActive) {
+                if (e.key === 'Escape') {
+                    exitTheaterMode();
+                }
+            } else {
+                if (e.key === 't' || e.key === 'T') {
+                    e.preventDefault(); // Prevent any default behavior
                     enterTheaterMode();
                 }
-            });
+            }
+        });
+
+        // Add click event listener to theater button - ENSURE IT WORKS
+        document.addEventListener('DOMContentLoaded', function() {
+            const theaterBtn = document.querySelector('.theater-btn');
+            if (theaterBtn) {
+                theaterBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (!theaterModeActive) {
+                        enterTheaterMode();
+                    }
+                });
+            }
+        });
+
+        // Existing expand function (unchanged)
+        function toggleExpand() {
+            const videoWrapper = document.getElementById("videoWrapper");
+            const episodeSidebar = document.querySelector(".episode-sidebar");
+            const serverWrapper = document.querySelector(".server-episode-wrapper");
+
+            videoWrapper.classList.toggle("expanded");
+
+            if (videoWrapper.classList.contains("expanded")) {
+                episodeSidebar.style.display = "none";
+                serverWrapper.style.display = "flex";
+                serverWrapper.style.justifyContent = "center";
+                serverWrapper.style.width = "100%";
+            } else {
+                episodeSidebar.style.display = "block";
+                serverWrapper.style.display = "flex";
+                serverWrapper.style.justifyContent = "flex-start";
+                serverWrapper.style.width = "";
+            }
         }
-    });
-
-    // Existing expand function (unchanged)
-    function toggleExpand() {
-        const videoWrapper = document.getElementById("videoWrapper");
-        const episodeSidebar = document.querySelector(".episode-sidebar");
-        const serverWrapper = document.querySelector(".server-episode-wrapper");
-
-        videoWrapper.classList.toggle("expanded");
-
-        if (videoWrapper.classList.contains("expanded")) {
-            episodeSidebar.style.display = "none";
-            serverWrapper.style.display = "flex";
-            serverWrapper.style.justifyContent = "center";
-            serverWrapper.style.width = "100%";
-        } else {
-            episodeSidebar.style.display = "block";
-            serverWrapper.style.display = "flex";
-            serverWrapper.style.justifyContent = "flex-start";
-            serverWrapper.style.width = "";
-        }
-    }
     </script>
 
     <?php include 'Assets/HTML/footer.html' ?>

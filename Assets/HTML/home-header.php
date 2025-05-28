@@ -173,6 +173,19 @@ $userDisplay = $_SESSION['username'] ?? 'Guest';
         }
     }
 
+    @media (max-width: 76.8rem) {
+        .dropdown-content {
+            left: 0 !important;
+            right: 0 !important;
+            transform: none !important;
+            min-width: 100vw !important;
+            max-width: 100vw !important;
+            border-radius: 0 0 1rem 1rem;
+            margin-top: 1.5rem;
+            z-index: 2000;
+        }
+    }
+
     @media (max-width: 46.8rem) {
 
         /* Even smaller search on very small screens */
@@ -183,11 +196,30 @@ $userDisplay = $_SESSION['username'] ?? 'Guest';
         /* Adjust header padding */
         header {
             padding: 1rem 5%;
+            overflow: visible;
+            /* ensure dropdown can overflow */
         }
 
         /* Stack icons better */
         .icons {
+            display: flex;
+            align-items: center;
             gap: 0.5rem;
+            flex-shrink: 0;
+        }
+    }
+
+    @media (max-width: 50rem) {
+        header {
+            padding: 1rem 2vw;
+        }
+
+        .icons {
+            gap: 0.2rem;
+        }
+
+        .search-wrapper input {
+            width: 8rem;
         }
     }
 </style>
@@ -198,10 +230,13 @@ $userDisplay = $_SESSION['username'] ?? 'Guest';
         const searchIcon = document.getElementById('searchIcon');
         const searchWrapper = searchInput.parentElement;
 
+
         const userDropdown = document.getElementById('userDropdown');
+        const userIcon = document.getElementById('userIcon');
         const dropdownContent = document.getElementById('dropdownContent');
         let dropdownTimeout;
         let searchTimeout;
+
 
         // Show input on hover
         searchWrapper.addEventListener('mouseenter', function() {
@@ -255,5 +290,37 @@ $userDisplay = $_SESSION['username'] ?? 'Guest';
                 dropdownContent.style.display = 'none';
             }, 100); // 0.5 second delay
         });
+
+        // Dropdown logic for mobile (click/tap)
+        userDropdown.addEventListener('click', function(e) {
+            if (window.innerWidth <= 992) {
+                e.stopPropagation();
+                dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' :
+                    'block';
+            }
+        });
+        // Close dropdown if clicking elsewhere on mobile
+        document.addEventListener('click', function(e) {
+            if (window.innerWidth <= 992 && !userDropdown.contains(e.target)) {
+                dropdownContent.style.display = 'none';
+            }
+        });
+
+        // Mobile: click (icon)
+        userIcon.addEventListener('click', function(e) {
+            if (window.innerWidth <= 992) {
+                e.stopPropagation();
+                dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' :
+                    'block';
+            }
+        });
+
+        // Close dropdown if clicking elsewhere
+        document.addEventListener('click', function(e) {
+            if (window.innerWidth <= 992 && !userDropdown.contains(e.target)) {
+                dropdownContent.style.display = 'none';
+            }
+        });
+
     });
 </script>
