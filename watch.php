@@ -176,18 +176,29 @@ $all_episodes_result = $all_episodes_stmt->get_result();
         const theaterContainer = document.getElementById('theaterVideoContainer');
         const mainVideo = document.getElementById('mainVideo');
 
+        if (!theaterMode || !theaterContainer || !mainVideo) {
+            console.error('Theater mode elements not found');
+            return;
+        }
+
         // Clone the video element
         const videoClone = mainVideo.cloneNode(true);
         videoClone.style.width = '100%';
         videoClone.style.height = 'auto';
+        videoClone.style.position = 'relative';
+        videoClone.style.zIndex = '100001';
 
         // Clear theater container and add cloned video
         theaterContainer.innerHTML = '';
         theaterContainer.appendChild(videoClone);
 
-        // Show theater mode
-        theaterMode.classList.add('active');
-        document.body.classList.add('theater-active');
+        // Show theater mode with proper timing
+        theaterMode.style.display = 'flex';
+        setTimeout(() => {
+            theaterMode.classList.add('active');
+            document.body.classList.add('theater-active');
+        }, 10);
+        
         theaterModeActive = true;
 
         // If it's a video element, sync the time
@@ -208,7 +219,7 @@ $all_episodes_result = $all_episodes_stmt->get_result();
         const theaterVideo = document.querySelector('#theaterVideoContainer video, #theaterVideoContainer iframe');
 
         // Sync time back to main video if applicable
-        if (mainVideo.tagName === 'VIDEO' && theaterVideo && theaterVideo.tagName === 'VIDEO') {
+        if (mainVideo && mainVideo.tagName === 'VIDEO' && theaterVideo && theaterVideo.tagName === 'VIDEO') {
             mainVideo.currentTime = theaterVideo.currentTime;
             if (!theaterVideo.paused) {
                 mainVideo.play();
@@ -216,10 +227,18 @@ $all_episodes_result = $all_episodes_stmt->get_result();
         }
 
         // Clear theater container
-        theaterContainer.innerHTML = '';
+        if (theaterContainer) {
+            theaterContainer.innerHTML = '';
+        }
 
         // Hide theater mode
-        theaterMode.classList.remove('active');
+        if (theaterMode) {
+            theaterMode.classList.remove('active');
+            setTimeout(() => {
+                theaterMode.style.display = 'none';
+            }, 300);
+        }
+        
         document.body.classList.remove('theater-active');
         theaterModeActive = false;
 
