@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Configuration loader for environment variables
  * Loads .env file and provides secure access to credentials
