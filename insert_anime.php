@@ -72,9 +72,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['populate_genres'])) 
             }
             $episodeStmt->close();
         }
-        $message = "<div style='background:#e8f5e8;padding:10rem;border-radius:5rem;'>✅ Anime and episodes inserted successfully!</div>";
+        $message = "<div class='success-message'>✅ Anime and episodes inserted successfully!</div>";
     } else {
-        $message = "<div style='background:#ffdddd;padding:10rem;border-radius:5rem;'>❌ Insert failed or anime already exists.</div>";
+        $message = "<div class='error-message'>❌ Insert failed or anime already exists.</div>";
     }
 }
 ?>
@@ -83,143 +83,418 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['populate_genres'])) 
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=5.0">
     <title>Insert Anime - Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
+        :root {
+            --primary-color: #007cba;
+            --primary-dark: #005a87;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --warning-dark: #ff9800;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --border-color: #dee2e6;
+            --text-color: #495057;
+            --shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: #f8f9fa;
-            padding: 0 0 40rem 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 2rem 1rem;
         }
 
         .container {
-            max-width: 800rem;
-            margin: 40rem auto;
-            background: #fff;
-            padding: 30rem;
-            border-radius: 10rem;
-            box-shadow: 0 2rem 12rem #0002;
+            max-width: 80rem;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
         }
 
         h2 {
-            margin-top: 0;
-            color: #007cba;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            font-size: 2.4rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
 
-        label {
+        h3 {
+            margin: 2rem 0 1rem 0;
+            color: var(--primary-color);
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        /* Message Styles */
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #c3e6cb;
+            margin-bottom: 2rem;
             font-weight: 500;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #f5c6cb;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        /* Form Styles */
+        label {
+            font-weight: 600;
             display: block;
-            margin: 12rem 0 4rem;
+            margin: 1.2rem 0 0.4rem;
+            color: var(--text-color);
+            font-size: 1.4rem;
         }
 
         input[type="text"],
         input[type="number"],
         input[type="date"],
-        textarea {
+        textarea,
+        select {
             width: 100%;
-            padding: 8rem;
-            border: 1rem solid #ccc;
-            border-radius: 4rem;
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 0.5rem;
+            font-size: 1.4rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            background: var(--white);
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.3rem rgba(0, 124, 186, 0.1);
         }
 
         textarea {
-            min-height: 60rem;
+            min-height: 10rem;
+            resize: vertical;
+            font-family: inherit;
         }
 
+        /* Layout Styles */
         .row {
             display: flex;
-            gap: 16rem;
+            gap: 2rem;
+            margin: 1rem 0;
         }
 
         .row>div {
             flex: 1;
         }
 
+        .col-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .col-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2rem;
+        }
+
+        /* Episodes Section */
         .episodes {
-            margin: 18rem 0;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 0.8rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .episodes h4 {
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
         }
 
         .ep-row {
             display: flex;
-            gap: 10rem;
-            margin-bottom: 7rem;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            align-items: center;
+            background: var(--white);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
         }
 
-        .ep-row input {
+        .ep-row input[type="text"]:first-child {
             flex: 2;
         }
 
-        .ep-row input[type="text"]:last-child {
+        .ep-row input[type="text"]:last-of-type {
             flex: 3;
         }
 
-        .ep-row button {
-            background: #e33;
-            color: #fff;
+        .ep-row .remove-btn {
+            background: var(--danger-color);
+            color: var(--white);
             border: none;
-            border-radius: 3rem;
-            padding: 0 8rem;
+            border-radius: 0.4rem;
+            padding: 0.8rem 1rem;
             cursor: pointer;
+            font-size: 1.2rem;
+            transition: background 0.3s ease;
+            flex-shrink: 0;
         }
 
-        .ep-row button:hover {
-            background: #c00;
+        .ep-row .remove-btn:hover {
+            background: #c82333;
+        }
+
+        /* Button Styles */
+        .btn {
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-0.1rem);
+        }
+
+        .btn-warning {
+            background: var(--warning-color);
+            color: #333;
+        }
+
+        .btn-warning:hover {
+            background: var(--warning-dark);
+            transform: translateY(-0.1rem);
+        }
+
+        .btn-success {
+            background: var(--success-color);
+            color: var(--white);
+        }
+
+        .btn-success:hover {
+            background: #218838;
+            transform: translateY(-0.1rem);
         }
 
         #add-ep-btn {
-            margin: 10rem 0;
-            background: #007cba;
-            color: #fff;
-            border: none;
-            padding: 6rem 20rem;
-            border-radius: 5rem;
-            font-size: 1em;
-            cursor: pointer;
+            margin: 1.5rem 0;
         }
 
-        #add-ep-btn:hover {
-            background: #005a87;
+        /* Checkbox Styles */
+        .checkbox-group {
+            display: flex;
+            gap: 2rem;
+            margin: 1rem 0;
+            align-items: center;
         }
 
         .checkbox-label {
             font-weight: 400;
-        }
-
-        .checkbox-group {
             display: flex;
-            gap: 18rem;
-            margin: 10rem 0;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.4rem;
+            cursor: pointer;
         }
 
+        .checkbox-label input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+            transform: scale(1.2);
+        }
+
+        /* Table Styles */
         .summary-table {
-            margin-top: 40rem;
+            margin-top: 4rem;
+            overflow-x: auto;
+        }
+
+        .summary-table table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background: var(--white);
+            border-radius: 0.8rem;
+            overflow: hidden;
+            box-shadow: var(--shadow);
         }
 
         .summary-table th,
         .summary-table td {
-            padding: 6rem 10rem;
+            padding: 1.2rem 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .summary-table th {
-            background: #f0f0f0;
+            background: var(--primary-color);
+            color: var(--white);
+            font-weight: 600;
+            font-size: 1.3rem;
         }
 
         .summary-table td {
-            background: #fbfbfb;
+            background: var(--white);
+            font-size: 1.3rem;
         }
 
-        .populate-btn {
-            background: #ffc107;
-            color: #333;
-            border: none;
-            padding: 10rem 20rem;
-            border-radius: 5rem;
-            font-size: 1em;
-            cursor: pointer;
-            margin-bottom: 18rem;
+        .summary-table tr:hover td {
+            background: #f8f9fa;
         }
 
-        .populate-btn:hover {
-            background: #ff9800;
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem 0.5rem;
+            }
+
+            .container {
+                padding: 2rem 1.5rem;
+                margin: 0 0.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .row {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .col-2,
+            .col-3 {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .checkbox-group {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .ep-row {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .ep-row input {
+                flex: none !important;
+            }
+
+            .summary-table {
+                font-size: 1.2rem;
+            }
+
+            .summary-table th,
+            .summary-table td {
+                padding: 0.8rem 1rem;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+                margin: 0.5rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1.5rem 1rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            h3 {
+                font-size: 1.6rem;
+            }
+
+            input[type="text"],
+            input[type="number"],
+            input[type="date"],
+            textarea {
+                font-size: 1.6rem;
+                padding: 1.2rem;
+            }
+
+            .summary-table {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Loading state */
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Focus styles for accessibility */
+        .btn:focus {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        /* Print styles */
+        @media print {
+            .btn {
+                display: none;
+            }
+
+            .container {
+                box-shadow: none;
+                padding: 1rem;
+            }
         }
     </style>
     <script>
@@ -228,20 +503,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['populate_genres'])) 
             const div = document.createElement('div');
             div.className = 'ep-row';
             div.innerHTML = `
-            <input type="text" name="ep_title[]" placeholder="Episode Title" value="${title.replace(/"/g, '&quot;')}" required>
-            <input type="text" name="ep_url[]" placeholder="Episode Video URL (optional)" value="${url.replace(/"/g, '&quot;')}">
-            <button type="button" onclick="this.parentElement.remove()">✖</button>
-        `;
+                <input type="text" name="ep_title[]" placeholder="Episode Title" value="${title.replace(/"/g, '&quot;')}" required>
+                <input type="text" name="ep_url[]" placeholder="Episode Video URL (optional)" value="${url.replace(/"/g, '&quot;')}">
+                <button type="button" class="remove-btn" onclick="this.parentElement.remove()">
+                    <i class="fas fa-trash"></i>
+                </button>
+            `;
             container.appendChild(div);
         }
+
         window.onload = function() {
             document.getElementById('add-ep-btn').onclick = function() {
                 addEpisodeRow();
             };
+
             // If page is loaded after error, preserve episode fields
             <?php if (!empty($_POST['ep_title'])):
                 foreach ($_POST['ep_title'] as $i => $title):
-                    $url = $_POST['ep_url'][$i];
+                    $url = $_POST['ep_url'][$i] ?? '';
             ?>
                     addEpisodeRow("<?= htmlspecialchars($title) ?>", "<?= htmlspecialchars($url) ?>");
                 <?php endforeach;
@@ -249,30 +528,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['populate_genres'])) 
                 addEpisodeRow();
             <?php endif; ?>
         }
+
+        // Form validation
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form[method="post"]');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    const requiredFields = form.querySelectorAll('[required]');
+                    let isValid = true;
+
+                    requiredFields.forEach(field => {
+                        if (!field.value.trim()) {
+                            field.style.borderColor = 'var(--danger-color)';
+                            isValid = false;
+                        } else {
+                            field.style.borderColor = 'var(--border-color)';
+                        }
+                    });
+
+                    if (!isValid) {
+                        e.preventDefault();
+                        alert('Please fill in all required fields.');
+                    }
+                });
+            }
+        });
     </script>
 </head>
 
 <body>
     <div class="container">
-        <h2>🎬 Insert New Anime</h2>
+        <h2>
+            <i class="fas fa-film"></i>
+            Insert New Anime
+        </h2>
+
         <?php if (!empty($message)) echo $message; ?>
 
         <!-- Populate Genres Button -->
         <form action="populate_genres.php" method="post" style="display:inline;">
-            <button type="submit" class="populate-btn">🔄 Populate Genres</button>
+            <button type="submit" class="btn btn-warning">
+                <i class="fas fa-sync-alt"></i>
+                Populate Genres
+            </button>
         </form>
 
-        <form action="" method="post" autocomplete="off" style="margin-top:16rem;">
+        <form action="" method="post" autocomplete="off" style="margin-top:2rem;">
             <label>Title *</label>
             <input type="text" name="title" required value="<?= htmlspecialchars($_POST['title'] ?? '') ?>">
 
             <label>Description *</label>
-            <textarea name="description" required><?= htmlspecialchars($_POST['description'] ?? '') ?></textarea>
+            <textarea name="description" required
+                placeholder="Enter anime description..."><?= htmlspecialchars($_POST['description'] ?? '') ?></textarea>
 
-            <div class="row">
+            <div class="col-2">
                 <div>
                     <label>Thumbnail URL *</label>
-                    <input type="text" name="thumbnail" required
+                    <input type="text" name="thumbnail" required placeholder="https://example.com/image.jpg"
                         value="<?= htmlspecialchars($_POST['thumbnail'] ?? '') ?>">
                 </div>
                 <div>
@@ -281,82 +593,109 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['populate_genres'])) 
                         value="<?= htmlspecialchars($_POST['release_date'] ?? '') ?>">
                 </div>
             </div>
-            <div class="row">
+
+            <div class="col-3">
                 <div>
                     <label>Genre *</label>
-                    <input type="text" name="genre" required value="<?= htmlspecialchars($_POST['genre'] ?? '') ?>">
+                    <input type="text" name="genre" required placeholder="Action, Adventure, etc."
+                        value="<?= htmlspecialchars($_POST['genre'] ?? '') ?>">
                 </div>
                 <div>
                     <label>Status *</label>
-                    <input type="text" name="status" required value="<?= htmlspecialchars($_POST['status'] ?? '') ?>">
+                    <input type="text" name="status" required placeholder="Ongoing, Completed, etc."
+                        value="<?= htmlspecialchars($_POST['status'] ?? '') ?>">
                 </div>
                 <div>
                     <label>Rating (0-10)</label>
-                    <input type="number" step="0.1" min="0" max="10" name="rating"
+                    <input type="number" step="0.1" min="0" max="10" name="rating" placeholder="8.5"
                         value="<?= htmlspecialchars($_POST['rating'] ?? '0') ?>">
                 </div>
             </div>
+
             <div class="row">
                 <div>
                     <label>Total Episodes *</label>
-                    <input type="number" name="total_episodes" min="1" required
+                    <input type="number" name="total_episodes" min="1" required placeholder="12"
                         value="<?= htmlspecialchars($_POST['total_episodes'] ?? '1') ?>">
                 </div>
                 <div class="checkbox-group">
-                    <label class="checkbox-label"><input type="checkbox" name="is_featured"
-                            <?= isset($_POST['is_featured']) ? 'checked' : '' ?>> Featured</label>
-                    <label class="checkbox-label"><input type="checkbox" name="is_new_release"
-                            <?= isset($_POST['is_new_release']) ? 'checked' : '' ?>> New Release</label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="is_featured" <?= isset($_POST['is_featured']) ? 'checked' : '' ?>>
+                        <i class="fas fa-star"></i> Featured
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="is_new_release"
+                            <?= isset($_POST['is_new_release']) ? 'checked' : '' ?>>
+                        <i class="fas fa-sparkles"></i> New Release
+                    </label>
                 </div>
             </div>
+
             <div class="episodes">
-                <label>Episodes</label>
+                <h4>
+                    <i class="fas fa-list"></i>
+                    Episodes
+                </h4>
                 <div id="episodes-container"></div>
-                <button type="button" id="add-ep-btn">+ Add Episode</button>
+                <button type="button" id="add-ep-btn" class="btn btn-primary">
+                    <i class="fas fa-plus"></i>
+                    Add Episode
+                </button>
             </div>
-            <button type="submit"
-                style="margin-top:18rem;background:#007cba;color:#fff;border:none;padding:10rem 30rem;font-size:1.1em;border-radius:5rem;cursor:pointer;">Insert
-                Anime</button>
+
+            <button type="submit" class="btn btn-success"
+                style="margin-top:2rem; font-size:1.6rem; padding:1.2rem 3rem;">
+                <i class="fas fa-save"></i>
+                Insert Anime
+            </button>
         </form>
 
         <!-- Show summary table -->
         <div class="summary-table">
-            <h3>📋 Current Anime in Database</h3>
+            <h3>
+                <i class="fas fa-table"></i>
+                Current Anime in Database
+            </h3>
             <?php
             $result = $mysqli->query("
-            SELECT 
-                a.id, 
-                a.title, 
-                a.status, 
-                a.total_episodes, 
-                a.rating, 
-                a.is_featured, 
-                a.is_new_release,
-                COUNT(e.id) as actual_episodes
-            FROM anime_series a 
-            LEFT JOIN episodes e ON a.id = e.anime_series_id 
-            GROUP BY a.id 
-            ORDER BY a.id DESC
-        ");
+                SELECT 
+                    a.id, 
+                    a.title, 
+                    a.status, 
+                    a.total_episodes, 
+                    a.rating, 
+                    a.is_featured, 
+                    a.is_new_release,
+                    COUNT(e.id) as actual_episodes
+                FROM anime_series a 
+                LEFT JOIN episodes e ON a.id = e.anime_series_id 
+                GROUP BY a.id 
+                ORDER BY a.id DESC
+                LIMIT 20
+            ");
             if ($result && $result->num_rows > 0) {
-                echo "<table border='1' style='border-collapse: collapse; width: 100%;'>";
+                echo "<table>";
+                echo "<thead>";
                 echo "<tr>";
                 echo "<th>ID</th><th>Title</th><th>Status</th><th>Episodes (Total/Added)</th><th>Rating</th><th>Featured</th><th>New Release</th>";
                 echo "</tr>";
+                echo "</thead>";
+                echo "<tbody>";
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>";
                     echo "<td>{$row['id']}</td>";
-                    echo "<td><strong>{$row['title']}</strong></td>";
-                    echo "<td>{$row['status']}</td>";
+                    echo "<td><strong>" . htmlspecialchars($row['title']) . "</strong></td>";
+                    echo "<td>" . htmlspecialchars($row['status']) . "</td>";
                     echo "<td>{$row['total_episodes']} / {$row['actual_episodes']}</td>";
                     echo "<td>{$row['rating']}/10</td>";
-                    echo "<td>" . ($row['is_featured'] ? '⭐ Yes' : 'No') . "</td>";
-                    echo "<td>" . ($row['is_new_release'] ? '🆕 Yes' : 'No') . "</td>";
+                    echo "<td>" . ($row['is_featured'] ? '<i class="fas fa-star" style="color: gold;"></i> Yes' : 'No') . "</td>";
+                    echo "<td>" . ($row['is_new_release'] ? '<i class="fas fa-sparkles" style="color: #00d4ff;"></i> Yes' : 'No') . "</td>";
                     echo "</tr>";
                 }
+                echo "</tbody>";
                 echo "</table>";
             } else {
-                echo "<p>No anime found in database.</p>";
+                echo "<p style='text-align: center; font-style: italic; color: #6c757d; padding: 2rem;'>No anime found in database.</p>";
             }
             ?>
         </div>

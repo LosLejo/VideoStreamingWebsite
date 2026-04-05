@@ -203,16 +203,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Mobile menu toggle
-    const menuBars = document.getElementById('menu-bars');
-    const navbar = document.querySelector('.navbar');
-
-    if (menuBars && navbar) {
-        menuBars.addEventListener('click', function () {
-            navbar.classList.toggle('active');
-        });
-    }
-
     // Form validation (optional)
     const form = document.querySelector('.form');
     if (form) {

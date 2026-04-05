@@ -42,7 +42,8 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    z-index: 10000;
+    z-index: 100005;
+    /* Higher z-index to work with theater mode */
     box-shadow: var(--box-shadow);
 }
 
@@ -530,35 +531,6 @@ main {
         /* Changed from 300px */
     }
 
-    header .icons #menu-bars {
-        display: inline-block;
-    }
-
-    header .navbar {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: var(--black);
-        border-top: .1rem solid rgba(0, 0, 0, .2);
-        border-bottom: .1rem solid rgba(0, 0, 0, .2);
-        padding: 1rem;
-        clip-path: polygon(0 0, 100% 0, 0 0);
-        transition: clip-path 0.3s ease;
-    }
-
-    header .navbar.active {
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    }
-
-    header .navbar a {
-        display: block;
-        padding: 1.5rem;
-        margin: 1rem 0;
-        font-size: 2rem;
-        background: var(--yellow);
-        color: var(--black);
-    }
 }
 
 @media (max-width: 46.8rem) {
@@ -786,67 +758,111 @@ body.theater-active footer {
     transform: translateY(-0.2rem);
 }
 
-/* Fix header z-index conflict */
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: var(--black);
-    padding: 1rem 7%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    z-index: 10000;
-    /* Reduced from 10000 to avoid conflict */
-    box-shadow: var(--box-shadow);
-}
-
-/* Theater mode responsive design */
+/* Fix mobile hamburger positioning for watch.php */
 @media (max-width: 76.8rem) {
-    .theater-video-container {
-        width: 90vw;
-        max-width: 90vw;
+    header {
+        padding: 1rem 5% !important;
+        /* Reduce padding on mobile */
     }
 
-    .theater-controls {
-        bottom: -5rem;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 0.8rem;
+    header .icons {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-shrink: 0;
+        /* Prevent shrinking */
     }
 
-    .theater-controls button {
-        padding: 0.8rem 1.5rem;
-        font-size: 1.3rem;
+    header .icons #menu-bars {
+        display: inline-block !important;
+        cursor: pointer;
+        font-size: 2.5rem;
+        background: var(--yellow) !important;
+        color: var(--black) !important;
+        border-radius: 25% !important;
+        height: 4.5rem !important;
+        width: 4.5rem !important;
+        line-height: 4.5rem !important;
+        text-align: center !important;
+        transition: all 0.3s ease !important;
+        margin-left: 0.5rem !important;
+        position: relative !important;
+        /* Ensure proper positioning */
+        z-index: 100006 !important;
     }
 
-    .theater-close-hint {
-        top: 1rem;
-        right: 1rem;
-        font-size: 1.4rem;
+    header .icons #menu-bars:hover {
+        background: var(--black) !important;
+        color: var(--yellow) !important;
+    }
+
+    /* Mobile navbar styles */
+    header .navbar {
+        position: absolute !important;
+        top: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
+        background: var(--black) !important;
+        border-top: .1rem solid rgba(255, 255, 255, .1) !important;
+        border-bottom: .1rem solid rgba(255, 255, 255, .1) !important;
+        padding: 1rem !important;
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0) !important;
+        transition: clip-path 0.3s ease !important;
+        z-index: 100005 !important;
+        display: block !important;
+    }
+
+    header .navbar.active {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%) !important;
+    }
+
+    header .navbar a {
+        display: block !important;
+        padding: 1.5rem !important;
+        margin: 1rem 0 !important;
+        font-size: 2rem !important;
+        background: var(--yellow) !important;
+        color: var(--black) !important;
+        border-radius: 0.5rem !important;
+        text-align: center !important;
+    }
+
+    header .navbar a:hover {
+        background: #fff !important;
+        color: var(--black) !important;
+    }
+
+    /* Fix dropdown positioning for mobile */
+    .dropdown-content {
+        position: fixed !important;
+        right: 1rem !important;
+        top: 7rem !important;
+        z-index: 100007 !important;
+        min-width: 18rem;
+        max-width: 85vw;
     }
 }
 
 @media (max-width: 46.8rem) {
-    .theater-video-container {
-        width: 95vw;
-        max-width: 95vw;
+    header {
+        padding: 1rem 3% !important;
+        /* Even less padding on very small screens */
     }
 
-    .theater-controls {
-        bottom: -4rem;
-        gap: 0.5rem;
+    header .logo {
+        font-size: 2rem !important;
+        /* Smaller logo on very small screens */
     }
 
-    .theater-controls button {
-        padding: 0.6rem 1rem;
-        font-size: 1.2rem;
+    header .icons #menu-bars {
+        height: 4rem !important;
+        width: 4rem !important;
+        line-height: 4rem !important;
+        font-size: 2rem !important;
     }
 
-    .theater-close-hint {
-        font-size: 1.2rem;
+    .dropdown-content {
+        min-width: 20rem !important;
+        right: 0.5rem !important;
     }
 }
-
-/* ===== END THEATER MODE STYLES ===== */
