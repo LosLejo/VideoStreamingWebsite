@@ -64,4 +64,3 @@ if (isset($_GET['code'])) {
     }
     $stmt->close();
 }
-?>

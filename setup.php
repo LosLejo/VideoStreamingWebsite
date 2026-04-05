@@ -87,4 +87,3 @@ foreach ($tables as $name => $query) {
 
 $mysqli->close();
 echo "<p>Setup complete! Your database tables have been created.</p>";
-?>
